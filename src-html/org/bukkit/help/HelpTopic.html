@@ -1,0 +1,187 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.help;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.command.CommandSender;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import org.bukkit.entity.Player;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    /**<a name="line.6"></a>
+<FONT color="green">007</FONT>     * HelpTopic implementations are displayed to the user when the user uses the<a name="line.7"></a>
+<FONT color="green">008</FONT>     * /help command.<a name="line.8"></a>
+<FONT color="green">009</FONT>     * &lt;p&gt;<a name="line.9"></a>
+<FONT color="green">010</FONT>     * Custom implementations of this class can work at two levels. A simple<a name="line.10"></a>
+<FONT color="green">011</FONT>     * implementation only needs to set the value of {@code name}, {@code<a name="line.11"></a>
+<FONT color="green">012</FONT>     * shortText}, and {@code fullText} in the constructor. This base class will<a name="line.12"></a>
+<FONT color="green">013</FONT>     * take care of the rest.<a name="line.13"></a>
+<FONT color="green">014</FONT>     * &lt;p&gt;<a name="line.14"></a>
+<FONT color="green">015</FONT>     * Complex implementations can be created by overriding the behavior of all<a name="line.15"></a>
+<FONT color="green">016</FONT>     * the methods in this class.<a name="line.16"></a>
+<FONT color="green">017</FONT>     */<a name="line.17"></a>
+<FONT color="green">018</FONT>    public abstract class HelpTopic {<a name="line.18"></a>
+<FONT color="green">019</FONT>        protected String name;<a name="line.19"></a>
+<FONT color="green">020</FONT>        protected String shortText;<a name="line.20"></a>
+<FONT color="green">021</FONT>        protected String fullText;<a name="line.21"></a>
+<FONT color="green">022</FONT>        protected String amendedPermission;<a name="line.22"></a>
+<FONT color="green">023</FONT>        <a name="line.23"></a>
+<FONT color="green">024</FONT>        /**<a name="line.24"></a>
+<FONT color="green">025</FONT>         * Determines if a {@link Player} is allowed to see this help topic.<a name="line.25"></a>
+<FONT color="green">026</FONT>         * &lt;p&gt;<a name="line.26"></a>
+<FONT color="green">027</FONT>         * HelpTopic implementations should take server administrator wishes into<a name="line.27"></a>
+<FONT color="green">028</FONT>         * account as set by the {@link HelpTopic#amendCanSee(String)} function.<a name="line.28"></a>
+<FONT color="green">029</FONT>         *<a name="line.29"></a>
+<FONT color="green">030</FONT>         * @param player The Player in question.<a name="line.30"></a>
+<FONT color="green">031</FONT>         * @return True of the Player can see this help topic, false otherwise.<a name="line.31"></a>
+<FONT color="green">032</FONT>         */<a name="line.32"></a>
+<FONT color="green">033</FONT>        public abstract boolean canSee(CommandSender player);<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>        /**<a name="line.35"></a>
+<FONT color="green">036</FONT>         * Allows the server administrator to override the permission required to<a name="line.36"></a>
+<FONT color="green">037</FONT>         * see a help topic.<a name="line.37"></a>
+<FONT color="green">038</FONT>         * &lt;p&gt;<a name="line.38"></a>
+<FONT color="green">039</FONT>         * HelpTopic implementations should take this into account when<a name="line.39"></a>
+<FONT color="green">040</FONT>         * determining topic visibility on the {@link<a name="line.40"></a>
+<FONT color="green">041</FONT>         * HelpTopic#canSee(org.bukkit.command.CommandSender)} function.<a name="line.41"></a>
+<FONT color="green">042</FONT>         *<a name="line.42"></a>
+<FONT color="green">043</FONT>         * @param amendedPermission The permission node the server administrator<a name="line.43"></a>
+<FONT color="green">044</FONT>         *     wishes to apply to this topic.<a name="line.44"></a>
+<FONT color="green">045</FONT>         */<a name="line.45"></a>
+<FONT color="green">046</FONT>        public void amendCanSee(String amendedPermission) {<a name="line.46"></a>
+<FONT color="green">047</FONT>            this.amendedPermission = amendedPermission;<a name="line.47"></a>
+<FONT color="green">048</FONT>        }<a name="line.48"></a>
+<FONT color="green">049</FONT>    <a name="line.49"></a>
+<FONT color="green">050</FONT>        /**<a name="line.50"></a>
+<FONT color="green">051</FONT>         * Returns the name of this help topic.<a name="line.51"></a>
+<FONT color="green">052</FONT>         *<a name="line.52"></a>
+<FONT color="green">053</FONT>         * @return The topic name.<a name="line.53"></a>
+<FONT color="green">054</FONT>         */<a name="line.54"></a>
+<FONT color="green">055</FONT>        public String getName() {<a name="line.55"></a>
+<FONT color="green">056</FONT>            return name;<a name="line.56"></a>
+<FONT color="green">057</FONT>        }<a name="line.57"></a>
+<FONT color="green">058</FONT>    <a name="line.58"></a>
+<FONT color="green">059</FONT>        /**<a name="line.59"></a>
+<FONT color="green">060</FONT>         * Returns a brief description that will be displayed in the topic index.<a name="line.60"></a>
+<FONT color="green">061</FONT>         *<a name="line.61"></a>
+<FONT color="green">062</FONT>         * @return A brief topic description.<a name="line.62"></a>
+<FONT color="green">063</FONT>         */<a name="line.63"></a>
+<FONT color="green">064</FONT>        public String getShortText() {<a name="line.64"></a>
+<FONT color="green">065</FONT>            return shortText;<a name="line.65"></a>
+<FONT color="green">066</FONT>        }<a name="line.66"></a>
+<FONT color="green">067</FONT>    <a name="line.67"></a>
+<FONT color="green">068</FONT>        /**<a name="line.68"></a>
+<FONT color="green">069</FONT>         * Returns the full description of this help topic that is displayed when<a name="line.69"></a>
+<FONT color="green">070</FONT>         * the user requests this topic's details.<a name="line.70"></a>
+<FONT color="green">071</FONT>         * &lt;p&gt;<a name="line.71"></a>
+<FONT color="green">072</FONT>         * The result will be paginated to properly fit the user's client.<a name="line.72"></a>
+<FONT color="green">073</FONT>         *<a name="line.73"></a>
+<FONT color="green">074</FONT>         * @param forWho The player or console requesting the full text. Useful<a name="line.74"></a>
+<FONT color="green">075</FONT>         *     for further security trimming the command's full text based on<a name="line.75"></a>
+<FONT color="green">076</FONT>         *     sub-permissions in custom implementations.<a name="line.76"></a>
+<FONT color="green">077</FONT>         *<a name="line.77"></a>
+<FONT color="green">078</FONT>         * @return A full topic description.<a name="line.78"></a>
+<FONT color="green">079</FONT>         */<a name="line.79"></a>
+<FONT color="green">080</FONT>        public String getFullText(CommandSender forWho) {<a name="line.80"></a>
+<FONT color="green">081</FONT>            return fullText;<a name="line.81"></a>
+<FONT color="green">082</FONT>        }<a name="line.82"></a>
+<FONT color="green">083</FONT>    <a name="line.83"></a>
+<FONT color="green">084</FONT>        /**<a name="line.84"></a>
+<FONT color="green">085</FONT>         * Allows the server admin (or another plugin) to add or replace the<a name="line.85"></a>
+<FONT color="green">086</FONT>         * contents of a help topic.<a name="line.86"></a>
+<FONT color="green">087</FONT>         * &lt;p&gt;<a name="line.87"></a>
+<FONT color="green">088</FONT>         * A null in either parameter will leave that part of the topic unchanged.<a name="line.88"></a>
+<FONT color="green">089</FONT>         * In either amending parameter, the string {@literal &lt;text&gt;} is replaced<a name="line.89"></a>
+<FONT color="green">090</FONT>         * with the existing contents in the help topic. Use this to append or<a name="line.90"></a>
+<FONT color="green">091</FONT>         * prepend additional content into an automatically generated help topic.<a name="line.91"></a>
+<FONT color="green">092</FONT>         *<a name="line.92"></a>
+<FONT color="green">093</FONT>         * @param amendedShortText The new topic short text to use, or null to<a name="line.93"></a>
+<FONT color="green">094</FONT>         *     leave alone.<a name="line.94"></a>
+<FONT color="green">095</FONT>         * @param amendedFullText The new topic full text to use, or null to leave<a name="line.95"></a>
+<FONT color="green">096</FONT>         *     alone.<a name="line.96"></a>
+<FONT color="green">097</FONT>         */<a name="line.97"></a>
+<FONT color="green">098</FONT>        public void amendTopic(String amendedShortText, String amendedFullText) {<a name="line.98"></a>
+<FONT color="green">099</FONT>            shortText = applyAmendment(shortText, amendedShortText);<a name="line.99"></a>
+<FONT color="green">100</FONT>            fullText = applyAmendment(fullText, amendedFullText);<a name="line.100"></a>
+<FONT color="green">101</FONT>        }<a name="line.101"></a>
+<FONT color="green">102</FONT>    <a name="line.102"></a>
+<FONT color="green">103</FONT>        /**<a name="line.103"></a>
+<FONT color="green">104</FONT>         * Developers implementing their own custom HelpTopic implementations can<a name="line.104"></a>
+<FONT color="green">105</FONT>         * use this utility method to ensure their implementations comply with the<a name="line.105"></a>
+<FONT color="green">106</FONT>         * expected behavior of the {@link HelpTopic#amendTopic(String, String)}<a name="line.106"></a>
+<FONT color="green">107</FONT>         * method.<a name="line.107"></a>
+<FONT color="green">108</FONT>         *<a name="line.108"></a>
+<FONT color="green">109</FONT>         * @param baseText The existing text of the help topic.<a name="line.109"></a>
+<FONT color="green">110</FONT>         * @param amendment The amending text from the amendTopic() method.<a name="line.110"></a>
+<FONT color="green">111</FONT>         * @return The application of the amending text to the existing text,<a name="line.111"></a>
+<FONT color="green">112</FONT>         *     according to the expected rules of amendTopic().<a name="line.112"></a>
+<FONT color="green">113</FONT>         */<a name="line.113"></a>
+<FONT color="green">114</FONT>        protected String applyAmendment(String baseText, String amendment) {<a name="line.114"></a>
+<FONT color="green">115</FONT>            if (amendment == null) {<a name="line.115"></a>
+<FONT color="green">116</FONT>                return baseText;<a name="line.116"></a>
+<FONT color="green">117</FONT>            } else {<a name="line.117"></a>
+<FONT color="green">118</FONT>                return amendment.replaceAll("&lt;text&gt;", baseText);<a name="line.118"></a>
+<FONT color="green">119</FONT>            }<a name="line.119"></a>
+<FONT color="green">120</FONT>        }<a name="line.120"></a>
+<FONT color="green">121</FONT>    }<a name="line.121"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

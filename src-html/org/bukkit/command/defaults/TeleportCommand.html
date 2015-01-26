@@ -1,0 +1,190 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.command.defaults;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.util.List;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import org.apache.commons.lang.Validate;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import org.bukkit.Bukkit;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import org.bukkit.ChatColor;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import org.bukkit.Location;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import org.bukkit.command.Command;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import org.bukkit.command.CommandSender;<a name="line.10"></a>
+<FONT color="green">011</FONT>    import org.bukkit.entity.Player;<a name="line.11"></a>
+<FONT color="green">012</FONT>    import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;<a name="line.12"></a>
+<FONT color="green">013</FONT>    <a name="line.13"></a>
+<FONT color="green">014</FONT>    import com.google.common.collect.ImmutableList;<a name="line.14"></a>
+<FONT color="green">015</FONT>    <a name="line.15"></a>
+<FONT color="green">016</FONT>    public class TeleportCommand extends VanillaCommand {<a name="line.16"></a>
+<FONT color="green">017</FONT>    <a name="line.17"></a>
+<FONT color="green">018</FONT>        public TeleportCommand() {<a name="line.18"></a>
+<FONT color="green">019</FONT>            super("tp");<a name="line.19"></a>
+<FONT color="green">020</FONT>            this.description = "Teleports the given player (or yourself) to another player or coordinates";<a name="line.20"></a>
+<FONT color="green">021</FONT>            this.usageMessage = "/tp [player] &lt;target&gt; and/or &lt;x&gt; &lt;y&gt; &lt;z&gt;";<a name="line.21"></a>
+<FONT color="green">022</FONT>            this.setPermission("bukkit.command.teleport");<a name="line.22"></a>
+<FONT color="green">023</FONT>        }<a name="line.23"></a>
+<FONT color="green">024</FONT>    <a name="line.24"></a>
+<FONT color="green">025</FONT>        @Override<a name="line.25"></a>
+<FONT color="green">026</FONT>        public boolean execute(CommandSender sender, String currentAlias, String[] args) {<a name="line.26"></a>
+<FONT color="green">027</FONT>            if (!testPermission(sender)) return true;<a name="line.27"></a>
+<FONT color="green">028</FONT>            if (args.length &lt; 1 || args.length &gt; 4) {<a name="line.28"></a>
+<FONT color="green">029</FONT>                sender.sendMessage(ChatColor.RED + "Usage: " + usageMessage);<a name="line.29"></a>
+<FONT color="green">030</FONT>                return false;<a name="line.30"></a>
+<FONT color="green">031</FONT>            }<a name="line.31"></a>
+<FONT color="green">032</FONT>    <a name="line.32"></a>
+<FONT color="green">033</FONT>            Player player;<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>            if (args.length == 1 || args.length == 3) {<a name="line.35"></a>
+<FONT color="green">036</FONT>                if (sender instanceof Player) {<a name="line.36"></a>
+<FONT color="green">037</FONT>                    player = (Player) sender;<a name="line.37"></a>
+<FONT color="green">038</FONT>                } else {<a name="line.38"></a>
+<FONT color="green">039</FONT>                    sender.sendMessage("Please provide a player!");<a name="line.39"></a>
+<FONT color="green">040</FONT>                    return true;<a name="line.40"></a>
+<FONT color="green">041</FONT>                }<a name="line.41"></a>
+<FONT color="green">042</FONT>            } else {<a name="line.42"></a>
+<FONT color="green">043</FONT>                player = Bukkit.getPlayerExact(args[0]);<a name="line.43"></a>
+<FONT color="green">044</FONT>            }<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>            if (player == null) {<a name="line.46"></a>
+<FONT color="green">047</FONT>                sender.sendMessage("Player not found: " + args[0]);<a name="line.47"></a>
+<FONT color="green">048</FONT>                return true;<a name="line.48"></a>
+<FONT color="green">049</FONT>            }<a name="line.49"></a>
+<FONT color="green">050</FONT>    <a name="line.50"></a>
+<FONT color="green">051</FONT>            if (args.length &lt; 3) {<a name="line.51"></a>
+<FONT color="green">052</FONT>                Player target = Bukkit.getPlayerExact(args[args.length - 1]);<a name="line.52"></a>
+<FONT color="green">053</FONT>                if (target == null) {<a name="line.53"></a>
+<FONT color="green">054</FONT>                    sender.sendMessage("Can't find player " + args[args.length - 1] + ". No tp.");<a name="line.54"></a>
+<FONT color="green">055</FONT>                    return true;<a name="line.55"></a>
+<FONT color="green">056</FONT>                }<a name="line.56"></a>
+<FONT color="green">057</FONT>                player.teleport(target, TeleportCause.COMMAND);<a name="line.57"></a>
+<FONT color="green">058</FONT>                Command.broadcastCommandMessage(sender, "Teleported " + player.getDisplayName() + " to " + target.getDisplayName());<a name="line.58"></a>
+<FONT color="green">059</FONT>            } else if (player.getWorld() != null) {<a name="line.59"></a>
+<FONT color="green">060</FONT>                Location playerLocation = player.getLocation();<a name="line.60"></a>
+<FONT color="green">061</FONT>                double x = getCoordinate(sender, playerLocation.getX(), args[args.length - 3]);<a name="line.61"></a>
+<FONT color="green">062</FONT>                double y = getCoordinate(sender, playerLocation.getY(), args[args.length - 2], 0, 0);<a name="line.62"></a>
+<FONT color="green">063</FONT>                double z = getCoordinate(sender, playerLocation.getZ(), args[args.length - 1]);<a name="line.63"></a>
+<FONT color="green">064</FONT>    <a name="line.64"></a>
+<FONT color="green">065</FONT>                if (x == MIN_COORD_MINUS_ONE || y == MIN_COORD_MINUS_ONE || z == MIN_COORD_MINUS_ONE) {<a name="line.65"></a>
+<FONT color="green">066</FONT>                    sender.sendMessage("Please provide a valid location!");<a name="line.66"></a>
+<FONT color="green">067</FONT>                    return true;<a name="line.67"></a>
+<FONT color="green">068</FONT>                }<a name="line.68"></a>
+<FONT color="green">069</FONT>    <a name="line.69"></a>
+<FONT color="green">070</FONT>                playerLocation.setX(x);<a name="line.70"></a>
+<FONT color="green">071</FONT>                playerLocation.setY(y);<a name="line.71"></a>
+<FONT color="green">072</FONT>                playerLocation.setZ(z);<a name="line.72"></a>
+<FONT color="green">073</FONT>    <a name="line.73"></a>
+<FONT color="green">074</FONT>                player.teleport(playerLocation, TeleportCause.COMMAND);<a name="line.74"></a>
+<FONT color="green">075</FONT>                Command.broadcastCommandMessage(sender, String.format("Teleported %s to %.2f, %.2f, %.2f", player.getDisplayName(), x, y, z));<a name="line.75"></a>
+<FONT color="green">076</FONT>            }<a name="line.76"></a>
+<FONT color="green">077</FONT>            return true;<a name="line.77"></a>
+<FONT color="green">078</FONT>        }<a name="line.78"></a>
+<FONT color="green">079</FONT>    <a name="line.79"></a>
+<FONT color="green">080</FONT>        private double getCoordinate(CommandSender sender, double current, String input) {<a name="line.80"></a>
+<FONT color="green">081</FONT>            return getCoordinate(sender, current, input, MIN_COORD, MAX_COORD);<a name="line.81"></a>
+<FONT color="green">082</FONT>        }<a name="line.82"></a>
+<FONT color="green">083</FONT>    <a name="line.83"></a>
+<FONT color="green">084</FONT>        private double getCoordinate(CommandSender sender, double current, String input, int min, int max) {<a name="line.84"></a>
+<FONT color="green">085</FONT>            boolean relative = input.startsWith("~");<a name="line.85"></a>
+<FONT color="green">086</FONT>            double result = relative ? current : 0;<a name="line.86"></a>
+<FONT color="green">087</FONT>    <a name="line.87"></a>
+<FONT color="green">088</FONT>            if (!relative || input.length() &gt; 1) {<a name="line.88"></a>
+<FONT color="green">089</FONT>                boolean exact = input.contains(".");<a name="line.89"></a>
+<FONT color="green">090</FONT>                if (relative) input = input.substring(1);<a name="line.90"></a>
+<FONT color="green">091</FONT>    <a name="line.91"></a>
+<FONT color="green">092</FONT>                double testResult = getDouble(sender, input);<a name="line.92"></a>
+<FONT color="green">093</FONT>                if (testResult == MIN_COORD_MINUS_ONE) {<a name="line.93"></a>
+<FONT color="green">094</FONT>                    return MIN_COORD_MINUS_ONE;<a name="line.94"></a>
+<FONT color="green">095</FONT>                }<a name="line.95"></a>
+<FONT color="green">096</FONT>                result += testResult;<a name="line.96"></a>
+<FONT color="green">097</FONT>    <a name="line.97"></a>
+<FONT color="green">098</FONT>                if (!exact &amp;&amp; !relative) result += 0.5f;<a name="line.98"></a>
+<FONT color="green">099</FONT>            }<a name="line.99"></a>
+<FONT color="green">100</FONT>            if (min != 0 || max != 0) {<a name="line.100"></a>
+<FONT color="green">101</FONT>                if (result &lt; min) {<a name="line.101"></a>
+<FONT color="green">102</FONT>                    result = MIN_COORD_MINUS_ONE;<a name="line.102"></a>
+<FONT color="green">103</FONT>                }<a name="line.103"></a>
+<FONT color="green">104</FONT>    <a name="line.104"></a>
+<FONT color="green">105</FONT>                if (result &gt; max) {<a name="line.105"></a>
+<FONT color="green">106</FONT>                    result = MIN_COORD_MINUS_ONE;<a name="line.106"></a>
+<FONT color="green">107</FONT>                }<a name="line.107"></a>
+<FONT color="green">108</FONT>            }<a name="line.108"></a>
+<FONT color="green">109</FONT>    <a name="line.109"></a>
+<FONT color="green">110</FONT>            return result;<a name="line.110"></a>
+<FONT color="green">111</FONT>        }<a name="line.111"></a>
+<FONT color="green">112</FONT>    <a name="line.112"></a>
+<FONT color="green">113</FONT>        @Override<a name="line.113"></a>
+<FONT color="green">114</FONT>        public List&lt;String&gt; tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {<a name="line.114"></a>
+<FONT color="green">115</FONT>            Validate.notNull(sender, "Sender cannot be null");<a name="line.115"></a>
+<FONT color="green">116</FONT>            Validate.notNull(args, "Arguments cannot be null");<a name="line.116"></a>
+<FONT color="green">117</FONT>            Validate.notNull(alias, "Alias cannot be null");<a name="line.117"></a>
+<FONT color="green">118</FONT>    <a name="line.118"></a>
+<FONT color="green">119</FONT>            if (args.length == 1 || args.length == 2) {<a name="line.119"></a>
+<FONT color="green">120</FONT>                return super.tabComplete(sender, alias, args);<a name="line.120"></a>
+<FONT color="green">121</FONT>            }<a name="line.121"></a>
+<FONT color="green">122</FONT>            return ImmutableList.of();<a name="line.122"></a>
+<FONT color="green">123</FONT>        }<a name="line.123"></a>
+<FONT color="green">124</FONT>    }<a name="line.124"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

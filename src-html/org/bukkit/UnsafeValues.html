@@ -1,0 +1,99 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.util.List;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import org.bukkit.inventory.ItemStack;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    /**<a name="line.7"></a>
+<FONT color="green">008</FONT>     * This interface provides value conversions that may be specific to a<a name="line.8"></a>
+<FONT color="green">009</FONT>     * runtime, or have arbitrary meaning (read: magic values).<a name="line.9"></a>
+<FONT color="green">010</FONT>     * &lt;p&gt;<a name="line.10"></a>
+<FONT color="green">011</FONT>     * Their existence and behavior is not guaranteed across future versions. They<a name="line.11"></a>
+<FONT color="green">012</FONT>     * may be poorly named, throw exceptions, have misleading parameters, or any<a name="line.12"></a>
+<FONT color="green">013</FONT>     * other bad programming practice.<a name="line.13"></a>
+<FONT color="green">014</FONT>     * &lt;p&gt;<a name="line.14"></a>
+<FONT color="green">015</FONT>     * This interface is unsupported and only for internal use.<a name="line.15"></a>
+<FONT color="green">016</FONT>     *<a name="line.16"></a>
+<FONT color="green">017</FONT>     * @deprecated Unsupported &amp; internal use only<a name="line.17"></a>
+<FONT color="green">018</FONT>     */<a name="line.18"></a>
+<FONT color="green">019</FONT>    @Deprecated<a name="line.19"></a>
+<FONT color="green">020</FONT>    public interface UnsafeValues {<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>        Material getMaterialFromInternalName(String name);<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>        List&lt;String&gt; tabCompleteInternalMaterialName(String token, List&lt;String&gt; completions);<a name="line.24"></a>
+<FONT color="green">025</FONT>    <a name="line.25"></a>
+<FONT color="green">026</FONT>        ItemStack modifyItemStack(ItemStack stack, String arguments);<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>        Statistic getStatisticFromInternalName(String name);<a name="line.28"></a>
+<FONT color="green">029</FONT>    <a name="line.29"></a>
+<FONT color="green">030</FONT>        Achievement getAchievementFromInternalName(String name);<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>        List&lt;String&gt; tabCompleteInternalStatisticOrAchievementName(String token, List&lt;String&gt; completions);<a name="line.32"></a>
+<FONT color="green">033</FONT>    }<a name="line.33"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

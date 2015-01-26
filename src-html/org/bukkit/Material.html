@@ -1,0 +1,1100 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.lang.reflect.Constructor;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.Map;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import org.apache.commons.lang.Validate;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import org.bukkit.map.MapView;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import org.bukkit.material.Bed;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import org.bukkit.material.Button;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import org.bukkit.material.Cake;<a name="line.10"></a>
+<FONT color="green">011</FONT>    import org.bukkit.material.Cauldron;<a name="line.11"></a>
+<FONT color="green">012</FONT>    import org.bukkit.material.Chest;<a name="line.12"></a>
+<FONT color="green">013</FONT>    import org.bukkit.material.Coal;<a name="line.13"></a>
+<FONT color="green">014</FONT>    import org.bukkit.material.CocoaPlant;<a name="line.14"></a>
+<FONT color="green">015</FONT>    import org.bukkit.material.Command;<a name="line.15"></a>
+<FONT color="green">016</FONT>    import org.bukkit.material.Crops;<a name="line.16"></a>
+<FONT color="green">017</FONT>    import org.bukkit.material.DetectorRail;<a name="line.17"></a>
+<FONT color="green">018</FONT>    import org.bukkit.material.Diode;<a name="line.18"></a>
+<FONT color="green">019</FONT>    import org.bukkit.material.Dispenser;<a name="line.19"></a>
+<FONT color="green">020</FONT>    import org.bukkit.material.Door;<a name="line.20"></a>
+<FONT color="green">021</FONT>    import org.bukkit.material.Dye;<a name="line.21"></a>
+<FONT color="green">022</FONT>    import org.bukkit.material.EnderChest;<a name="line.22"></a>
+<FONT color="green">023</FONT>    import org.bukkit.material.FlowerPot;<a name="line.23"></a>
+<FONT color="green">024</FONT>    import org.bukkit.material.Furnace;<a name="line.24"></a>
+<FONT color="green">025</FONT>    import org.bukkit.material.Gate;<a name="line.25"></a>
+<FONT color="green">026</FONT>    import org.bukkit.material.Ladder;<a name="line.26"></a>
+<FONT color="green">027</FONT>    import org.bukkit.material.Lever;<a name="line.27"></a>
+<FONT color="green">028</FONT>    import org.bukkit.material.LongGrass;<a name="line.28"></a>
+<FONT color="green">029</FONT>    import org.bukkit.material.MaterialData;<a name="line.29"></a>
+<FONT color="green">030</FONT>    import org.bukkit.material.MonsterEggs;<a name="line.30"></a>
+<FONT color="green">031</FONT>    import org.bukkit.material.Mushroom;<a name="line.31"></a>
+<FONT color="green">032</FONT>    import org.bukkit.material.NetherWarts;<a name="line.32"></a>
+<FONT color="green">033</FONT>    import org.bukkit.material.PistonBaseMaterial;<a name="line.33"></a>
+<FONT color="green">034</FONT>    import org.bukkit.material.PistonExtensionMaterial;<a name="line.34"></a>
+<FONT color="green">035</FONT>    import org.bukkit.material.PoweredRail;<a name="line.35"></a>
+<FONT color="green">036</FONT>    import org.bukkit.material.PressurePlate;<a name="line.36"></a>
+<FONT color="green">037</FONT>    import org.bukkit.material.Pumpkin;<a name="line.37"></a>
+<FONT color="green">038</FONT>    import org.bukkit.material.Rails;<a name="line.38"></a>
+<FONT color="green">039</FONT>    import org.bukkit.material.RedstoneTorch;<a name="line.39"></a>
+<FONT color="green">040</FONT>    import org.bukkit.material.RedstoneWire;<a name="line.40"></a>
+<FONT color="green">041</FONT>    import org.bukkit.material.Sandstone;<a name="line.41"></a>
+<FONT color="green">042</FONT>    import org.bukkit.material.Sign;<a name="line.42"></a>
+<FONT color="green">043</FONT>    import org.bukkit.material.Skull;<a name="line.43"></a>
+<FONT color="green">044</FONT>    import org.bukkit.material.SmoothBrick;<a name="line.44"></a>
+<FONT color="green">045</FONT>    import org.bukkit.material.SpawnEgg;<a name="line.45"></a>
+<FONT color="green">046</FONT>    import org.bukkit.material.Stairs;<a name="line.46"></a>
+<FONT color="green">047</FONT>    import org.bukkit.material.Step;<a name="line.47"></a>
+<FONT color="green">048</FONT>    import org.bukkit.material.Torch;<a name="line.48"></a>
+<FONT color="green">049</FONT>    import org.bukkit.material.TrapDoor;<a name="line.49"></a>
+<FONT color="green">050</FONT>    import org.bukkit.material.Tree;<a name="line.50"></a>
+<FONT color="green">051</FONT>    import org.bukkit.material.Tripwire;<a name="line.51"></a>
+<FONT color="green">052</FONT>    import org.bukkit.material.TripwireHook;<a name="line.52"></a>
+<FONT color="green">053</FONT>    import org.bukkit.material.Vine;<a name="line.53"></a>
+<FONT color="green">054</FONT>    import org.bukkit.material.WoodenStep;<a name="line.54"></a>
+<FONT color="green">055</FONT>    import org.bukkit.material.Wool;<a name="line.55"></a>
+<FONT color="green">056</FONT>    import org.bukkit.potion.Potion;<a name="line.56"></a>
+<FONT color="green">057</FONT>    import org.bukkit.util.Java15Compat;<a name="line.57"></a>
+<FONT color="green">058</FONT>    <a name="line.58"></a>
+<FONT color="green">059</FONT>    import com.google.common.collect.Maps;<a name="line.59"></a>
+<FONT color="green">060</FONT>    <a name="line.60"></a>
+<FONT color="green">061</FONT>    /**<a name="line.61"></a>
+<FONT color="green">062</FONT>     * An enum of all material IDs accepted by the official server and client<a name="line.62"></a>
+<FONT color="green">063</FONT>     */<a name="line.63"></a>
+<FONT color="green">064</FONT>    public enum Material {<a name="line.64"></a>
+<FONT color="green">065</FONT>        AIR(0, 0),<a name="line.65"></a>
+<FONT color="green">066</FONT>        STONE(1),<a name="line.66"></a>
+<FONT color="green">067</FONT>        GRASS(2),<a name="line.67"></a>
+<FONT color="green">068</FONT>        DIRT(3),<a name="line.68"></a>
+<FONT color="green">069</FONT>        COBBLESTONE(4),<a name="line.69"></a>
+<FONT color="green">070</FONT>        WOOD(5, Tree.class),<a name="line.70"></a>
+<FONT color="green">071</FONT>        SAPLING(6, Tree.class),<a name="line.71"></a>
+<FONT color="green">072</FONT>        BEDROCK(7),<a name="line.72"></a>
+<FONT color="green">073</FONT>        WATER(8, MaterialData.class),<a name="line.73"></a>
+<FONT color="green">074</FONT>        STATIONARY_WATER(9, MaterialData.class),<a name="line.74"></a>
+<FONT color="green">075</FONT>        LAVA(10, MaterialData.class),<a name="line.75"></a>
+<FONT color="green">076</FONT>        STATIONARY_LAVA(11, MaterialData.class),<a name="line.76"></a>
+<FONT color="green">077</FONT>        SAND(12),<a name="line.77"></a>
+<FONT color="green">078</FONT>        GRAVEL(13),<a name="line.78"></a>
+<FONT color="green">079</FONT>        GOLD_ORE(14),<a name="line.79"></a>
+<FONT color="green">080</FONT>        IRON_ORE(15),<a name="line.80"></a>
+<FONT color="green">081</FONT>        COAL_ORE(16),<a name="line.81"></a>
+<FONT color="green">082</FONT>        LOG(17, Tree.class),<a name="line.82"></a>
+<FONT color="green">083</FONT>        LEAVES(18, Tree.class),<a name="line.83"></a>
+<FONT color="green">084</FONT>        SPONGE(19),<a name="line.84"></a>
+<FONT color="green">085</FONT>        GLASS(20),<a name="line.85"></a>
+<FONT color="green">086</FONT>        LAPIS_ORE(21),<a name="line.86"></a>
+<FONT color="green">087</FONT>        LAPIS_BLOCK(22),<a name="line.87"></a>
+<FONT color="green">088</FONT>        DISPENSER(23, Dispenser.class),<a name="line.88"></a>
+<FONT color="green">089</FONT>        SANDSTONE(24, Sandstone.class),<a name="line.89"></a>
+<FONT color="green">090</FONT>        NOTE_BLOCK(25),<a name="line.90"></a>
+<FONT color="green">091</FONT>        BED_BLOCK(26, Bed.class),<a name="line.91"></a>
+<FONT color="green">092</FONT>        POWERED_RAIL(27, PoweredRail.class),<a name="line.92"></a>
+<FONT color="green">093</FONT>        DETECTOR_RAIL(28, DetectorRail.class),<a name="line.93"></a>
+<FONT color="green">094</FONT>        PISTON_STICKY_BASE(29, PistonBaseMaterial.class),<a name="line.94"></a>
+<FONT color="green">095</FONT>        WEB(30),<a name="line.95"></a>
+<FONT color="green">096</FONT>        LONG_GRASS(31, LongGrass.class),<a name="line.96"></a>
+<FONT color="green">097</FONT>        DEAD_BUSH(32),<a name="line.97"></a>
+<FONT color="green">098</FONT>        PISTON_BASE(33, PistonBaseMaterial.class),<a name="line.98"></a>
+<FONT color="green">099</FONT>        PISTON_EXTENSION(34, PistonExtensionMaterial.class),<a name="line.99"></a>
+<FONT color="green">100</FONT>        WOOL(35, Wool.class),<a name="line.100"></a>
+<FONT color="green">101</FONT>        PISTON_MOVING_PIECE(36),<a name="line.101"></a>
+<FONT color="green">102</FONT>        YELLOW_FLOWER(37),<a name="line.102"></a>
+<FONT color="green">103</FONT>        RED_ROSE(38),<a name="line.103"></a>
+<FONT color="green">104</FONT>        BROWN_MUSHROOM(39),<a name="line.104"></a>
+<FONT color="green">105</FONT>        RED_MUSHROOM(40),<a name="line.105"></a>
+<FONT color="green">106</FONT>        GOLD_BLOCK(41),<a name="line.106"></a>
+<FONT color="green">107</FONT>        IRON_BLOCK(42),<a name="line.107"></a>
+<FONT color="green">108</FONT>        DOUBLE_STEP(43, Step.class),<a name="line.108"></a>
+<FONT color="green">109</FONT>        STEP(44, Step.class),<a name="line.109"></a>
+<FONT color="green">110</FONT>        BRICK(45),<a name="line.110"></a>
+<FONT color="green">111</FONT>        TNT(46),<a name="line.111"></a>
+<FONT color="green">112</FONT>        BOOKSHELF(47),<a name="line.112"></a>
+<FONT color="green">113</FONT>        MOSSY_COBBLESTONE(48),<a name="line.113"></a>
+<FONT color="green">114</FONT>        OBSIDIAN(49),<a name="line.114"></a>
+<FONT color="green">115</FONT>        TORCH(50, Torch.class),<a name="line.115"></a>
+<FONT color="green">116</FONT>        FIRE(51),<a name="line.116"></a>
+<FONT color="green">117</FONT>        MOB_SPAWNER(52),<a name="line.117"></a>
+<FONT color="green">118</FONT>        WOOD_STAIRS(53, Stairs.class),<a name="line.118"></a>
+<FONT color="green">119</FONT>        CHEST(54, Chest.class),<a name="line.119"></a>
+<FONT color="green">120</FONT>        REDSTONE_WIRE(55, RedstoneWire.class),<a name="line.120"></a>
+<FONT color="green">121</FONT>        DIAMOND_ORE(56),<a name="line.121"></a>
+<FONT color="green">122</FONT>        DIAMOND_BLOCK(57),<a name="line.122"></a>
+<FONT color="green">123</FONT>        WORKBENCH(58),<a name="line.123"></a>
+<FONT color="green">124</FONT>        CROPS(59, Crops.class),<a name="line.124"></a>
+<FONT color="green">125</FONT>        SOIL(60, MaterialData.class),<a name="line.125"></a>
+<FONT color="green">126</FONT>        FURNACE(61, Furnace.class),<a name="line.126"></a>
+<FONT color="green">127</FONT>        BURNING_FURNACE(62, Furnace.class),<a name="line.127"></a>
+<FONT color="green">128</FONT>        SIGN_POST(63, 64, Sign.class),<a name="line.128"></a>
+<FONT color="green">129</FONT>        WOODEN_DOOR(64, Door.class),<a name="line.129"></a>
+<FONT color="green">130</FONT>        LADDER(65, Ladder.class),<a name="line.130"></a>
+<FONT color="green">131</FONT>        RAILS(66, Rails.class),<a name="line.131"></a>
+<FONT color="green">132</FONT>        COBBLESTONE_STAIRS(67, Stairs.class),<a name="line.132"></a>
+<FONT color="green">133</FONT>        WALL_SIGN(68, 64, Sign.class),<a name="line.133"></a>
+<FONT color="green">134</FONT>        LEVER(69, Lever.class),<a name="line.134"></a>
+<FONT color="green">135</FONT>        STONE_PLATE(70, PressurePlate.class),<a name="line.135"></a>
+<FONT color="green">136</FONT>        IRON_DOOR_BLOCK(71, Door.class),<a name="line.136"></a>
+<FONT color="green">137</FONT>        WOOD_PLATE(72, PressurePlate.class),<a name="line.137"></a>
+<FONT color="green">138</FONT>        REDSTONE_ORE(73),<a name="line.138"></a>
+<FONT color="green">139</FONT>        GLOWING_REDSTONE_ORE(74),<a name="line.139"></a>
+<FONT color="green">140</FONT>        REDSTONE_TORCH_OFF(75, RedstoneTorch.class),<a name="line.140"></a>
+<FONT color="green">141</FONT>        REDSTONE_TORCH_ON(76, RedstoneTorch.class),<a name="line.141"></a>
+<FONT color="green">142</FONT>        STONE_BUTTON(77, Button.class),<a name="line.142"></a>
+<FONT color="green">143</FONT>        SNOW(78),<a name="line.143"></a>
+<FONT color="green">144</FONT>        ICE(79),<a name="line.144"></a>
+<FONT color="green">145</FONT>        SNOW_BLOCK(80),<a name="line.145"></a>
+<FONT color="green">146</FONT>        CACTUS(81, MaterialData.class),<a name="line.146"></a>
+<FONT color="green">147</FONT>        CLAY(82),<a name="line.147"></a>
+<FONT color="green">148</FONT>        SUGAR_CANE_BLOCK(83, MaterialData.class),<a name="line.148"></a>
+<FONT color="green">149</FONT>        JUKEBOX(84),<a name="line.149"></a>
+<FONT color="green">150</FONT>        FENCE(85),<a name="line.150"></a>
+<FONT color="green">151</FONT>        PUMPKIN(86, Pumpkin.class),<a name="line.151"></a>
+<FONT color="green">152</FONT>        NETHERRACK(87),<a name="line.152"></a>
+<FONT color="green">153</FONT>        SOUL_SAND(88),<a name="line.153"></a>
+<FONT color="green">154</FONT>        GLOWSTONE(89),<a name="line.154"></a>
+<FONT color="green">155</FONT>        PORTAL(90),<a name="line.155"></a>
+<FONT color="green">156</FONT>        JACK_O_LANTERN(91, Pumpkin.class),<a name="line.156"></a>
+<FONT color="green">157</FONT>        CAKE_BLOCK(92, 64, Cake.class),<a name="line.157"></a>
+<FONT color="green">158</FONT>        DIODE_BLOCK_OFF(93, Diode.class),<a name="line.158"></a>
+<FONT color="green">159</FONT>        DIODE_BLOCK_ON(94, Diode.class),<a name="line.159"></a>
+<FONT color="green">160</FONT>        @Deprecated<a name="line.160"></a>
+<FONT color="green">161</FONT>        LOCKED_CHEST(95),<a name="line.161"></a>
+<FONT color="green">162</FONT>        STAINED_GLASS(95),<a name="line.162"></a>
+<FONT color="green">163</FONT>        TRAP_DOOR(96, TrapDoor.class),<a name="line.163"></a>
+<FONT color="green">164</FONT>        MONSTER_EGGS(97, MonsterEggs.class),<a name="line.164"></a>
+<FONT color="green">165</FONT>        SMOOTH_BRICK(98, SmoothBrick.class),<a name="line.165"></a>
+<FONT color="green">166</FONT>        HUGE_MUSHROOM_1(99, Mushroom.class),<a name="line.166"></a>
+<FONT color="green">167</FONT>        HUGE_MUSHROOM_2(100, Mushroom.class),<a name="line.167"></a>
+<FONT color="green">168</FONT>        IRON_FENCE(101),<a name="line.168"></a>
+<FONT color="green">169</FONT>        THIN_GLASS(102),<a name="line.169"></a>
+<FONT color="green">170</FONT>        MELON_BLOCK(103),<a name="line.170"></a>
+<FONT color="green">171</FONT>        PUMPKIN_STEM(104, MaterialData.class),<a name="line.171"></a>
+<FONT color="green">172</FONT>        MELON_STEM(105, MaterialData.class),<a name="line.172"></a>
+<FONT color="green">173</FONT>        VINE(106, Vine.class),<a name="line.173"></a>
+<FONT color="green">174</FONT>        FENCE_GATE(107, Gate.class),<a name="line.174"></a>
+<FONT color="green">175</FONT>        BRICK_STAIRS(108, Stairs.class),<a name="line.175"></a>
+<FONT color="green">176</FONT>        SMOOTH_STAIRS(109, Stairs.class),<a name="line.176"></a>
+<FONT color="green">177</FONT>        MYCEL(110),<a name="line.177"></a>
+<FONT color="green">178</FONT>        WATER_LILY(111),<a name="line.178"></a>
+<FONT color="green">179</FONT>        NETHER_BRICK(112),<a name="line.179"></a>
+<FONT color="green">180</FONT>        NETHER_FENCE(113),<a name="line.180"></a>
+<FONT color="green">181</FONT>        NETHER_BRICK_STAIRS(114, Stairs.class),<a name="line.181"></a>
+<FONT color="green">182</FONT>        NETHER_WARTS(115, NetherWarts.class),<a name="line.182"></a>
+<FONT color="green">183</FONT>        ENCHANTMENT_TABLE(116),<a name="line.183"></a>
+<FONT color="green">184</FONT>        BREWING_STAND(117, MaterialData.class),<a name="line.184"></a>
+<FONT color="green">185</FONT>        CAULDRON(118, Cauldron.class),<a name="line.185"></a>
+<FONT color="green">186</FONT>        ENDER_PORTAL(119),<a name="line.186"></a>
+<FONT color="green">187</FONT>        ENDER_PORTAL_FRAME(120),<a name="line.187"></a>
+<FONT color="green">188</FONT>        ENDER_STONE(121),<a name="line.188"></a>
+<FONT color="green">189</FONT>        DRAGON_EGG(122),<a name="line.189"></a>
+<FONT color="green">190</FONT>        REDSTONE_LAMP_OFF(123),<a name="line.190"></a>
+<FONT color="green">191</FONT>        REDSTONE_LAMP_ON(124),<a name="line.191"></a>
+<FONT color="green">192</FONT>        WOOD_DOUBLE_STEP(125, WoodenStep.class),<a name="line.192"></a>
+<FONT color="green">193</FONT>        WOOD_STEP(126, WoodenStep.class),<a name="line.193"></a>
+<FONT color="green">194</FONT>        COCOA(127, CocoaPlant.class),<a name="line.194"></a>
+<FONT color="green">195</FONT>        SANDSTONE_STAIRS(128, Stairs.class),<a name="line.195"></a>
+<FONT color="green">196</FONT>        EMERALD_ORE(129),<a name="line.196"></a>
+<FONT color="green">197</FONT>        ENDER_CHEST(130, EnderChest.class),<a name="line.197"></a>
+<FONT color="green">198</FONT>        TRIPWIRE_HOOK(131, TripwireHook.class),<a name="line.198"></a>
+<FONT color="green">199</FONT>        TRIPWIRE(132, Tripwire.class),<a name="line.199"></a>
+<FONT color="green">200</FONT>        EMERALD_BLOCK(133),<a name="line.200"></a>
+<FONT color="green">201</FONT>        SPRUCE_WOOD_STAIRS(134, Stairs.class),<a name="line.201"></a>
+<FONT color="green">202</FONT>        BIRCH_WOOD_STAIRS(135, Stairs.class),<a name="line.202"></a>
+<FONT color="green">203</FONT>        JUNGLE_WOOD_STAIRS(136, Stairs.class),<a name="line.203"></a>
+<FONT color="green">204</FONT>        COMMAND(137, Command.class),<a name="line.204"></a>
+<FONT color="green">205</FONT>        BEACON(138),<a name="line.205"></a>
+<FONT color="green">206</FONT>        COBBLE_WALL(139),<a name="line.206"></a>
+<FONT color="green">207</FONT>        FLOWER_POT(140, FlowerPot.class),<a name="line.207"></a>
+<FONT color="green">208</FONT>        CARROT(141),<a name="line.208"></a>
+<FONT color="green">209</FONT>        POTATO(142),<a name="line.209"></a>
+<FONT color="green">210</FONT>        WOOD_BUTTON(143, Button.class),<a name="line.210"></a>
+<FONT color="green">211</FONT>        SKULL(144, Skull.class),<a name="line.211"></a>
+<FONT color="green">212</FONT>        ANVIL(145),<a name="line.212"></a>
+<FONT color="green">213</FONT>        TRAPPED_CHEST(146),<a name="line.213"></a>
+<FONT color="green">214</FONT>        GOLD_PLATE(147),<a name="line.214"></a>
+<FONT color="green">215</FONT>        IRON_PLATE(148),<a name="line.215"></a>
+<FONT color="green">216</FONT>        REDSTONE_COMPARATOR_OFF(149),<a name="line.216"></a>
+<FONT color="green">217</FONT>        REDSTONE_COMPARATOR_ON(150),<a name="line.217"></a>
+<FONT color="green">218</FONT>        DAYLIGHT_DETECTOR(151),<a name="line.218"></a>
+<FONT color="green">219</FONT>        REDSTONE_BLOCK(152),<a name="line.219"></a>
+<FONT color="green">220</FONT>        QUARTZ_ORE(153),<a name="line.220"></a>
+<FONT color="green">221</FONT>        HOPPER(154),<a name="line.221"></a>
+<FONT color="green">222</FONT>        QUARTZ_BLOCK(155),<a name="line.222"></a>
+<FONT color="green">223</FONT>        QUARTZ_STAIRS(156, Stairs.class),<a name="line.223"></a>
+<FONT color="green">224</FONT>        ACTIVATOR_RAIL(157, PoweredRail.class),<a name="line.224"></a>
+<FONT color="green">225</FONT>        DROPPER(158, Dispenser.class),<a name="line.225"></a>
+<FONT color="green">226</FONT>        STAINED_CLAY(159),<a name="line.226"></a>
+<FONT color="green">227</FONT>        STAINED_GLASS_PANE(160),<a name="line.227"></a>
+<FONT color="green">228</FONT>        LEAVES_2(161),<a name="line.228"></a>
+<FONT color="green">229</FONT>        LOG_2(162),<a name="line.229"></a>
+<FONT color="green">230</FONT>        ACACIA_STAIRS(163, Stairs.class),<a name="line.230"></a>
+<FONT color="green">231</FONT>        DARK_OAK_STAIRS(164, Stairs.class),<a name="line.231"></a>
+<FONT color="green">232</FONT>        HAY_BLOCK(170),<a name="line.232"></a>
+<FONT color="green">233</FONT>        CARPET(171),<a name="line.233"></a>
+<FONT color="green">234</FONT>        HARD_CLAY(172),<a name="line.234"></a>
+<FONT color="green">235</FONT>        COAL_BLOCK(173),<a name="line.235"></a>
+<FONT color="green">236</FONT>        PACKED_ICE(174),<a name="line.236"></a>
+<FONT color="green">237</FONT>        DOUBLE_PLANT(175),<a name="line.237"></a>
+<FONT color="green">238</FONT>        // ----- Item Separator -----<a name="line.238"></a>
+<FONT color="green">239</FONT>        IRON_SPADE(256, 1, 250),<a name="line.239"></a>
+<FONT color="green">240</FONT>        IRON_PICKAXE(257, 1, 250),<a name="line.240"></a>
+<FONT color="green">241</FONT>        IRON_AXE(258, 1, 250),<a name="line.241"></a>
+<FONT color="green">242</FONT>        FLINT_AND_STEEL(259, 1, 64),<a name="line.242"></a>
+<FONT color="green">243</FONT>        APPLE(260),<a name="line.243"></a>
+<FONT color="green">244</FONT>        BOW(261, 1, 384),<a name="line.244"></a>
+<FONT color="green">245</FONT>        ARROW(262),<a name="line.245"></a>
+<FONT color="green">246</FONT>        COAL(263, Coal.class),<a name="line.246"></a>
+<FONT color="green">247</FONT>        DIAMOND(264),<a name="line.247"></a>
+<FONT color="green">248</FONT>        IRON_INGOT(265),<a name="line.248"></a>
+<FONT color="green">249</FONT>        GOLD_INGOT(266),<a name="line.249"></a>
+<FONT color="green">250</FONT>        IRON_SWORD(267, 1, 250),<a name="line.250"></a>
+<FONT color="green">251</FONT>        WOOD_SWORD(268, 1, 59),<a name="line.251"></a>
+<FONT color="green">252</FONT>        WOOD_SPADE(269, 1, 59),<a name="line.252"></a>
+<FONT color="green">253</FONT>        WOOD_PICKAXE(270, 1, 59),<a name="line.253"></a>
+<FONT color="green">254</FONT>        WOOD_AXE(271, 1, 59),<a name="line.254"></a>
+<FONT color="green">255</FONT>        STONE_SWORD(272, 1, 131),<a name="line.255"></a>
+<FONT color="green">256</FONT>        STONE_SPADE(273, 1, 131),<a name="line.256"></a>
+<FONT color="green">257</FONT>        STONE_PICKAXE(274, 1, 131),<a name="line.257"></a>
+<FONT color="green">258</FONT>        STONE_AXE(275, 1, 131),<a name="line.258"></a>
+<FONT color="green">259</FONT>        DIAMOND_SWORD(276, 1, 1561),<a name="line.259"></a>
+<FONT color="green">260</FONT>        DIAMOND_SPADE(277, 1, 1561),<a name="line.260"></a>
+<FONT color="green">261</FONT>        DIAMOND_PICKAXE(278, 1, 1561),<a name="line.261"></a>
+<FONT color="green">262</FONT>        DIAMOND_AXE(279, 1, 1561),<a name="line.262"></a>
+<FONT color="green">263</FONT>        STICK(280),<a name="line.263"></a>
+<FONT color="green">264</FONT>        BOWL(281),<a name="line.264"></a>
+<FONT color="green">265</FONT>        MUSHROOM_SOUP(282, 1),<a name="line.265"></a>
+<FONT color="green">266</FONT>        GOLD_SWORD(283, 1, 32),<a name="line.266"></a>
+<FONT color="green">267</FONT>        GOLD_SPADE(284, 1, 32),<a name="line.267"></a>
+<FONT color="green">268</FONT>        GOLD_PICKAXE(285, 1, 32),<a name="line.268"></a>
+<FONT color="green">269</FONT>        GOLD_AXE(286, 1, 32),<a name="line.269"></a>
+<FONT color="green">270</FONT>        STRING(287),<a name="line.270"></a>
+<FONT color="green">271</FONT>        FEATHER(288),<a name="line.271"></a>
+<FONT color="green">272</FONT>        SULPHUR(289),<a name="line.272"></a>
+<FONT color="green">273</FONT>        WOOD_HOE(290, 1, 59),<a name="line.273"></a>
+<FONT color="green">274</FONT>        STONE_HOE(291, 1, 131),<a name="line.274"></a>
+<FONT color="green">275</FONT>        IRON_HOE(292, 1, 250),<a name="line.275"></a>
+<FONT color="green">276</FONT>        DIAMOND_HOE(293, 1, 1561),<a name="line.276"></a>
+<FONT color="green">277</FONT>        GOLD_HOE(294, 1, 32),<a name="line.277"></a>
+<FONT color="green">278</FONT>        SEEDS(295),<a name="line.278"></a>
+<FONT color="green">279</FONT>        WHEAT(296),<a name="line.279"></a>
+<FONT color="green">280</FONT>        BREAD(297),<a name="line.280"></a>
+<FONT color="green">281</FONT>        LEATHER_HELMET(298, 1, 55),<a name="line.281"></a>
+<FONT color="green">282</FONT>        LEATHER_CHESTPLATE(299, 1, 80),<a name="line.282"></a>
+<FONT color="green">283</FONT>        LEATHER_LEGGINGS(300, 1, 75),<a name="line.283"></a>
+<FONT color="green">284</FONT>        LEATHER_BOOTS(301, 1, 65),<a name="line.284"></a>
+<FONT color="green">285</FONT>        CHAINMAIL_HELMET(302, 1, 165),<a name="line.285"></a>
+<FONT color="green">286</FONT>        CHAINMAIL_CHESTPLATE(303, 1, 240),<a name="line.286"></a>
+<FONT color="green">287</FONT>        CHAINMAIL_LEGGINGS(304, 1, 225),<a name="line.287"></a>
+<FONT color="green">288</FONT>        CHAINMAIL_BOOTS(305, 1, 195),<a name="line.288"></a>
+<FONT color="green">289</FONT>        IRON_HELMET(306, 1, 165),<a name="line.289"></a>
+<FONT color="green">290</FONT>        IRON_CHESTPLATE(307, 1, 240),<a name="line.290"></a>
+<FONT color="green">291</FONT>        IRON_LEGGINGS(308, 1, 225),<a name="line.291"></a>
+<FONT color="green">292</FONT>        IRON_BOOTS(309, 1, 195),<a name="line.292"></a>
+<FONT color="green">293</FONT>        DIAMOND_HELMET(310, 1, 363),<a name="line.293"></a>
+<FONT color="green">294</FONT>        DIAMOND_CHESTPLATE(311, 1, 528),<a name="line.294"></a>
+<FONT color="green">295</FONT>        DIAMOND_LEGGINGS(312, 1, 495),<a name="line.295"></a>
+<FONT color="green">296</FONT>        DIAMOND_BOOTS(313, 1, 429),<a name="line.296"></a>
+<FONT color="green">297</FONT>        GOLD_HELMET(314, 1, 77),<a name="line.297"></a>
+<FONT color="green">298</FONT>        GOLD_CHESTPLATE(315, 1, 112),<a name="line.298"></a>
+<FONT color="green">299</FONT>        GOLD_LEGGINGS(316, 1, 105),<a name="line.299"></a>
+<FONT color="green">300</FONT>        GOLD_BOOTS(317, 1, 91),<a name="line.300"></a>
+<FONT color="green">301</FONT>        FLINT(318),<a name="line.301"></a>
+<FONT color="green">302</FONT>        PORK(319),<a name="line.302"></a>
+<FONT color="green">303</FONT>        GRILLED_PORK(320),<a name="line.303"></a>
+<FONT color="green">304</FONT>        PAINTING(321),<a name="line.304"></a>
+<FONT color="green">305</FONT>        GOLDEN_APPLE(322),<a name="line.305"></a>
+<FONT color="green">306</FONT>        SIGN(323, 16),<a name="line.306"></a>
+<FONT color="green">307</FONT>        WOOD_DOOR(324, 1),<a name="line.307"></a>
+<FONT color="green">308</FONT>        BUCKET(325, 16),<a name="line.308"></a>
+<FONT color="green">309</FONT>        WATER_BUCKET(326, 1),<a name="line.309"></a>
+<FONT color="green">310</FONT>        LAVA_BUCKET(327, 1),<a name="line.310"></a>
+<FONT color="green">311</FONT>        MINECART(328, 1),<a name="line.311"></a>
+<FONT color="green">312</FONT>        SADDLE(329, 1),<a name="line.312"></a>
+<FONT color="green">313</FONT>        IRON_DOOR(330, 1),<a name="line.313"></a>
+<FONT color="green">314</FONT>        REDSTONE(331),<a name="line.314"></a>
+<FONT color="green">315</FONT>        SNOW_BALL(332, 16),<a name="line.315"></a>
+<FONT color="green">316</FONT>        BOAT(333, 1),<a name="line.316"></a>
+<FONT color="green">317</FONT>        LEATHER(334),<a name="line.317"></a>
+<FONT color="green">318</FONT>        MILK_BUCKET(335, 1),<a name="line.318"></a>
+<FONT color="green">319</FONT>        CLAY_BRICK(336),<a name="line.319"></a>
+<FONT color="green">320</FONT>        CLAY_BALL(337),<a name="line.320"></a>
+<FONT color="green">321</FONT>        SUGAR_CANE(338),<a name="line.321"></a>
+<FONT color="green">322</FONT>        PAPER(339),<a name="line.322"></a>
+<FONT color="green">323</FONT>        BOOK(340),<a name="line.323"></a>
+<FONT color="green">324</FONT>        SLIME_BALL(341),<a name="line.324"></a>
+<FONT color="green">325</FONT>        STORAGE_MINECART(342, 1),<a name="line.325"></a>
+<FONT color="green">326</FONT>        POWERED_MINECART(343, 1),<a name="line.326"></a>
+<FONT color="green">327</FONT>        EGG(344, 16),<a name="line.327"></a>
+<FONT color="green">328</FONT>        COMPASS(345),<a name="line.328"></a>
+<FONT color="green">329</FONT>        FISHING_ROD(346, 1, 64),<a name="line.329"></a>
+<FONT color="green">330</FONT>        WATCH(347),<a name="line.330"></a>
+<FONT color="green">331</FONT>        GLOWSTONE_DUST(348),<a name="line.331"></a>
+<FONT color="green">332</FONT>        RAW_FISH(349),<a name="line.332"></a>
+<FONT color="green">333</FONT>        COOKED_FISH(350),<a name="line.333"></a>
+<FONT color="green">334</FONT>        INK_SACK(351, Dye.class),<a name="line.334"></a>
+<FONT color="green">335</FONT>        BONE(352),<a name="line.335"></a>
+<FONT color="green">336</FONT>        SUGAR(353),<a name="line.336"></a>
+<FONT color="green">337</FONT>        CAKE(354, 1),<a name="line.337"></a>
+<FONT color="green">338</FONT>        BED(355, 1),<a name="line.338"></a>
+<FONT color="green">339</FONT>        DIODE(356),<a name="line.339"></a>
+<FONT color="green">340</FONT>        COOKIE(357),<a name="line.340"></a>
+<FONT color="green">341</FONT>        /**<a name="line.341"></a>
+<FONT color="green">342</FONT>         * @see MapView<a name="line.342"></a>
+<FONT color="green">343</FONT>         */<a name="line.343"></a>
+<FONT color="green">344</FONT>        MAP(358, MaterialData.class),<a name="line.344"></a>
+<FONT color="green">345</FONT>        SHEARS(359, 1, 238),<a name="line.345"></a>
+<FONT color="green">346</FONT>        MELON(360),<a name="line.346"></a>
+<FONT color="green">347</FONT>        PUMPKIN_SEEDS(361),<a name="line.347"></a>
+<FONT color="green">348</FONT>        MELON_SEEDS(362),<a name="line.348"></a>
+<FONT color="green">349</FONT>        RAW_BEEF(363),<a name="line.349"></a>
+<FONT color="green">350</FONT>        COOKED_BEEF(364),<a name="line.350"></a>
+<FONT color="green">351</FONT>        RAW_CHICKEN(365),<a name="line.351"></a>
+<FONT color="green">352</FONT>        COOKED_CHICKEN(366),<a name="line.352"></a>
+<FONT color="green">353</FONT>        ROTTEN_FLESH(367),<a name="line.353"></a>
+<FONT color="green">354</FONT>        ENDER_PEARL(368, 16),<a name="line.354"></a>
+<FONT color="green">355</FONT>        BLAZE_ROD(369),<a name="line.355"></a>
+<FONT color="green">356</FONT>        GHAST_TEAR(370),<a name="line.356"></a>
+<FONT color="green">357</FONT>        GOLD_NUGGET(371),<a name="line.357"></a>
+<FONT color="green">358</FONT>        NETHER_STALK(372),<a name="line.358"></a>
+<FONT color="green">359</FONT>        /**<a name="line.359"></a>
+<FONT color="green">360</FONT>         * @see Potion<a name="line.360"></a>
+<FONT color="green">361</FONT>         */<a name="line.361"></a>
+<FONT color="green">362</FONT>        POTION(373, 1, MaterialData.class),<a name="line.362"></a>
+<FONT color="green">363</FONT>        GLASS_BOTTLE(374),<a name="line.363"></a>
+<FONT color="green">364</FONT>        SPIDER_EYE(375),<a name="line.364"></a>
+<FONT color="green">365</FONT>        FERMENTED_SPIDER_EYE(376),<a name="line.365"></a>
+<FONT color="green">366</FONT>        BLAZE_POWDER(377),<a name="line.366"></a>
+<FONT color="green">367</FONT>        MAGMA_CREAM(378),<a name="line.367"></a>
+<FONT color="green">368</FONT>        BREWING_STAND_ITEM(379),<a name="line.368"></a>
+<FONT color="green">369</FONT>        CAULDRON_ITEM(380),<a name="line.369"></a>
+<FONT color="green">370</FONT>        EYE_OF_ENDER(381),<a name="line.370"></a>
+<FONT color="green">371</FONT>        SPECKLED_MELON(382),<a name="line.371"></a>
+<FONT color="green">372</FONT>        MONSTER_EGG(383, 64, SpawnEgg.class),<a name="line.372"></a>
+<FONT color="green">373</FONT>        EXP_BOTTLE(384, 64),<a name="line.373"></a>
+<FONT color="green">374</FONT>        FIREBALL(385, 64),<a name="line.374"></a>
+<FONT color="green">375</FONT>        BOOK_AND_QUILL(386, 1),<a name="line.375"></a>
+<FONT color="green">376</FONT>        WRITTEN_BOOK(387, 16),<a name="line.376"></a>
+<FONT color="green">377</FONT>        EMERALD(388, 64),<a name="line.377"></a>
+<FONT color="green">378</FONT>        ITEM_FRAME(389),<a name="line.378"></a>
+<FONT color="green">379</FONT>        FLOWER_POT_ITEM(390),<a name="line.379"></a>
+<FONT color="green">380</FONT>        CARROT_ITEM(391),<a name="line.380"></a>
+<FONT color="green">381</FONT>        POTATO_ITEM(392),<a name="line.381"></a>
+<FONT color="green">382</FONT>        BAKED_POTATO(393),<a name="line.382"></a>
+<FONT color="green">383</FONT>        POISONOUS_POTATO(394),<a name="line.383"></a>
+<FONT color="green">384</FONT>        EMPTY_MAP(395),<a name="line.384"></a>
+<FONT color="green">385</FONT>        GOLDEN_CARROT(396),<a name="line.385"></a>
+<FONT color="green">386</FONT>        SKULL_ITEM(397),<a name="line.386"></a>
+<FONT color="green">387</FONT>        CARROT_STICK(398, 1, 25),<a name="line.387"></a>
+<FONT color="green">388</FONT>        NETHER_STAR(399),<a name="line.388"></a>
+<FONT color="green">389</FONT>        PUMPKIN_PIE(400),<a name="line.389"></a>
+<FONT color="green">390</FONT>        FIREWORK(401),<a name="line.390"></a>
+<FONT color="green">391</FONT>        FIREWORK_CHARGE(402),<a name="line.391"></a>
+<FONT color="green">392</FONT>        ENCHANTED_BOOK(403, 1),<a name="line.392"></a>
+<FONT color="green">393</FONT>        REDSTONE_COMPARATOR(404),<a name="line.393"></a>
+<FONT color="green">394</FONT>        NETHER_BRICK_ITEM(405),<a name="line.394"></a>
+<FONT color="green">395</FONT>        QUARTZ(406),<a name="line.395"></a>
+<FONT color="green">396</FONT>        EXPLOSIVE_MINECART(407, 1),<a name="line.396"></a>
+<FONT color="green">397</FONT>        HOPPER_MINECART(408, 1),<a name="line.397"></a>
+<FONT color="green">398</FONT>        IRON_BARDING(417, 1),<a name="line.398"></a>
+<FONT color="green">399</FONT>        GOLD_BARDING(418, 1),<a name="line.399"></a>
+<FONT color="green">400</FONT>        DIAMOND_BARDING(419, 1),<a name="line.400"></a>
+<FONT color="green">401</FONT>        LEASH(420),<a name="line.401"></a>
+<FONT color="green">402</FONT>        NAME_TAG(421),<a name="line.402"></a>
+<FONT color="green">403</FONT>        COMMAND_MINECART(422, 1),<a name="line.403"></a>
+<FONT color="green">404</FONT>        GOLD_RECORD(2256, 1),<a name="line.404"></a>
+<FONT color="green">405</FONT>        GREEN_RECORD(2257, 1),<a name="line.405"></a>
+<FONT color="green">406</FONT>        RECORD_3(2258, 1),<a name="line.406"></a>
+<FONT color="green">407</FONT>        RECORD_4(2259, 1),<a name="line.407"></a>
+<FONT color="green">408</FONT>        RECORD_5(2260, 1),<a name="line.408"></a>
+<FONT color="green">409</FONT>        RECORD_6(2261, 1),<a name="line.409"></a>
+<FONT color="green">410</FONT>        RECORD_7(2262, 1),<a name="line.410"></a>
+<FONT color="green">411</FONT>        RECORD_8(2263, 1),<a name="line.411"></a>
+<FONT color="green">412</FONT>        RECORD_9(2264, 1),<a name="line.412"></a>
+<FONT color="green">413</FONT>        RECORD_10(2265, 1),<a name="line.413"></a>
+<FONT color="green">414</FONT>        RECORD_11(2266, 1),<a name="line.414"></a>
+<FONT color="green">415</FONT>        RECORD_12(2267, 1),<a name="line.415"></a>
+<FONT color="green">416</FONT>        ;<a name="line.416"></a>
+<FONT color="green">417</FONT>    <a name="line.417"></a>
+<FONT color="green">418</FONT>        private final int id;<a name="line.418"></a>
+<FONT color="green">419</FONT>        private final Constructor&lt;? extends MaterialData&gt; ctor;<a name="line.419"></a>
+<FONT color="green">420</FONT>        private static Material[] byId = new Material[383];<a name="line.420"></a>
+<FONT color="green">421</FONT>        private final static Map&lt;String, Material&gt; BY_NAME = Maps.newHashMap();<a name="line.421"></a>
+<FONT color="green">422</FONT>        private final int maxStack;<a name="line.422"></a>
+<FONT color="green">423</FONT>        private final short durability;<a name="line.423"></a>
+<FONT color="green">424</FONT>    <a name="line.424"></a>
+<FONT color="green">425</FONT>        private Material(final int id) {<a name="line.425"></a>
+<FONT color="green">426</FONT>            this(id, 64);<a name="line.426"></a>
+<FONT color="green">427</FONT>        }<a name="line.427"></a>
+<FONT color="green">428</FONT>    <a name="line.428"></a>
+<FONT color="green">429</FONT>        private Material(final int id, final int stack) {<a name="line.429"></a>
+<FONT color="green">430</FONT>            this(id, stack, MaterialData.class);<a name="line.430"></a>
+<FONT color="green">431</FONT>        }<a name="line.431"></a>
+<FONT color="green">432</FONT>    <a name="line.432"></a>
+<FONT color="green">433</FONT>        private Material(final int id, final int stack, final int durability) {<a name="line.433"></a>
+<FONT color="green">434</FONT>            this(id, stack, durability, MaterialData.class);<a name="line.434"></a>
+<FONT color="green">435</FONT>        }<a name="line.435"></a>
+<FONT color="green">436</FONT>    <a name="line.436"></a>
+<FONT color="green">437</FONT>        private Material(final int id, final Class&lt;? extends MaterialData&gt; data) {<a name="line.437"></a>
+<FONT color="green">438</FONT>            this(id, 64, data);<a name="line.438"></a>
+<FONT color="green">439</FONT>        }<a name="line.439"></a>
+<FONT color="green">440</FONT>    <a name="line.440"></a>
+<FONT color="green">441</FONT>        private Material(final int id, final int stack, final Class&lt;? extends MaterialData&gt; data) {<a name="line.441"></a>
+<FONT color="green">442</FONT>            this(id, stack, 0, data);<a name="line.442"></a>
+<FONT color="green">443</FONT>        }<a name="line.443"></a>
+<FONT color="green">444</FONT>    <a name="line.444"></a>
+<FONT color="green">445</FONT>        private Material(final int id, final int stack, final int durability, final Class&lt;? extends MaterialData&gt; data) {<a name="line.445"></a>
+<FONT color="green">446</FONT>            this.id = id;<a name="line.446"></a>
+<FONT color="green">447</FONT>            this.durability = (short) durability;<a name="line.447"></a>
+<FONT color="green">448</FONT>            this.maxStack = stack;<a name="line.448"></a>
+<FONT color="green">449</FONT>            // try to cache the constructor for this material<a name="line.449"></a>
+<FONT color="green">450</FONT>            try {<a name="line.450"></a>
+<FONT color="green">451</FONT>                this.ctor = data.getConstructor(int.class, byte.class);<a name="line.451"></a>
+<FONT color="green">452</FONT>            } catch (NoSuchMethodException ex) {<a name="line.452"></a>
+<FONT color="green">453</FONT>                throw new AssertionError(ex);<a name="line.453"></a>
+<FONT color="green">454</FONT>            } catch (SecurityException ex) {<a name="line.454"></a>
+<FONT color="green">455</FONT>                throw new AssertionError(ex);<a name="line.455"></a>
+<FONT color="green">456</FONT>            }<a name="line.456"></a>
+<FONT color="green">457</FONT>        }<a name="line.457"></a>
+<FONT color="green">458</FONT>    <a name="line.458"></a>
+<FONT color="green">459</FONT>        /**<a name="line.459"></a>
+<FONT color="green">460</FONT>         * Gets the item ID or block ID of this Material<a name="line.460"></a>
+<FONT color="green">461</FONT>         *<a name="line.461"></a>
+<FONT color="green">462</FONT>         * @return ID of this material<a name="line.462"></a>
+<FONT color="green">463</FONT>         * @deprecated Magic value<a name="line.463"></a>
+<FONT color="green">464</FONT>         */<a name="line.464"></a>
+<FONT color="green">465</FONT>        @Deprecated<a name="line.465"></a>
+<FONT color="green">466</FONT>        public int getId() {<a name="line.466"></a>
+<FONT color="green">467</FONT>            return id;<a name="line.467"></a>
+<FONT color="green">468</FONT>        }<a name="line.468"></a>
+<FONT color="green">469</FONT>    <a name="line.469"></a>
+<FONT color="green">470</FONT>        /**<a name="line.470"></a>
+<FONT color="green">471</FONT>         * Gets the maximum amount of this material that can be held in a stack<a name="line.471"></a>
+<FONT color="green">472</FONT>         *<a name="line.472"></a>
+<FONT color="green">473</FONT>         * @return Maximum stack size for this material<a name="line.473"></a>
+<FONT color="green">474</FONT>         */<a name="line.474"></a>
+<FONT color="green">475</FONT>        public int getMaxStackSize() {<a name="line.475"></a>
+<FONT color="green">476</FONT>            return maxStack;<a name="line.476"></a>
+<FONT color="green">477</FONT>        }<a name="line.477"></a>
+<FONT color="green">478</FONT>    <a name="line.478"></a>
+<FONT color="green">479</FONT>        /**<a name="line.479"></a>
+<FONT color="green">480</FONT>         * Gets the maximum durability of this material<a name="line.480"></a>
+<FONT color="green">481</FONT>         *<a name="line.481"></a>
+<FONT color="green">482</FONT>         * @return Maximum durability for this material<a name="line.482"></a>
+<FONT color="green">483</FONT>         */<a name="line.483"></a>
+<FONT color="green">484</FONT>        public short getMaxDurability() {<a name="line.484"></a>
+<FONT color="green">485</FONT>            return durability;<a name="line.485"></a>
+<FONT color="green">486</FONT>        }<a name="line.486"></a>
+<FONT color="green">487</FONT>    <a name="line.487"></a>
+<FONT color="green">488</FONT>        /**<a name="line.488"></a>
+<FONT color="green">489</FONT>         * Gets the MaterialData class associated with this Material<a name="line.489"></a>
+<FONT color="green">490</FONT>         *<a name="line.490"></a>
+<FONT color="green">491</FONT>         * @return MaterialData associated with this Material<a name="line.491"></a>
+<FONT color="green">492</FONT>         */<a name="line.492"></a>
+<FONT color="green">493</FONT>        public Class&lt;? extends MaterialData&gt; getData() {<a name="line.493"></a>
+<FONT color="green">494</FONT>            return ctor.getDeclaringClass();<a name="line.494"></a>
+<FONT color="green">495</FONT>        }<a name="line.495"></a>
+<FONT color="green">496</FONT>    <a name="line.496"></a>
+<FONT color="green">497</FONT>        /**<a name="line.497"></a>
+<FONT color="green">498</FONT>         * Constructs a new MaterialData relevant for this Material, with the<a name="line.498"></a>
+<FONT color="green">499</FONT>         * given initial data<a name="line.499"></a>
+<FONT color="green">500</FONT>         *<a name="line.500"></a>
+<FONT color="green">501</FONT>         * @param raw Initial data to construct the MaterialData with<a name="line.501"></a>
+<FONT color="green">502</FONT>         * @return New MaterialData with the given data<a name="line.502"></a>
+<FONT color="green">503</FONT>         * @deprecated Magic value<a name="line.503"></a>
+<FONT color="green">504</FONT>         */<a name="line.504"></a>
+<FONT color="green">505</FONT>        @Deprecated<a name="line.505"></a>
+<FONT color="green">506</FONT>        public MaterialData getNewData(final byte raw) {<a name="line.506"></a>
+<FONT color="green">507</FONT>            try {<a name="line.507"></a>
+<FONT color="green">508</FONT>                return ctor.newInstance(id, raw);<a name="line.508"></a>
+<FONT color="green">509</FONT>            } catch (InstantiationException ex) {<a name="line.509"></a>
+<FONT color="green">510</FONT>                final Throwable t = ex.getCause();<a name="line.510"></a>
+<FONT color="green">511</FONT>                if (t instanceof RuntimeException) {<a name="line.511"></a>
+<FONT color="green">512</FONT>                    throw (RuntimeException) t;<a name="line.512"></a>
+<FONT color="green">513</FONT>                }<a name="line.513"></a>
+<FONT color="green">514</FONT>                if (t instanceof Error) {<a name="line.514"></a>
+<FONT color="green">515</FONT>                    throw (Error) t;<a name="line.515"></a>
+<FONT color="green">516</FONT>                }<a name="line.516"></a>
+<FONT color="green">517</FONT>                throw new AssertionError(t);<a name="line.517"></a>
+<FONT color="green">518</FONT>            } catch (Throwable t) {<a name="line.518"></a>
+<FONT color="green">519</FONT>                throw new AssertionError(t);<a name="line.519"></a>
+<FONT color="green">520</FONT>            }<a name="line.520"></a>
+<FONT color="green">521</FONT>        }<a name="line.521"></a>
+<FONT color="green">522</FONT>    <a name="line.522"></a>
+<FONT color="green">523</FONT>        /**<a name="line.523"></a>
+<FONT color="green">524</FONT>         * Checks if this Material is a placable block<a name="line.524"></a>
+<FONT color="green">525</FONT>         *<a name="line.525"></a>
+<FONT color="green">526</FONT>         * @return true if this material is a block<a name="line.526"></a>
+<FONT color="green">527</FONT>         */<a name="line.527"></a>
+<FONT color="green">528</FONT>        public boolean isBlock() {<a name="line.528"></a>
+<FONT color="green">529</FONT>            return id &lt; 256;<a name="line.529"></a>
+<FONT color="green">530</FONT>        }<a name="line.530"></a>
+<FONT color="green">531</FONT>    <a name="line.531"></a>
+<FONT color="green">532</FONT>        /**<a name="line.532"></a>
+<FONT color="green">533</FONT>         * Checks if this Material is edible.<a name="line.533"></a>
+<FONT color="green">534</FONT>         *<a name="line.534"></a>
+<FONT color="green">535</FONT>         * @return true if this Material is edible.<a name="line.535"></a>
+<FONT color="green">536</FONT>         */<a name="line.536"></a>
+<FONT color="green">537</FONT>        public boolean isEdible() {<a name="line.537"></a>
+<FONT color="green">538</FONT>            switch (this) {<a name="line.538"></a>
+<FONT color="green">539</FONT>                case BREAD:<a name="line.539"></a>
+<FONT color="green">540</FONT>                case CARROT_ITEM:<a name="line.540"></a>
+<FONT color="green">541</FONT>                case BAKED_POTATO:<a name="line.541"></a>
+<FONT color="green">542</FONT>                case POTATO_ITEM:<a name="line.542"></a>
+<FONT color="green">543</FONT>                case POISONOUS_POTATO:<a name="line.543"></a>
+<FONT color="green">544</FONT>                case GOLDEN_CARROT:<a name="line.544"></a>
+<FONT color="green">545</FONT>                case PUMPKIN_PIE:<a name="line.545"></a>
+<FONT color="green">546</FONT>                case COOKIE:<a name="line.546"></a>
+<FONT color="green">547</FONT>                case MELON:<a name="line.547"></a>
+<FONT color="green">548</FONT>                case MUSHROOM_SOUP:<a name="line.548"></a>
+<FONT color="green">549</FONT>                case RAW_CHICKEN:<a name="line.549"></a>
+<FONT color="green">550</FONT>                case COOKED_CHICKEN:<a name="line.550"></a>
+<FONT color="green">551</FONT>                case RAW_BEEF:<a name="line.551"></a>
+<FONT color="green">552</FONT>                case COOKED_BEEF:<a name="line.552"></a>
+<FONT color="green">553</FONT>                case RAW_FISH:<a name="line.553"></a>
+<FONT color="green">554</FONT>                case COOKED_FISH:<a name="line.554"></a>
+<FONT color="green">555</FONT>                case PORK:<a name="line.555"></a>
+<FONT color="green">556</FONT>                case GRILLED_PORK:<a name="line.556"></a>
+<FONT color="green">557</FONT>                case APPLE:<a name="line.557"></a>
+<FONT color="green">558</FONT>                case GOLDEN_APPLE:<a name="line.558"></a>
+<FONT color="green">559</FONT>                case ROTTEN_FLESH:<a name="line.559"></a>
+<FONT color="green">560</FONT>                case SPIDER_EYE:<a name="line.560"></a>
+<FONT color="green">561</FONT>                    return true;<a name="line.561"></a>
+<FONT color="green">562</FONT>                default:<a name="line.562"></a>
+<FONT color="green">563</FONT>                    return false;<a name="line.563"></a>
+<FONT color="green">564</FONT>            }<a name="line.564"></a>
+<FONT color="green">565</FONT>        }<a name="line.565"></a>
+<FONT color="green">566</FONT>    <a name="line.566"></a>
+<FONT color="green">567</FONT>        /**<a name="line.567"></a>
+<FONT color="green">568</FONT>         * Attempts to get the Material with the given ID<a name="line.568"></a>
+<FONT color="green">569</FONT>         *<a name="line.569"></a>
+<FONT color="green">570</FONT>         * @param id ID of the material to get<a name="line.570"></a>
+<FONT color="green">571</FONT>         * @return Material if found, or null<a name="line.571"></a>
+<FONT color="green">572</FONT>         * @deprecated Magic value<a name="line.572"></a>
+<FONT color="green">573</FONT>         */<a name="line.573"></a>
+<FONT color="green">574</FONT>        @Deprecated<a name="line.574"></a>
+<FONT color="green">575</FONT>        public static Material getMaterial(final int id) {<a name="line.575"></a>
+<FONT color="green">576</FONT>            if (byId.length &gt; id &amp;&amp; id &gt;= 0) {<a name="line.576"></a>
+<FONT color="green">577</FONT>                return byId[id];<a name="line.577"></a>
+<FONT color="green">578</FONT>            } else {<a name="line.578"></a>
+<FONT color="green">579</FONT>                return null;<a name="line.579"></a>
+<FONT color="green">580</FONT>            }<a name="line.580"></a>
+<FONT color="green">581</FONT>        }<a name="line.581"></a>
+<FONT color="green">582</FONT>    <a name="line.582"></a>
+<FONT color="green">583</FONT>        /**<a name="line.583"></a>
+<FONT color="green">584</FONT>         * Attempts to get the Material with the given name.<a name="line.584"></a>
+<FONT color="green">585</FONT>         * &lt;p&gt;<a name="line.585"></a>
+<FONT color="green">586</FONT>         * This is a normal lookup, names must be the precise name they are given<a name="line.586"></a>
+<FONT color="green">587</FONT>         * in the enum.<a name="line.587"></a>
+<FONT color="green">588</FONT>         *<a name="line.588"></a>
+<FONT color="green">589</FONT>         * @param name Name of the material to get<a name="line.589"></a>
+<FONT color="green">590</FONT>         * @return Material if found, or null<a name="line.590"></a>
+<FONT color="green">591</FONT>         */<a name="line.591"></a>
+<FONT color="green">592</FONT>        public static Material getMaterial(final String name) {<a name="line.592"></a>
+<FONT color="green">593</FONT>            return BY_NAME.get(name);<a name="line.593"></a>
+<FONT color="green">594</FONT>        }<a name="line.594"></a>
+<FONT color="green">595</FONT>    <a name="line.595"></a>
+<FONT color="green">596</FONT>        /**<a name="line.596"></a>
+<FONT color="green">597</FONT>         * Attempts to match the Material with the given name.<a name="line.597"></a>
+<FONT color="green">598</FONT>         * &lt;p&gt;<a name="line.598"></a>
+<FONT color="green">599</FONT>         * This is a match lookup; names will be converted to uppercase, then<a name="line.599"></a>
+<FONT color="green">600</FONT>         * stripped of special characters in an attempt to format it like the<a name="line.600"></a>
+<FONT color="green">601</FONT>         * enum.<a name="line.601"></a>
+<FONT color="green">602</FONT>         * &lt;p&gt;<a name="line.602"></a>
+<FONT color="green">603</FONT>         * Using this for match by ID is deprecated.<a name="line.603"></a>
+<FONT color="green">604</FONT>         *<a name="line.604"></a>
+<FONT color="green">605</FONT>         * @param name Name of the material to get<a name="line.605"></a>
+<FONT color="green">606</FONT>         * @return Material if found, or null<a name="line.606"></a>
+<FONT color="green">607</FONT>         */<a name="line.607"></a>
+<FONT color="green">608</FONT>        public static Material matchMaterial(final String name) {<a name="line.608"></a>
+<FONT color="green">609</FONT>            Validate.notNull(name, "Name cannot be null");<a name="line.609"></a>
+<FONT color="green">610</FONT>    <a name="line.610"></a>
+<FONT color="green">611</FONT>            Material result = null;<a name="line.611"></a>
+<FONT color="green">612</FONT>    <a name="line.612"></a>
+<FONT color="green">613</FONT>            try {<a name="line.613"></a>
+<FONT color="green">614</FONT>                result = getMaterial(Integer.parseInt(name));<a name="line.614"></a>
+<FONT color="green">615</FONT>            } catch (NumberFormatException ex) {}<a name="line.615"></a>
+<FONT color="green">616</FONT>    <a name="line.616"></a>
+<FONT color="green">617</FONT>            if (result == null) {<a name="line.617"></a>
+<FONT color="green">618</FONT>                String filtered = name.toUpperCase();<a name="line.618"></a>
+<FONT color="green">619</FONT>    <a name="line.619"></a>
+<FONT color="green">620</FONT>                filtered = filtered.replaceAll("\\s+", "_").replaceAll("\\W", "");<a name="line.620"></a>
+<FONT color="green">621</FONT>                result = BY_NAME.get(filtered);<a name="line.621"></a>
+<FONT color="green">622</FONT>            }<a name="line.622"></a>
+<FONT color="green">623</FONT>    <a name="line.623"></a>
+<FONT color="green">624</FONT>            return result;<a name="line.624"></a>
+<FONT color="green">625</FONT>        }<a name="line.625"></a>
+<FONT color="green">626</FONT>    <a name="line.626"></a>
+<FONT color="green">627</FONT>        static {<a name="line.627"></a>
+<FONT color="green">628</FONT>            for (Material material : values()) {<a name="line.628"></a>
+<FONT color="green">629</FONT>                if (byId.length &gt; material.id) {<a name="line.629"></a>
+<FONT color="green">630</FONT>                    byId[material.id] = material;<a name="line.630"></a>
+<FONT color="green">631</FONT>                } else {<a name="line.631"></a>
+<FONT color="green">632</FONT>                    byId = Java15Compat.Arrays_copyOfRange(byId, 0, material.id + 2);<a name="line.632"></a>
+<FONT color="green">633</FONT>                    byId[material.id] = material;<a name="line.633"></a>
+<FONT color="green">634</FONT>                }<a name="line.634"></a>
+<FONT color="green">635</FONT>                BY_NAME.put(material.name(), material);<a name="line.635"></a>
+<FONT color="green">636</FONT>            }<a name="line.636"></a>
+<FONT color="green">637</FONT>        }<a name="line.637"></a>
+<FONT color="green">638</FONT>    <a name="line.638"></a>
+<FONT color="green">639</FONT>        /**<a name="line.639"></a>
+<FONT color="green">640</FONT>         * @return True if this material represents a playable music disk.<a name="line.640"></a>
+<FONT color="green">641</FONT>         */<a name="line.641"></a>
+<FONT color="green">642</FONT>        public boolean isRecord() {<a name="line.642"></a>
+<FONT color="green">643</FONT>            return id &gt;= GOLD_RECORD.id &amp;&amp; id &lt;= RECORD_12.id;<a name="line.643"></a>
+<FONT color="green">644</FONT>        }<a name="line.644"></a>
+<FONT color="green">645</FONT>    <a name="line.645"></a>
+<FONT color="green">646</FONT>        /**<a name="line.646"></a>
+<FONT color="green">647</FONT>         * Check if the material is a block and solid (cannot be passed through by<a name="line.647"></a>
+<FONT color="green">648</FONT>         * a player)<a name="line.648"></a>
+<FONT color="green">649</FONT>         *<a name="line.649"></a>
+<FONT color="green">650</FONT>         * @return True if this material is a block and solid<a name="line.650"></a>
+<FONT color="green">651</FONT>         */<a name="line.651"></a>
+<FONT color="green">652</FONT>        public boolean isSolid() {<a name="line.652"></a>
+<FONT color="green">653</FONT>            if (!isBlock() || id == 0) {<a name="line.653"></a>
+<FONT color="green">654</FONT>                return false;<a name="line.654"></a>
+<FONT color="green">655</FONT>            }<a name="line.655"></a>
+<FONT color="green">656</FONT>            switch (this) {<a name="line.656"></a>
+<FONT color="green">657</FONT>                case STONE:<a name="line.657"></a>
+<FONT color="green">658</FONT>                case GRASS:<a name="line.658"></a>
+<FONT color="green">659</FONT>                case DIRT:<a name="line.659"></a>
+<FONT color="green">660</FONT>                case COBBLESTONE:<a name="line.660"></a>
+<FONT color="green">661</FONT>                case WOOD:<a name="line.661"></a>
+<FONT color="green">662</FONT>                case BEDROCK:<a name="line.662"></a>
+<FONT color="green">663</FONT>                case SAND:<a name="line.663"></a>
+<FONT color="green">664</FONT>                case GRAVEL:<a name="line.664"></a>
+<FONT color="green">665</FONT>                case GOLD_ORE:<a name="line.665"></a>
+<FONT color="green">666</FONT>                case IRON_ORE:<a name="line.666"></a>
+<FONT color="green">667</FONT>                case COAL_ORE:<a name="line.667"></a>
+<FONT color="green">668</FONT>                case LOG:<a name="line.668"></a>
+<FONT color="green">669</FONT>                case LEAVES:<a name="line.669"></a>
+<FONT color="green">670</FONT>                case SPONGE:<a name="line.670"></a>
+<FONT color="green">671</FONT>                case GLASS:<a name="line.671"></a>
+<FONT color="green">672</FONT>                case LAPIS_ORE:<a name="line.672"></a>
+<FONT color="green">673</FONT>                case LAPIS_BLOCK:<a name="line.673"></a>
+<FONT color="green">674</FONT>                case DISPENSER:<a name="line.674"></a>
+<FONT color="green">675</FONT>                case SANDSTONE:<a name="line.675"></a>
+<FONT color="green">676</FONT>                case NOTE_BLOCK:<a name="line.676"></a>
+<FONT color="green">677</FONT>                case BED_BLOCK:<a name="line.677"></a>
+<FONT color="green">678</FONT>                case PISTON_STICKY_BASE:<a name="line.678"></a>
+<FONT color="green">679</FONT>                case PISTON_BASE:<a name="line.679"></a>
+<FONT color="green">680</FONT>                case PISTON_EXTENSION:<a name="line.680"></a>
+<FONT color="green">681</FONT>                case WOOL:<a name="line.681"></a>
+<FONT color="green">682</FONT>                case PISTON_MOVING_PIECE:<a name="line.682"></a>
+<FONT color="green">683</FONT>                case GOLD_BLOCK:<a name="line.683"></a>
+<FONT color="green">684</FONT>                case IRON_BLOCK:<a name="line.684"></a>
+<FONT color="green">685</FONT>                case DOUBLE_STEP:<a name="line.685"></a>
+<FONT color="green">686</FONT>                case STEP:<a name="line.686"></a>
+<FONT color="green">687</FONT>                case BRICK:<a name="line.687"></a>
+<FONT color="green">688</FONT>                case TNT:<a name="line.688"></a>
+<FONT color="green">689</FONT>                case BOOKSHELF:<a name="line.689"></a>
+<FONT color="green">690</FONT>                case MOSSY_COBBLESTONE:<a name="line.690"></a>
+<FONT color="green">691</FONT>                case OBSIDIAN:<a name="line.691"></a>
+<FONT color="green">692</FONT>                case MOB_SPAWNER:<a name="line.692"></a>
+<FONT color="green">693</FONT>                case WOOD_STAIRS:<a name="line.693"></a>
+<FONT color="green">694</FONT>                case CHEST:<a name="line.694"></a>
+<FONT color="green">695</FONT>                case DIAMOND_ORE:<a name="line.695"></a>
+<FONT color="green">696</FONT>                case DIAMOND_BLOCK:<a name="line.696"></a>
+<FONT color="green">697</FONT>                case WORKBENCH:<a name="line.697"></a>
+<FONT color="green">698</FONT>                case SOIL:<a name="line.698"></a>
+<FONT color="green">699</FONT>                case FURNACE:<a name="line.699"></a>
+<FONT color="green">700</FONT>                case BURNING_FURNACE:<a name="line.700"></a>
+<FONT color="green">701</FONT>                case SIGN_POST:<a name="line.701"></a>
+<FONT color="green">702</FONT>                case WOODEN_DOOR:<a name="line.702"></a>
+<FONT color="green">703</FONT>                case COBBLESTONE_STAIRS:<a name="line.703"></a>
+<FONT color="green">704</FONT>                case WALL_SIGN:<a name="line.704"></a>
+<FONT color="green">705</FONT>                case STONE_PLATE:<a name="line.705"></a>
+<FONT color="green">706</FONT>                case IRON_DOOR_BLOCK:<a name="line.706"></a>
+<FONT color="green">707</FONT>                case WOOD_PLATE:<a name="line.707"></a>
+<FONT color="green">708</FONT>                case REDSTONE_ORE:<a name="line.708"></a>
+<FONT color="green">709</FONT>                case GLOWING_REDSTONE_ORE:<a name="line.709"></a>
+<FONT color="green">710</FONT>                case ICE:<a name="line.710"></a>
+<FONT color="green">711</FONT>                case SNOW_BLOCK:<a name="line.711"></a>
+<FONT color="green">712</FONT>                case CACTUS:<a name="line.712"></a>
+<FONT color="green">713</FONT>                case CLAY:<a name="line.713"></a>
+<FONT color="green">714</FONT>                case JUKEBOX:<a name="line.714"></a>
+<FONT color="green">715</FONT>                case FENCE:<a name="line.715"></a>
+<FONT color="green">716</FONT>                case PUMPKIN:<a name="line.716"></a>
+<FONT color="green">717</FONT>                case NETHERRACK:<a name="line.717"></a>
+<FONT color="green">718</FONT>                case SOUL_SAND:<a name="line.718"></a>
+<FONT color="green">719</FONT>                case GLOWSTONE:<a name="line.719"></a>
+<FONT color="green">720</FONT>                case JACK_O_LANTERN:<a name="line.720"></a>
+<FONT color="green">721</FONT>                case CAKE_BLOCK:<a name="line.721"></a>
+<FONT color="green">722</FONT>                case LOCKED_CHEST:<a name="line.722"></a>
+<FONT color="green">723</FONT>                case STAINED_GLASS:<a name="line.723"></a>
+<FONT color="green">724</FONT>                case TRAP_DOOR:<a name="line.724"></a>
+<FONT color="green">725</FONT>                case MONSTER_EGGS:<a name="line.725"></a>
+<FONT color="green">726</FONT>                case SMOOTH_BRICK:<a name="line.726"></a>
+<FONT color="green">727</FONT>                case HUGE_MUSHROOM_1:<a name="line.727"></a>
+<FONT color="green">728</FONT>                case HUGE_MUSHROOM_2:<a name="line.728"></a>
+<FONT color="green">729</FONT>                case IRON_FENCE:<a name="line.729"></a>
+<FONT color="green">730</FONT>                case THIN_GLASS:<a name="line.730"></a>
+<FONT color="green">731</FONT>                case MELON_BLOCK:<a name="line.731"></a>
+<FONT color="green">732</FONT>                case FENCE_GATE:<a name="line.732"></a>
+<FONT color="green">733</FONT>                case BRICK_STAIRS:<a name="line.733"></a>
+<FONT color="green">734</FONT>                case SMOOTH_STAIRS:<a name="line.734"></a>
+<FONT color="green">735</FONT>                case MYCEL:<a name="line.735"></a>
+<FONT color="green">736</FONT>                case NETHER_BRICK:<a name="line.736"></a>
+<FONT color="green">737</FONT>                case NETHER_FENCE:<a name="line.737"></a>
+<FONT color="green">738</FONT>                case NETHER_BRICK_STAIRS:<a name="line.738"></a>
+<FONT color="green">739</FONT>                case ENCHANTMENT_TABLE:<a name="line.739"></a>
+<FONT color="green">740</FONT>                case BREWING_STAND:<a name="line.740"></a>
+<FONT color="green">741</FONT>                case CAULDRON:<a name="line.741"></a>
+<FONT color="green">742</FONT>                case ENDER_PORTAL_FRAME:<a name="line.742"></a>
+<FONT color="green">743</FONT>                case ENDER_STONE:<a name="line.743"></a>
+<FONT color="green">744</FONT>                case DRAGON_EGG:<a name="line.744"></a>
+<FONT color="green">745</FONT>                case REDSTONE_LAMP_OFF:<a name="line.745"></a>
+<FONT color="green">746</FONT>                case REDSTONE_LAMP_ON:<a name="line.746"></a>
+<FONT color="green">747</FONT>                case WOOD_DOUBLE_STEP:<a name="line.747"></a>
+<FONT color="green">748</FONT>                case WOOD_STEP:<a name="line.748"></a>
+<FONT color="green">749</FONT>                case SANDSTONE_STAIRS:<a name="line.749"></a>
+<FONT color="green">750</FONT>                case EMERALD_ORE:<a name="line.750"></a>
+<FONT color="green">751</FONT>                case ENDER_CHEST:<a name="line.751"></a>
+<FONT color="green">752</FONT>                case EMERALD_BLOCK:<a name="line.752"></a>
+<FONT color="green">753</FONT>                case SPRUCE_WOOD_STAIRS:<a name="line.753"></a>
+<FONT color="green">754</FONT>                case BIRCH_WOOD_STAIRS:<a name="line.754"></a>
+<FONT color="green">755</FONT>                case JUNGLE_WOOD_STAIRS:<a name="line.755"></a>
+<FONT color="green">756</FONT>                case COMMAND:<a name="line.756"></a>
+<FONT color="green">757</FONT>                case BEACON:<a name="line.757"></a>
+<FONT color="green">758</FONT>                case COBBLE_WALL:<a name="line.758"></a>
+<FONT color="green">759</FONT>                case ANVIL:<a name="line.759"></a>
+<FONT color="green">760</FONT>                case TRAPPED_CHEST:<a name="line.760"></a>
+<FONT color="green">761</FONT>                case GOLD_PLATE:<a name="line.761"></a>
+<FONT color="green">762</FONT>                case IRON_PLATE:<a name="line.762"></a>
+<FONT color="green">763</FONT>                case DAYLIGHT_DETECTOR:<a name="line.763"></a>
+<FONT color="green">764</FONT>                case REDSTONE_BLOCK:<a name="line.764"></a>
+<FONT color="green">765</FONT>                case QUARTZ_ORE:<a name="line.765"></a>
+<FONT color="green">766</FONT>                case HOPPER:<a name="line.766"></a>
+<FONT color="green">767</FONT>                case QUARTZ_BLOCK:<a name="line.767"></a>
+<FONT color="green">768</FONT>                case QUARTZ_STAIRS:<a name="line.768"></a>
+<FONT color="green">769</FONT>                case DROPPER:<a name="line.769"></a>
+<FONT color="green">770</FONT>                case STAINED_CLAY:<a name="line.770"></a>
+<FONT color="green">771</FONT>                case HAY_BLOCK:<a name="line.771"></a>
+<FONT color="green">772</FONT>                case HARD_CLAY:<a name="line.772"></a>
+<FONT color="green">773</FONT>                case COAL_BLOCK:<a name="line.773"></a>
+<FONT color="green">774</FONT>                case STAINED_GLASS_PANE:<a name="line.774"></a>
+<FONT color="green">775</FONT>                case LEAVES_2:<a name="line.775"></a>
+<FONT color="green">776</FONT>                case LOG_2:<a name="line.776"></a>
+<FONT color="green">777</FONT>                case ACACIA_STAIRS:<a name="line.777"></a>
+<FONT color="green">778</FONT>                case DARK_OAK_STAIRS:<a name="line.778"></a>
+<FONT color="green">779</FONT>                case PACKED_ICE:<a name="line.779"></a>
+<FONT color="green">780</FONT>                    return true;<a name="line.780"></a>
+<FONT color="green">781</FONT>                default:<a name="line.781"></a>
+<FONT color="green">782</FONT>                    return false;<a name="line.782"></a>
+<FONT color="green">783</FONT>            }<a name="line.783"></a>
+<FONT color="green">784</FONT>        }<a name="line.784"></a>
+<FONT color="green">785</FONT>    <a name="line.785"></a>
+<FONT color="green">786</FONT>        /**<a name="line.786"></a>
+<FONT color="green">787</FONT>         * Check if the material is a block and does not block any light<a name="line.787"></a>
+<FONT color="green">788</FONT>         *<a name="line.788"></a>
+<FONT color="green">789</FONT>         * @return True if this material is a block and does not block any light<a name="line.789"></a>
+<FONT color="green">790</FONT>         */<a name="line.790"></a>
+<FONT color="green">791</FONT>        public boolean isTransparent() {<a name="line.791"></a>
+<FONT color="green">792</FONT>            if (!isBlock()) {<a name="line.792"></a>
+<FONT color="green">793</FONT>                return false;<a name="line.793"></a>
+<FONT color="green">794</FONT>            }<a name="line.794"></a>
+<FONT color="green">795</FONT>            switch (this) {<a name="line.795"></a>
+<FONT color="green">796</FONT>                case AIR:<a name="line.796"></a>
+<FONT color="green">797</FONT>                case SAPLING:<a name="line.797"></a>
+<FONT color="green">798</FONT>                case POWERED_RAIL:<a name="line.798"></a>
+<FONT color="green">799</FONT>                case DETECTOR_RAIL:<a name="line.799"></a>
+<FONT color="green">800</FONT>                case LONG_GRASS:<a name="line.800"></a>
+<FONT color="green">801</FONT>                case DEAD_BUSH:<a name="line.801"></a>
+<FONT color="green">802</FONT>                case YELLOW_FLOWER:<a name="line.802"></a>
+<FONT color="green">803</FONT>                case RED_ROSE:<a name="line.803"></a>
+<FONT color="green">804</FONT>                case BROWN_MUSHROOM:<a name="line.804"></a>
+<FONT color="green">805</FONT>                case RED_MUSHROOM:<a name="line.805"></a>
+<FONT color="green">806</FONT>                case TORCH:<a name="line.806"></a>
+<FONT color="green">807</FONT>                case FIRE:<a name="line.807"></a>
+<FONT color="green">808</FONT>                case REDSTONE_WIRE:<a name="line.808"></a>
+<FONT color="green">809</FONT>                case CROPS:<a name="line.809"></a>
+<FONT color="green">810</FONT>                case LADDER:<a name="line.810"></a>
+<FONT color="green">811</FONT>                case RAILS:<a name="line.811"></a>
+<FONT color="green">812</FONT>                case LEVER:<a name="line.812"></a>
+<FONT color="green">813</FONT>                case REDSTONE_TORCH_OFF:<a name="line.813"></a>
+<FONT color="green">814</FONT>                case REDSTONE_TORCH_ON:<a name="line.814"></a>
+<FONT color="green">815</FONT>                case STONE_BUTTON:<a name="line.815"></a>
+<FONT color="green">816</FONT>                case SNOW:<a name="line.816"></a>
+<FONT color="green">817</FONT>                case SUGAR_CANE_BLOCK:<a name="line.817"></a>
+<FONT color="green">818</FONT>                case PORTAL:<a name="line.818"></a>
+<FONT color="green">819</FONT>                case DIODE_BLOCK_OFF:<a name="line.819"></a>
+<FONT color="green">820</FONT>                case DIODE_BLOCK_ON:<a name="line.820"></a>
+<FONT color="green">821</FONT>                case PUMPKIN_STEM:<a name="line.821"></a>
+<FONT color="green">822</FONT>                case MELON_STEM:<a name="line.822"></a>
+<FONT color="green">823</FONT>                case VINE:<a name="line.823"></a>
+<FONT color="green">824</FONT>                case WATER_LILY:<a name="line.824"></a>
+<FONT color="green">825</FONT>                case NETHER_WARTS:<a name="line.825"></a>
+<FONT color="green">826</FONT>                case ENDER_PORTAL:<a name="line.826"></a>
+<FONT color="green">827</FONT>                case COCOA:<a name="line.827"></a>
+<FONT color="green">828</FONT>                case TRIPWIRE_HOOK:<a name="line.828"></a>
+<FONT color="green">829</FONT>                case TRIPWIRE:<a name="line.829"></a>
+<FONT color="green">830</FONT>                case FLOWER_POT:<a name="line.830"></a>
+<FONT color="green">831</FONT>                case CARROT:<a name="line.831"></a>
+<FONT color="green">832</FONT>                case POTATO:<a name="line.832"></a>
+<FONT color="green">833</FONT>                case WOOD_BUTTON:<a name="line.833"></a>
+<FONT color="green">834</FONT>                case SKULL:<a name="line.834"></a>
+<FONT color="green">835</FONT>                case REDSTONE_COMPARATOR_OFF:<a name="line.835"></a>
+<FONT color="green">836</FONT>                case REDSTONE_COMPARATOR_ON:<a name="line.836"></a>
+<FONT color="green">837</FONT>                case ACTIVATOR_RAIL:<a name="line.837"></a>
+<FONT color="green">838</FONT>                case CARPET:<a name="line.838"></a>
+<FONT color="green">839</FONT>                case DOUBLE_PLANT:<a name="line.839"></a>
+<FONT color="green">840</FONT>                    return true;<a name="line.840"></a>
+<FONT color="green">841</FONT>                default:<a name="line.841"></a>
+<FONT color="green">842</FONT>                    return false;<a name="line.842"></a>
+<FONT color="green">843</FONT>            }<a name="line.843"></a>
+<FONT color="green">844</FONT>        }<a name="line.844"></a>
+<FONT color="green">845</FONT>    <a name="line.845"></a>
+<FONT color="green">846</FONT>        /**<a name="line.846"></a>
+<FONT color="green">847</FONT>         * Check if the material is a block and can catch fire<a name="line.847"></a>
+<FONT color="green">848</FONT>         *<a name="line.848"></a>
+<FONT color="green">849</FONT>         * @return True if this material is a block and can catch fire<a name="line.849"></a>
+<FONT color="green">850</FONT>         */<a name="line.850"></a>
+<FONT color="green">851</FONT>        public boolean isFlammable() {<a name="line.851"></a>
+<FONT color="green">852</FONT>            if (!isBlock()) {<a name="line.852"></a>
+<FONT color="green">853</FONT>                return false;<a name="line.853"></a>
+<FONT color="green">854</FONT>            }<a name="line.854"></a>
+<FONT color="green">855</FONT>            switch (this) {<a name="line.855"></a>
+<FONT color="green">856</FONT>                case WOOD:<a name="line.856"></a>
+<FONT color="green">857</FONT>                case LOG:<a name="line.857"></a>
+<FONT color="green">858</FONT>                case LEAVES:<a name="line.858"></a>
+<FONT color="green">859</FONT>                case NOTE_BLOCK:<a name="line.859"></a>
+<FONT color="green">860</FONT>                case BED_BLOCK:<a name="line.860"></a>
+<FONT color="green">861</FONT>                case LONG_GRASS:<a name="line.861"></a>
+<FONT color="green">862</FONT>                case DEAD_BUSH:<a name="line.862"></a>
+<FONT color="green">863</FONT>                case WOOL:<a name="line.863"></a>
+<FONT color="green">864</FONT>                case TNT:<a name="line.864"></a>
+<FONT color="green">865</FONT>                case BOOKSHELF:<a name="line.865"></a>
+<FONT color="green">866</FONT>                case WOOD_STAIRS:<a name="line.866"></a>
+<FONT color="green">867</FONT>                case CHEST:<a name="line.867"></a>
+<FONT color="green">868</FONT>                case WORKBENCH:<a name="line.868"></a>
+<FONT color="green">869</FONT>                case SIGN_POST:<a name="line.869"></a>
+<FONT color="green">870</FONT>                case WOODEN_DOOR:<a name="line.870"></a>
+<FONT color="green">871</FONT>                case WALL_SIGN:<a name="line.871"></a>
+<FONT color="green">872</FONT>                case WOOD_PLATE:<a name="line.872"></a>
+<FONT color="green">873</FONT>                case JUKEBOX:<a name="line.873"></a>
+<FONT color="green">874</FONT>                case FENCE:<a name="line.874"></a>
+<FONT color="green">875</FONT>                case TRAP_DOOR:<a name="line.875"></a>
+<FONT color="green">876</FONT>                case HUGE_MUSHROOM_1:<a name="line.876"></a>
+<FONT color="green">877</FONT>                case HUGE_MUSHROOM_2:<a name="line.877"></a>
+<FONT color="green">878</FONT>                case VINE:<a name="line.878"></a>
+<FONT color="green">879</FONT>                case FENCE_GATE:<a name="line.879"></a>
+<FONT color="green">880</FONT>                case WOOD_DOUBLE_STEP:<a name="line.880"></a>
+<FONT color="green">881</FONT>                case WOOD_STEP:<a name="line.881"></a>
+<FONT color="green">882</FONT>                case SPRUCE_WOOD_STAIRS:<a name="line.882"></a>
+<FONT color="green">883</FONT>                case BIRCH_WOOD_STAIRS:<a name="line.883"></a>
+<FONT color="green">884</FONT>                case JUNGLE_WOOD_STAIRS:<a name="line.884"></a>
+<FONT color="green">885</FONT>                case TRAPPED_CHEST:<a name="line.885"></a>
+<FONT color="green">886</FONT>                case DAYLIGHT_DETECTOR:<a name="line.886"></a>
+<FONT color="green">887</FONT>                case CARPET:<a name="line.887"></a>
+<FONT color="green">888</FONT>                case LEAVES_2:<a name="line.888"></a>
+<FONT color="green">889</FONT>                case LOG_2:<a name="line.889"></a>
+<FONT color="green">890</FONT>                case ACACIA_STAIRS:<a name="line.890"></a>
+<FONT color="green">891</FONT>                case DARK_OAK_STAIRS:<a name="line.891"></a>
+<FONT color="green">892</FONT>                    return true;<a name="line.892"></a>
+<FONT color="green">893</FONT>                default:<a name="line.893"></a>
+<FONT color="green">894</FONT>                    return false;<a name="line.894"></a>
+<FONT color="green">895</FONT>            }<a name="line.895"></a>
+<FONT color="green">896</FONT>        }<a name="line.896"></a>
+<FONT color="green">897</FONT>    <a name="line.897"></a>
+<FONT color="green">898</FONT>        /**<a name="line.898"></a>
+<FONT color="green">899</FONT>         * Check if the material is a block and can burn away<a name="line.899"></a>
+<FONT color="green">900</FONT>         *<a name="line.900"></a>
+<FONT color="green">901</FONT>         * @return True if this material is a block and can burn away<a name="line.901"></a>
+<FONT color="green">902</FONT>         */<a name="line.902"></a>
+<FONT color="green">903</FONT>        public boolean isBurnable() {<a name="line.903"></a>
+<FONT color="green">904</FONT>            if (!isBlock()) {<a name="line.904"></a>
+<FONT color="green">905</FONT>                return false;<a name="line.905"></a>
+<FONT color="green">906</FONT>            }<a name="line.906"></a>
+<FONT color="green">907</FONT>            switch (this) {<a name="line.907"></a>
+<FONT color="green">908</FONT>                case WOOD:<a name="line.908"></a>
+<FONT color="green">909</FONT>                case LOG:<a name="line.909"></a>
+<FONT color="green">910</FONT>                case LEAVES:<a name="line.910"></a>
+<FONT color="green">911</FONT>                case LONG_GRASS:<a name="line.911"></a>
+<FONT color="green">912</FONT>                case WOOL:<a name="line.912"></a>
+<FONT color="green">913</FONT>                case YELLOW_FLOWER:<a name="line.913"></a>
+<FONT color="green">914</FONT>                case RED_ROSE:<a name="line.914"></a>
+<FONT color="green">915</FONT>                case TNT:<a name="line.915"></a>
+<FONT color="green">916</FONT>                case BOOKSHELF:<a name="line.916"></a>
+<FONT color="green">917</FONT>                case WOOD_STAIRS:<a name="line.917"></a>
+<FONT color="green">918</FONT>                case FENCE:<a name="line.918"></a>
+<FONT color="green">919</FONT>                case VINE:<a name="line.919"></a>
+<FONT color="green">920</FONT>                case WOOD_DOUBLE_STEP:<a name="line.920"></a>
+<FONT color="green">921</FONT>                case WOOD_STEP:<a name="line.921"></a>
+<FONT color="green">922</FONT>                case SPRUCE_WOOD_STAIRS:<a name="line.922"></a>
+<FONT color="green">923</FONT>                case BIRCH_WOOD_STAIRS:<a name="line.923"></a>
+<FONT color="green">924</FONT>                case JUNGLE_WOOD_STAIRS:<a name="line.924"></a>
+<FONT color="green">925</FONT>                case HAY_BLOCK:<a name="line.925"></a>
+<FONT color="green">926</FONT>                case COAL_BLOCK:<a name="line.926"></a>
+<FONT color="green">927</FONT>                case LEAVES_2:<a name="line.927"></a>
+<FONT color="green">928</FONT>                case LOG_2:<a name="line.928"></a>
+<FONT color="green">929</FONT>                case CARPET:<a name="line.929"></a>
+<FONT color="green">930</FONT>                case DOUBLE_PLANT:<a name="line.930"></a>
+<FONT color="green">931</FONT>                    return true;<a name="line.931"></a>
+<FONT color="green">932</FONT>                default:<a name="line.932"></a>
+<FONT color="green">933</FONT>                    return false;<a name="line.933"></a>
+<FONT color="green">934</FONT>            }<a name="line.934"></a>
+<FONT color="green">935</FONT>        }<a name="line.935"></a>
+<FONT color="green">936</FONT>    <a name="line.936"></a>
+<FONT color="green">937</FONT>        /**<a name="line.937"></a>
+<FONT color="green">938</FONT>         * Check if the material is a block and completely blocks vision<a name="line.938"></a>
+<FONT color="green">939</FONT>         *<a name="line.939"></a>
+<FONT color="green">940</FONT>         * @return True if this material is a block and completely blocks vision<a name="line.940"></a>
+<FONT color="green">941</FONT>         */<a name="line.941"></a>
+<FONT color="green">942</FONT>        public boolean isOccluding() {<a name="line.942"></a>
+<FONT color="green">943</FONT>            if (!isBlock()) {<a name="line.943"></a>
+<FONT color="green">944</FONT>                return false;<a name="line.944"></a>
+<FONT color="green">945</FONT>            }<a name="line.945"></a>
+<FONT color="green">946</FONT>            switch (this) {<a name="line.946"></a>
+<FONT color="green">947</FONT>                case STONE:<a name="line.947"></a>
+<FONT color="green">948</FONT>                case GRASS:<a name="line.948"></a>
+<FONT color="green">949</FONT>                case DIRT:<a name="line.949"></a>
+<FONT color="green">950</FONT>                case COBBLESTONE:<a name="line.950"></a>
+<FONT color="green">951</FONT>                case WOOD:<a name="line.951"></a>
+<FONT color="green">952</FONT>                case BEDROCK:<a name="line.952"></a>
+<FONT color="green">953</FONT>                case SAND:<a name="line.953"></a>
+<FONT color="green">954</FONT>                case GRAVEL:<a name="line.954"></a>
+<FONT color="green">955</FONT>                case GOLD_ORE:<a name="line.955"></a>
+<FONT color="green">956</FONT>                case IRON_ORE:<a name="line.956"></a>
+<FONT color="green">957</FONT>                case COAL_ORE:<a name="line.957"></a>
+<FONT color="green">958</FONT>                case LOG:<a name="line.958"></a>
+<FONT color="green">959</FONT>                case SPONGE:<a name="line.959"></a>
+<FONT color="green">960</FONT>                case LAPIS_ORE:<a name="line.960"></a>
+<FONT color="green">961</FONT>                case LAPIS_BLOCK:<a name="line.961"></a>
+<FONT color="green">962</FONT>                case DISPENSER:<a name="line.962"></a>
+<FONT color="green">963</FONT>                case SANDSTONE:<a name="line.963"></a>
+<FONT color="green">964</FONT>                case NOTE_BLOCK:<a name="line.964"></a>
+<FONT color="green">965</FONT>                case WOOL:<a name="line.965"></a>
+<FONT color="green">966</FONT>                case GOLD_BLOCK:<a name="line.966"></a>
+<FONT color="green">967</FONT>                case IRON_BLOCK:<a name="line.967"></a>
+<FONT color="green">968</FONT>                case DOUBLE_STEP:<a name="line.968"></a>
+<FONT color="green">969</FONT>                case BRICK:<a name="line.969"></a>
+<FONT color="green">970</FONT>                case BOOKSHELF:<a name="line.970"></a>
+<FONT color="green">971</FONT>                case MOSSY_COBBLESTONE:<a name="line.971"></a>
+<FONT color="green">972</FONT>                case OBSIDIAN:<a name="line.972"></a>
+<FONT color="green">973</FONT>                case MOB_SPAWNER:<a name="line.973"></a>
+<FONT color="green">974</FONT>                case DIAMOND_ORE:<a name="line.974"></a>
+<FONT color="green">975</FONT>                case DIAMOND_BLOCK:<a name="line.975"></a>
+<FONT color="green">976</FONT>                case WORKBENCH:<a name="line.976"></a>
+<FONT color="green">977</FONT>                case FURNACE:<a name="line.977"></a>
+<FONT color="green">978</FONT>                case BURNING_FURNACE:<a name="line.978"></a>
+<FONT color="green">979</FONT>                case REDSTONE_ORE:<a name="line.979"></a>
+<FONT color="green">980</FONT>                case GLOWING_REDSTONE_ORE:<a name="line.980"></a>
+<FONT color="green">981</FONT>                case SNOW_BLOCK:<a name="line.981"></a>
+<FONT color="green">982</FONT>                case CLAY:<a name="line.982"></a>
+<FONT color="green">983</FONT>                case JUKEBOX:<a name="line.983"></a>
+<FONT color="green">984</FONT>                case PUMPKIN:<a name="line.984"></a>
+<FONT color="green">985</FONT>                case NETHERRACK:<a name="line.985"></a>
+<FONT color="green">986</FONT>                case SOUL_SAND:<a name="line.986"></a>
+<FONT color="green">987</FONT>                case JACK_O_LANTERN:<a name="line.987"></a>
+<FONT color="green">988</FONT>                case MONSTER_EGGS:<a name="line.988"></a>
+<FONT color="green">989</FONT>                case SMOOTH_BRICK:<a name="line.989"></a>
+<FONT color="green">990</FONT>                case HUGE_MUSHROOM_1:<a name="line.990"></a>
+<FONT color="green">991</FONT>                case HUGE_MUSHROOM_2:<a name="line.991"></a>
+<FONT color="green">992</FONT>                case MELON_BLOCK:<a name="line.992"></a>
+<FONT color="green">993</FONT>                case MYCEL:<a name="line.993"></a>
+<FONT color="green">994</FONT>                case NETHER_BRICK:<a name="line.994"></a>
+<FONT color="green">995</FONT>                case ENDER_PORTAL_FRAME:<a name="line.995"></a>
+<FONT color="green">996</FONT>                case ENDER_STONE:<a name="line.996"></a>
+<FONT color="green">997</FONT>                case REDSTONE_LAMP_OFF:<a name="line.997"></a>
+<FONT color="green">998</FONT>                case REDSTONE_LAMP_ON:<a name="line.998"></a>
+<FONT color="green">999</FONT>                case WOOD_DOUBLE_STEP:<a name="line.999"></a>
+<FONT color="green">1000</FONT>                case EMERALD_ORE:<a name="line.1000"></a>
+<FONT color="green">1001</FONT>                case EMERALD_BLOCK:<a name="line.1001"></a>
+<FONT color="green">1002</FONT>                case COMMAND:<a name="line.1002"></a>
+<FONT color="green">1003</FONT>                case QUARTZ_ORE:<a name="line.1003"></a>
+<FONT color="green">1004</FONT>                case QUARTZ_BLOCK:<a name="line.1004"></a>
+<FONT color="green">1005</FONT>                case DROPPER:<a name="line.1005"></a>
+<FONT color="green">1006</FONT>                case STAINED_CLAY:<a name="line.1006"></a>
+<FONT color="green">1007</FONT>                case HAY_BLOCK:<a name="line.1007"></a>
+<FONT color="green">1008</FONT>                case HARD_CLAY:<a name="line.1008"></a>
+<FONT color="green">1009</FONT>                case COAL_BLOCK:<a name="line.1009"></a>
+<FONT color="green">1010</FONT>                case LOG_2:<a name="line.1010"></a>
+<FONT color="green">1011</FONT>                case PACKED_ICE:<a name="line.1011"></a>
+<FONT color="green">1012</FONT>                    return true;<a name="line.1012"></a>
+<FONT color="green">1013</FONT>                default:<a name="line.1013"></a>
+<FONT color="green">1014</FONT>                    return false;<a name="line.1014"></a>
+<FONT color="green">1015</FONT>            }<a name="line.1015"></a>
+<FONT color="green">1016</FONT>        }<a name="line.1016"></a>
+<FONT color="green">1017</FONT>    <a name="line.1017"></a>
+<FONT color="green">1018</FONT>        /**<a name="line.1018"></a>
+<FONT color="green">1019</FONT>         * @return True if this material is affected by gravity.<a name="line.1019"></a>
+<FONT color="green">1020</FONT>         */<a name="line.1020"></a>
+<FONT color="green">1021</FONT>        public boolean hasGravity() {<a name="line.1021"></a>
+<FONT color="green">1022</FONT>            if (!isBlock()) {<a name="line.1022"></a>
+<FONT color="green">1023</FONT>                return false;<a name="line.1023"></a>
+<FONT color="green">1024</FONT>            }<a name="line.1024"></a>
+<FONT color="green">1025</FONT>            switch (this) {<a name="line.1025"></a>
+<FONT color="green">1026</FONT>                case SAND:<a name="line.1026"></a>
+<FONT color="green">1027</FONT>                case GRAVEL:<a name="line.1027"></a>
+<FONT color="green">1028</FONT>                case ANVIL:<a name="line.1028"></a>
+<FONT color="green">1029</FONT>                    return true;<a name="line.1029"></a>
+<FONT color="green">1030</FONT>                default:<a name="line.1030"></a>
+<FONT color="green">1031</FONT>                    return false;<a name="line.1031"></a>
+<FONT color="green">1032</FONT>            }<a name="line.1032"></a>
+<FONT color="green">1033</FONT>        }<a name="line.1033"></a>
+<FONT color="green">1034</FONT>    }<a name="line.1034"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

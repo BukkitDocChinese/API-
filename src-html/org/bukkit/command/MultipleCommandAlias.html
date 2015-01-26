@@ -1,0 +1,99 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.command;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    /**<a name="line.3"></a>
+<FONT color="green">004</FONT>     * Represents a command that delegates to one or more other commands<a name="line.4"></a>
+<FONT color="green">005</FONT>     */<a name="line.5"></a>
+<FONT color="green">006</FONT>    public class MultipleCommandAlias extends Command {<a name="line.6"></a>
+<FONT color="green">007</FONT>        private Command[] commands;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>        public MultipleCommandAlias(String name, Command[] commands) {<a name="line.9"></a>
+<FONT color="green">010</FONT>            super(name);<a name="line.10"></a>
+<FONT color="green">011</FONT>            this.commands = commands;<a name="line.11"></a>
+<FONT color="green">012</FONT>        }<a name="line.12"></a>
+<FONT color="green">013</FONT>    <a name="line.13"></a>
+<FONT color="green">014</FONT>        /**<a name="line.14"></a>
+<FONT color="green">015</FONT>         * Gets the commands associated with the multi-command alias.<a name="line.15"></a>
+<FONT color="green">016</FONT>         *<a name="line.16"></a>
+<FONT color="green">017</FONT>         * @return commands associated with alias<a name="line.17"></a>
+<FONT color="green">018</FONT>         */<a name="line.18"></a>
+<FONT color="green">019</FONT>        public Command[] getCommands() {<a name="line.19"></a>
+<FONT color="green">020</FONT>            return commands;<a name="line.20"></a>
+<FONT color="green">021</FONT>        }<a name="line.21"></a>
+<FONT color="green">022</FONT>    <a name="line.22"></a>
+<FONT color="green">023</FONT>        @Override<a name="line.23"></a>
+<FONT color="green">024</FONT>        public boolean execute(CommandSender sender, String commandLabel, String[] args) {<a name="line.24"></a>
+<FONT color="green">025</FONT>            boolean result = false;<a name="line.25"></a>
+<FONT color="green">026</FONT>    <a name="line.26"></a>
+<FONT color="green">027</FONT>            for (Command command : commands) {<a name="line.27"></a>
+<FONT color="green">028</FONT>                result |= command.execute(sender, commandLabel, args);<a name="line.28"></a>
+<FONT color="green">029</FONT>            }<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>            return result;<a name="line.31"></a>
+<FONT color="green">032</FONT>        }<a name="line.32"></a>
+<FONT color="green">033</FONT>    }<a name="line.33"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

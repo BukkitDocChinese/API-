@@ -1,0 +1,113 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    /**<a name="line.3"></a>
+<FONT color="green">004</FONT>     * An enum to specify a rotation based orientation, like that on a clock.<a name="line.4"></a>
+<FONT color="green">005</FONT>     * &lt;p&gt;<a name="line.5"></a>
+<FONT color="green">006</FONT>     * It represents how something is viewed, as opposed to cardinal directions.<a name="line.6"></a>
+<FONT color="green">007</FONT>     */<a name="line.7"></a>
+<FONT color="green">008</FONT>    public enum Rotation {<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>        /**<a name="line.10"></a>
+<FONT color="green">011</FONT>         * No rotation<a name="line.11"></a>
+<FONT color="green">012</FONT>         */<a name="line.12"></a>
+<FONT color="green">013</FONT>        NONE,<a name="line.13"></a>
+<FONT color="green">014</FONT>        /**<a name="line.14"></a>
+<FONT color="green">015</FONT>         * Rotated clockwise by 90 degrees<a name="line.15"></a>
+<FONT color="green">016</FONT>         */<a name="line.16"></a>
+<FONT color="green">017</FONT>        CLOCKWISE,<a name="line.17"></a>
+<FONT color="green">018</FONT>        /**<a name="line.18"></a>
+<FONT color="green">019</FONT>         * Flipped upside-down, a 180 degree rotation<a name="line.19"></a>
+<FONT color="green">020</FONT>         */<a name="line.20"></a>
+<FONT color="green">021</FONT>        FLIPPED,<a name="line.21"></a>
+<FONT color="green">022</FONT>        /**<a name="line.22"></a>
+<FONT color="green">023</FONT>         * Rotated counter-clockwise by 90 degrees<a name="line.23"></a>
+<FONT color="green">024</FONT>         */<a name="line.24"></a>
+<FONT color="green">025</FONT>        COUNTER_CLOCKWISE,<a name="line.25"></a>
+<FONT color="green">026</FONT>        ;<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>        private static final Rotation [] rotations = values();<a name="line.28"></a>
+<FONT color="green">029</FONT>    <a name="line.29"></a>
+<FONT color="green">030</FONT>        /**<a name="line.30"></a>
+<FONT color="green">031</FONT>         * Rotate clockwise by 90 degrees.<a name="line.31"></a>
+<FONT color="green">032</FONT>         *<a name="line.32"></a>
+<FONT color="green">033</FONT>         * @return the relative rotation<a name="line.33"></a>
+<FONT color="green">034</FONT>         */<a name="line.34"></a>
+<FONT color="green">035</FONT>        public Rotation rotateClockwise() {<a name="line.35"></a>
+<FONT color="green">036</FONT>            return rotations[(this.ordinal() + 1) &amp; 0x3];<a name="line.36"></a>
+<FONT color="green">037</FONT>        }<a name="line.37"></a>
+<FONT color="green">038</FONT>    <a name="line.38"></a>
+<FONT color="green">039</FONT>        /**<a name="line.39"></a>
+<FONT color="green">040</FONT>         * Rotate counter-clockwise by 90 degrees.<a name="line.40"></a>
+<FONT color="green">041</FONT>         *<a name="line.41"></a>
+<FONT color="green">042</FONT>         * @return the relative rotation<a name="line.42"></a>
+<FONT color="green">043</FONT>         */<a name="line.43"></a>
+<FONT color="green">044</FONT>        public Rotation rotateCounterClockwise() {<a name="line.44"></a>
+<FONT color="green">045</FONT>            return rotations[(this.ordinal() - 1) &amp; 0x3];<a name="line.45"></a>
+<FONT color="green">046</FONT>        }<a name="line.46"></a>
+<FONT color="green">047</FONT>    }<a name="line.47"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

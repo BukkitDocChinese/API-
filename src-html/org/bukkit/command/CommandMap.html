@@ -1,0 +1,175 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.command;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.util.List;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    public interface CommandMap {<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>        /**<a name="line.7"></a>
+<FONT color="green">008</FONT>         * Registers all the commands belonging to a certain plugin.<a name="line.8"></a>
+<FONT color="green">009</FONT>         * &lt;p&gt;<a name="line.9"></a>
+<FONT color="green">010</FONT>         * Caller can use:-<a name="line.10"></a>
+<FONT color="green">011</FONT>         * &lt;ul&gt;<a name="line.11"></a>
+<FONT color="green">012</FONT>         * &lt;li&gt;command.getName() to determine the label registered for this<a name="line.12"></a>
+<FONT color="green">013</FONT>         *     command<a name="line.13"></a>
+<FONT color="green">014</FONT>         * &lt;li&gt;command.getAliases() to determine the aliases which where<a name="line.14"></a>
+<FONT color="green">015</FONT>         *     registered<a name="line.15"></a>
+<FONT color="green">016</FONT>         * &lt;/ul&gt;<a name="line.16"></a>
+<FONT color="green">017</FONT>         *<a name="line.17"></a>
+<FONT color="green">018</FONT>         * @param fallbackPrefix a prefix which is prepended to each command with<a name="line.18"></a>
+<FONT color="green">019</FONT>         *     a ':' one or more times to make the command unique<a name="line.19"></a>
+<FONT color="green">020</FONT>         * @param commands a list of commands to register<a name="line.20"></a>
+<FONT color="green">021</FONT>         */<a name="line.21"></a>
+<FONT color="green">022</FONT>        public void registerAll(String fallbackPrefix, List&lt;Command&gt; commands);<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>        /**<a name="line.24"></a>
+<FONT color="green">025</FONT>         * Registers a command. Returns true on success; false if name is already<a name="line.25"></a>
+<FONT color="green">026</FONT>         * taken and fallback had to be used.<a name="line.26"></a>
+<FONT color="green">027</FONT>         * &lt;p&gt;<a name="line.27"></a>
+<FONT color="green">028</FONT>         * Caller can use:-<a name="line.28"></a>
+<FONT color="green">029</FONT>         * &lt;ul&gt;<a name="line.29"></a>
+<FONT color="green">030</FONT>         * &lt;li&gt;command.getName() to determine the label registered for this<a name="line.30"></a>
+<FONT color="green">031</FONT>         *     command<a name="line.31"></a>
+<FONT color="green">032</FONT>         * &lt;li&gt;command.getAliases() to determine the aliases which where<a name="line.32"></a>
+<FONT color="green">033</FONT>         *     registered<a name="line.33"></a>
+<FONT color="green">034</FONT>         * &lt;/ul&gt;<a name="line.34"></a>
+<FONT color="green">035</FONT>         *<a name="line.35"></a>
+<FONT color="green">036</FONT>         * @param label the label of the command, without the '/'-prefix.<a name="line.36"></a>
+<FONT color="green">037</FONT>         * @param fallbackPrefix a prefix which is prepended to the command with a<a name="line.37"></a>
+<FONT color="green">038</FONT>         *     ':' one or more times to make the command unique<a name="line.38"></a>
+<FONT color="green">039</FONT>         * @param command the command to register<a name="line.39"></a>
+<FONT color="green">040</FONT>         * @return true if command was registered with the passed in label, false<a name="line.40"></a>
+<FONT color="green">041</FONT>         *     otherwise, which indicates the fallbackPrefix was used one or more<a name="line.41"></a>
+<FONT color="green">042</FONT>         *     times<a name="line.42"></a>
+<FONT color="green">043</FONT>         */<a name="line.43"></a>
+<FONT color="green">044</FONT>        public boolean register(String label, String fallbackPrefix, Command command);<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>        /**<a name="line.46"></a>
+<FONT color="green">047</FONT>         * Registers a command. Returns true on success; false if name is already<a name="line.47"></a>
+<FONT color="green">048</FONT>         * taken and fallback had to be used.<a name="line.48"></a>
+<FONT color="green">049</FONT>         * &lt;p&gt;<a name="line.49"></a>
+<FONT color="green">050</FONT>         * Caller can use:-<a name="line.50"></a>
+<FONT color="green">051</FONT>         * &lt;ul&gt;<a name="line.51"></a>
+<FONT color="green">052</FONT>         * &lt;li&gt;command.getName() to determine the label registered for this<a name="line.52"></a>
+<FONT color="green">053</FONT>         *     command<a name="line.53"></a>
+<FONT color="green">054</FONT>         * &lt;li&gt;command.getAliases() to determine the aliases which where<a name="line.54"></a>
+<FONT color="green">055</FONT>         *     registered<a name="line.55"></a>
+<FONT color="green">056</FONT>         * &lt;/ul&gt;<a name="line.56"></a>
+<FONT color="green">057</FONT>         *<a name="line.57"></a>
+<FONT color="green">058</FONT>         * @param fallbackPrefix a prefix which is prepended to the command with a<a name="line.58"></a>
+<FONT color="green">059</FONT>         *     ':' one or more times to make the command unique<a name="line.59"></a>
+<FONT color="green">060</FONT>         * @param command the command to register, from which label is determined<a name="line.60"></a>
+<FONT color="green">061</FONT>         *     from the command name<a name="line.61"></a>
+<FONT color="green">062</FONT>         * @return true if command was registered with the passed in label, false<a name="line.62"></a>
+<FONT color="green">063</FONT>         *     otherwise, which indicates the fallbackPrefix was used one or more<a name="line.63"></a>
+<FONT color="green">064</FONT>         *     times<a name="line.64"></a>
+<FONT color="green">065</FONT>         */<a name="line.65"></a>
+<FONT color="green">066</FONT>        public boolean register(String fallbackPrefix, Command command);<a name="line.66"></a>
+<FONT color="green">067</FONT>    <a name="line.67"></a>
+<FONT color="green">068</FONT>        /**<a name="line.68"></a>
+<FONT color="green">069</FONT>         * Looks for the requested command and executes it if found.<a name="line.69"></a>
+<FONT color="green">070</FONT>         *<a name="line.70"></a>
+<FONT color="green">071</FONT>         * @param sender The command's sender<a name="line.71"></a>
+<FONT color="green">072</FONT>         * @param cmdLine command + arguments. Example: "/test abc 123"<a name="line.72"></a>
+<FONT color="green">073</FONT>         * @return returns false if no target is found, true otherwise.<a name="line.73"></a>
+<FONT color="green">074</FONT>         * @throws CommandException Thrown when the executor for the given command<a name="line.74"></a>
+<FONT color="green">075</FONT>         *     fails with an unhandled exception<a name="line.75"></a>
+<FONT color="green">076</FONT>         */<a name="line.76"></a>
+<FONT color="green">077</FONT>        public boolean dispatch(CommandSender sender, String cmdLine) throws CommandException;<a name="line.77"></a>
+<FONT color="green">078</FONT>    <a name="line.78"></a>
+<FONT color="green">079</FONT>        /**<a name="line.79"></a>
+<FONT color="green">080</FONT>         * Clears all registered commands.<a name="line.80"></a>
+<FONT color="green">081</FONT>         */<a name="line.81"></a>
+<FONT color="green">082</FONT>        public void clearCommands();<a name="line.82"></a>
+<FONT color="green">083</FONT>    <a name="line.83"></a>
+<FONT color="green">084</FONT>        /**<a name="line.84"></a>
+<FONT color="green">085</FONT>         * Gets the command registered to the specified name<a name="line.85"></a>
+<FONT color="green">086</FONT>         *<a name="line.86"></a>
+<FONT color="green">087</FONT>         * @param name Name of the command to retrieve<a name="line.87"></a>
+<FONT color="green">088</FONT>         * @return Command with the specified name or null if a command with that<a name="line.88"></a>
+<FONT color="green">089</FONT>         *     label doesn't exist<a name="line.89"></a>
+<FONT color="green">090</FONT>         */<a name="line.90"></a>
+<FONT color="green">091</FONT>        public Command getCommand(String name);<a name="line.91"></a>
+<FONT color="green">092</FONT>    <a name="line.92"></a>
+<FONT color="green">093</FONT>    <a name="line.93"></a>
+<FONT color="green">094</FONT>        /**<a name="line.94"></a>
+<FONT color="green">095</FONT>         * Looks for the requested command and executes an appropriate<a name="line.95"></a>
+<FONT color="green">096</FONT>         * tab-completer if found. This method will also tab-complete partial<a name="line.96"></a>
+<FONT color="green">097</FONT>         * commands.<a name="line.97"></a>
+<FONT color="green">098</FONT>         *<a name="line.98"></a>
+<FONT color="green">099</FONT>         * @param sender The command's sender.<a name="line.99"></a>
+<FONT color="green">100</FONT>         * @param cmdLine The entire command string to tab-complete, excluding<a name="line.100"></a>
+<FONT color="green">101</FONT>         *     initial slash.<a name="line.101"></a>
+<FONT color="green">102</FONT>         * @return a list of possible tab-completions. This list may be immutable.<a name="line.102"></a>
+<FONT color="green">103</FONT>         *     Will be null if no matching command of which sender has permission.<a name="line.103"></a>
+<FONT color="green">104</FONT>         * @throws CommandException Thrown when the tab-completer for the given<a name="line.104"></a>
+<FONT color="green">105</FONT>         *     command fails with an unhandled exception<a name="line.105"></a>
+<FONT color="green">106</FONT>         * @throws IllegalArgumentException if either sender or cmdLine are null<a name="line.106"></a>
+<FONT color="green">107</FONT>         */<a name="line.107"></a>
+<FONT color="green">108</FONT>        public List&lt;String&gt; tabComplete(CommandSender sender, String cmdLine) throws IllegalArgumentException;<a name="line.108"></a>
+<FONT color="green">109</FONT>    }<a name="line.109"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

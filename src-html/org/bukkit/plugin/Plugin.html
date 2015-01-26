@@ -1,0 +1,255 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.plugin;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.io.File;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.io.InputStream;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.util.logging.Logger;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    import org.bukkit.Server;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import org.bukkit.command.TabExecutor;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import org.bukkit.configuration.file.FileConfiguration;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import org.bukkit.generator.ChunkGenerator;<a name="line.10"></a>
+<FONT color="green">011</FONT>    <a name="line.11"></a>
+<FONT color="green">012</FONT>    import com.avaje.ebean.EbeanServer;<a name="line.12"></a>
+<FONT color="green">013</FONT>    <a name="line.13"></a>
+<FONT color="green">014</FONT>    /**<a name="line.14"></a>
+<FONT color="green">015</FONT>     * Represents a Plugin<a name="line.15"></a>
+<FONT color="green">016</FONT>     * &lt;p&gt;<a name="line.16"></a>
+<FONT color="green">017</FONT>     * The use of {@link PluginBase} is recommended for actual Implementation<a name="line.17"></a>
+<FONT color="green">018</FONT>     */<a name="line.18"></a>
+<FONT color="green">019</FONT>    public interface Plugin extends TabExecutor {<a name="line.19"></a>
+<FONT color="green">020</FONT>        /**<a name="line.20"></a>
+<FONT color="green">021</FONT>         * Returns the folder that the plugin data's files are located in. The<a name="line.21"></a>
+<FONT color="green">022</FONT>         * folder may not yet exist.<a name="line.22"></a>
+<FONT color="green">023</FONT>         *<a name="line.23"></a>
+<FONT color="green">024</FONT>         * @return The folder<a name="line.24"></a>
+<FONT color="green">025</FONT>         */<a name="line.25"></a>
+<FONT color="green">026</FONT>        public File getDataFolder();<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>        /**<a name="line.28"></a>
+<FONT color="green">029</FONT>         * Returns the plugin.yaml file containing the details for this plugin<a name="line.29"></a>
+<FONT color="green">030</FONT>         *<a name="line.30"></a>
+<FONT color="green">031</FONT>         * @return Contents of the plugin.yaml file<a name="line.31"></a>
+<FONT color="green">032</FONT>         */<a name="line.32"></a>
+<FONT color="green">033</FONT>        public PluginDescriptionFile getDescription();<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>        /**<a name="line.35"></a>
+<FONT color="green">036</FONT>         * Gets a {@link FileConfiguration} for this plugin, read through<a name="line.36"></a>
+<FONT color="green">037</FONT>         * "config.yml"<a name="line.37"></a>
+<FONT color="green">038</FONT>         * &lt;p&gt;<a name="line.38"></a>
+<FONT color="green">039</FONT>         * If there is a default config.yml embedded in this plugin, it will be<a name="line.39"></a>
+<FONT color="green">040</FONT>         * provided as a default for this Configuration.<a name="line.40"></a>
+<FONT color="green">041</FONT>         *<a name="line.41"></a>
+<FONT color="green">042</FONT>         * @return Plugin configuration<a name="line.42"></a>
+<FONT color="green">043</FONT>         */<a name="line.43"></a>
+<FONT color="green">044</FONT>        public FileConfiguration getConfig();<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>        /**<a name="line.46"></a>
+<FONT color="green">047</FONT>         * Gets an embedded resource in this plugin<a name="line.47"></a>
+<FONT color="green">048</FONT>         *<a name="line.48"></a>
+<FONT color="green">049</FONT>         * @param filename Filename of the resource<a name="line.49"></a>
+<FONT color="green">050</FONT>         * @return File if found, otherwise null<a name="line.50"></a>
+<FONT color="green">051</FONT>         */<a name="line.51"></a>
+<FONT color="green">052</FONT>        public InputStream getResource(String filename);<a name="line.52"></a>
+<FONT color="green">053</FONT>    <a name="line.53"></a>
+<FONT color="green">054</FONT>        /**<a name="line.54"></a>
+<FONT color="green">055</FONT>         * Saves the {@link FileConfiguration} retrievable by {@link #getConfig()}.<a name="line.55"></a>
+<FONT color="green">056</FONT>         */<a name="line.56"></a>
+<FONT color="green">057</FONT>        public void saveConfig();<a name="line.57"></a>
+<FONT color="green">058</FONT>    <a name="line.58"></a>
+<FONT color="green">059</FONT>        /**<a name="line.59"></a>
+<FONT color="green">060</FONT>         * Saves the raw contents of the default config.yml file to the location<a name="line.60"></a>
+<FONT color="green">061</FONT>         * retrievable by {@link #getConfig()}. If there is no default config.yml<a name="line.61"></a>
+<FONT color="green">062</FONT>         * embedded in the plugin, an empty config.yml file is saved. This should<a name="line.62"></a>
+<FONT color="green">063</FONT>         * fail silently if the config.yml already exists.<a name="line.63"></a>
+<FONT color="green">064</FONT>         */<a name="line.64"></a>
+<FONT color="green">065</FONT>        public void saveDefaultConfig();<a name="line.65"></a>
+<FONT color="green">066</FONT>    <a name="line.66"></a>
+<FONT color="green">067</FONT>        /**<a name="line.67"></a>
+<FONT color="green">068</FONT>         * Saves the raw contents of any resource embedded with a plugin's .jar<a name="line.68"></a>
+<FONT color="green">069</FONT>         * file assuming it can be found using {@link #getResource(String)}.<a name="line.69"></a>
+<FONT color="green">070</FONT>         * &lt;p&gt;<a name="line.70"></a>
+<FONT color="green">071</FONT>         * The resource is saved into the plugin's data folder using the same<a name="line.71"></a>
+<FONT color="green">072</FONT>         * hierarchy as the .jar file (subdirectories are preserved).<a name="line.72"></a>
+<FONT color="green">073</FONT>         *<a name="line.73"></a>
+<FONT color="green">074</FONT>         * @param resourcePath the embedded resource path to look for within the<a name="line.74"></a>
+<FONT color="green">075</FONT>         *     plugin's .jar file. (No preceding slash).<a name="line.75"></a>
+<FONT color="green">076</FONT>         * @param replace if true, the embedded resource will overwrite the<a name="line.76"></a>
+<FONT color="green">077</FONT>         *     contents of an existing file.<a name="line.77"></a>
+<FONT color="green">078</FONT>         * @throws IllegalArgumentException if the resource path is null, empty,<a name="line.78"></a>
+<FONT color="green">079</FONT>         *     or points to a nonexistent resource.<a name="line.79"></a>
+<FONT color="green">080</FONT>         */<a name="line.80"></a>
+<FONT color="green">081</FONT>        public void saveResource(String resourcePath, boolean replace);<a name="line.81"></a>
+<FONT color="green">082</FONT>    <a name="line.82"></a>
+<FONT color="green">083</FONT>        /**<a name="line.83"></a>
+<FONT color="green">084</FONT>         * Discards any data in {@link #getConfig()} and reloads from disk.<a name="line.84"></a>
+<FONT color="green">085</FONT>         */<a name="line.85"></a>
+<FONT color="green">086</FONT>        public void reloadConfig();<a name="line.86"></a>
+<FONT color="green">087</FONT>    <a name="line.87"></a>
+<FONT color="green">088</FONT>        /**<a name="line.88"></a>
+<FONT color="green">089</FONT>         * Gets the associated PluginLoader responsible for this plugin<a name="line.89"></a>
+<FONT color="green">090</FONT>         *<a name="line.90"></a>
+<FONT color="green">091</FONT>         * @return PluginLoader that controls this plugin<a name="line.91"></a>
+<FONT color="green">092</FONT>         */<a name="line.92"></a>
+<FONT color="green">093</FONT>        public PluginLoader getPluginLoader();<a name="line.93"></a>
+<FONT color="green">094</FONT>    <a name="line.94"></a>
+<FONT color="green">095</FONT>        /**<a name="line.95"></a>
+<FONT color="green">096</FONT>         * Returns the Server instance currently running this plugin<a name="line.96"></a>
+<FONT color="green">097</FONT>         *<a name="line.97"></a>
+<FONT color="green">098</FONT>         * @return Server running this plugin<a name="line.98"></a>
+<FONT color="green">099</FONT>         */<a name="line.99"></a>
+<FONT color="green">100</FONT>        public Server getServer();<a name="line.100"></a>
+<FONT color="green">101</FONT>    <a name="line.101"></a>
+<FONT color="green">102</FONT>        /**<a name="line.102"></a>
+<FONT color="green">103</FONT>         * Returns a value indicating whether or not this plugin is currently<a name="line.103"></a>
+<FONT color="green">104</FONT>         * enabled<a name="line.104"></a>
+<FONT color="green">105</FONT>         *<a name="line.105"></a>
+<FONT color="green">106</FONT>         * @return true if this plugin is enabled, otherwise false<a name="line.106"></a>
+<FONT color="green">107</FONT>         */<a name="line.107"></a>
+<FONT color="green">108</FONT>        public boolean isEnabled();<a name="line.108"></a>
+<FONT color="green">109</FONT>    <a name="line.109"></a>
+<FONT color="green">110</FONT>        /**<a name="line.110"></a>
+<FONT color="green">111</FONT>         * Called when this plugin is disabled<a name="line.111"></a>
+<FONT color="green">112</FONT>         */<a name="line.112"></a>
+<FONT color="green">113</FONT>        public void onDisable();<a name="line.113"></a>
+<FONT color="green">114</FONT>    <a name="line.114"></a>
+<FONT color="green">115</FONT>        /**<a name="line.115"></a>
+<FONT color="green">116</FONT>         * Called after a plugin is loaded but before it has been enabled.<a name="line.116"></a>
+<FONT color="green">117</FONT>         * &lt;p&gt;<a name="line.117"></a>
+<FONT color="green">118</FONT>         * When mulitple plugins are loaded, the onLoad() for all plugins is<a name="line.118"></a>
+<FONT color="green">119</FONT>         * called before any onEnable() is called.<a name="line.119"></a>
+<FONT color="green">120</FONT>         */<a name="line.120"></a>
+<FONT color="green">121</FONT>        public void onLoad();<a name="line.121"></a>
+<FONT color="green">122</FONT>    <a name="line.122"></a>
+<FONT color="green">123</FONT>        /**<a name="line.123"></a>
+<FONT color="green">124</FONT>         * Called when this plugin is enabled<a name="line.124"></a>
+<FONT color="green">125</FONT>         */<a name="line.125"></a>
+<FONT color="green">126</FONT>        public void onEnable();<a name="line.126"></a>
+<FONT color="green">127</FONT>    <a name="line.127"></a>
+<FONT color="green">128</FONT>        /**<a name="line.128"></a>
+<FONT color="green">129</FONT>         * Simple boolean if we can still nag to the logs about things<a name="line.129"></a>
+<FONT color="green">130</FONT>         *<a name="line.130"></a>
+<FONT color="green">131</FONT>         * @return boolean whether we can nag<a name="line.131"></a>
+<FONT color="green">132</FONT>         */<a name="line.132"></a>
+<FONT color="green">133</FONT>        public boolean isNaggable();<a name="line.133"></a>
+<FONT color="green">134</FONT>    <a name="line.134"></a>
+<FONT color="green">135</FONT>        /**<a name="line.135"></a>
+<FONT color="green">136</FONT>         * Set naggable state<a name="line.136"></a>
+<FONT color="green">137</FONT>         *<a name="line.137"></a>
+<FONT color="green">138</FONT>         * @param canNag is this plugin still naggable?<a name="line.138"></a>
+<FONT color="green">139</FONT>         */<a name="line.139"></a>
+<FONT color="green">140</FONT>        public void setNaggable(boolean canNag);<a name="line.140"></a>
+<FONT color="green">141</FONT>    <a name="line.141"></a>
+<FONT color="green">142</FONT>        /**<a name="line.142"></a>
+<FONT color="green">143</FONT>         * Gets the {@link EbeanServer} tied to this plugin. This will only be<a name="line.143"></a>
+<FONT color="green">144</FONT>         * available if enabled in the {@link<a name="line.144"></a>
+<FONT color="green">145</FONT>         * PluginDescriptionFile#isDatabaseEnabled()}<a name="line.145"></a>
+<FONT color="green">146</FONT>         * &lt;p&gt;<a name="line.146"></a>
+<FONT color="green">147</FONT>         * &lt;i&gt;For more information on the use of &lt;a href="http://www.avaje.org/"&gt;<a name="line.147"></a>
+<FONT color="green">148</FONT>         * Avaje Ebeans ORM&lt;/a&gt;, see &lt;a<a name="line.148"></a>
+<FONT color="green">149</FONT>         * href="http://www.avaje.org/ebean/documentation.html"&gt;Avaje Ebeans<a name="line.149"></a>
+<FONT color="green">150</FONT>         * Documentation&lt;/a&gt;&lt;/i&gt;<a name="line.150"></a>
+<FONT color="green">151</FONT>         * &lt;p&gt;<a name="line.151"></a>
+<FONT color="green">152</FONT>         * &lt;i&gt;For an example using Ebeans ORM, see &lt;a<a name="line.152"></a>
+<FONT color="green">153</FONT>         * href="https://github.com/Bukkit/HomeBukkit"&gt;Bukkit's Homebukkit Plugin<a name="line.153"></a>
+<FONT color="green">154</FONT>         * &lt;/a&gt;&lt;/i&gt;<a name="line.154"></a>
+<FONT color="green">155</FONT>         *<a name="line.155"></a>
+<FONT color="green">156</FONT>         * @return ebean server instance or null if not enabled<a name="line.156"></a>
+<FONT color="green">157</FONT>         */<a name="line.157"></a>
+<FONT color="green">158</FONT>        public EbeanServer getDatabase();<a name="line.158"></a>
+<FONT color="green">159</FONT>    <a name="line.159"></a>
+<FONT color="green">160</FONT>        /**<a name="line.160"></a>
+<FONT color="green">161</FONT>         * Gets a {@link ChunkGenerator} for use in a default world, as specified<a name="line.161"></a>
+<FONT color="green">162</FONT>         * in the server configuration<a name="line.162"></a>
+<FONT color="green">163</FONT>         *<a name="line.163"></a>
+<FONT color="green">164</FONT>         * @param worldName Name of the world that this will be applied to<a name="line.164"></a>
+<FONT color="green">165</FONT>         * @param id Unique ID, if any, that was specified to indicate which<a name="line.165"></a>
+<FONT color="green">166</FONT>         *     generator was requested<a name="line.166"></a>
+<FONT color="green">167</FONT>         * @return ChunkGenerator for use in the default world generation<a name="line.167"></a>
+<FONT color="green">168</FONT>         */<a name="line.168"></a>
+<FONT color="green">169</FONT>        public ChunkGenerator getDefaultWorldGenerator(String worldName, String id);<a name="line.169"></a>
+<FONT color="green">170</FONT>    <a name="line.170"></a>
+<FONT color="green">171</FONT>        /**<a name="line.171"></a>
+<FONT color="green">172</FONT>         * Returns the plugin logger associated with this server's logger. The<a name="line.172"></a>
+<FONT color="green">173</FONT>         * returned logger automatically tags all log messages with the plugin's<a name="line.173"></a>
+<FONT color="green">174</FONT>         * name.<a name="line.174"></a>
+<FONT color="green">175</FONT>         *<a name="line.175"></a>
+<FONT color="green">176</FONT>         * @return Logger associated with this plugin<a name="line.176"></a>
+<FONT color="green">177</FONT>         */<a name="line.177"></a>
+<FONT color="green">178</FONT>        public Logger getLogger();<a name="line.178"></a>
+<FONT color="green">179</FONT>    <a name="line.179"></a>
+<FONT color="green">180</FONT>        /**<a name="line.180"></a>
+<FONT color="green">181</FONT>         * Returns the name of the plugin.<a name="line.181"></a>
+<FONT color="green">182</FONT>         * &lt;p&gt;<a name="line.182"></a>
+<FONT color="green">183</FONT>         * This should return the bare name of the plugin and should be used for<a name="line.183"></a>
+<FONT color="green">184</FONT>         * comparison.<a name="line.184"></a>
+<FONT color="green">185</FONT>         *<a name="line.185"></a>
+<FONT color="green">186</FONT>         * @return name of the plugin<a name="line.186"></a>
+<FONT color="green">187</FONT>         */<a name="line.187"></a>
+<FONT color="green">188</FONT>        public String getName();<a name="line.188"></a>
+<FONT color="green">189</FONT>    }<a name="line.189"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

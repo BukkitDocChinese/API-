@@ -1,0 +1,108 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.help;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.command.Command;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    /**<a name="line.5"></a>
+<FONT color="green">006</FONT>     * A HelpTopicFactory is used to create custom {@link HelpTopic} objects from<a name="line.6"></a>
+<FONT color="green">007</FONT>     * commands that inherit from a common base class or have executors that<a name="line.7"></a>
+<FONT color="green">008</FONT>     * inherit from a common base class. You can use a custom HelpTopic to change<a name="line.8"></a>
+<FONT color="green">009</FONT>     * the way all the commands in your plugin display in the help. If your plugin<a name="line.9"></a>
+<FONT color="green">010</FONT>     * implements a complex permissions system, a custom help topic may also be<a name="line.10"></a>
+<FONT color="green">011</FONT>     * appropriate.<a name="line.11"></a>
+<FONT color="green">012</FONT>     * &lt;p&gt;<a name="line.12"></a>
+<FONT color="green">013</FONT>     * To automatically bind your plugin's commands to your custom HelpTopic<a name="line.13"></a>
+<FONT color="green">014</FONT>     * implementation, first make sure all your commands or executors derive from<a name="line.14"></a>
+<FONT color="green">015</FONT>     * a custom base class (it doesn't have to do anything). Next implement a<a name="line.15"></a>
+<FONT color="green">016</FONT>     * custom HelpTopicFactory that accepts your custom command base class and<a name="line.16"></a>
+<FONT color="green">017</FONT>     * instantiates an instance of your custom HelpTopic from it. Finally,<a name="line.17"></a>
+<FONT color="green">018</FONT>     * register your HelpTopicFactory against your command base class using the<a name="line.18"></a>
+<FONT color="green">019</FONT>     * {@link HelpMap#registerHelpTopicFactory(Class, HelpTopicFactory)} method.<a name="line.19"></a>
+<FONT color="green">020</FONT>     * &lt;p&gt;<a name="line.20"></a>
+<FONT color="green">021</FONT>     * As the help system iterates over all registered commands to make help<a name="line.21"></a>
+<FONT color="green">022</FONT>     * topics, it first checks to see if there is a HelpTopicFactory registered<a name="line.22"></a>
+<FONT color="green">023</FONT>     * for the command's base class. If so, the factory is used to make a help<a name="line.23"></a>
+<FONT color="green">024</FONT>     * topic rather than a generic help topic. If no factory is found for the<a name="line.24"></a>
+<FONT color="green">025</FONT>     * command's base class and the command derives from {@link<a name="line.25"></a>
+<FONT color="green">026</FONT>     * org.bukkit.command.PluginCommand}, then the type of the command's executor<a name="line.26"></a>
+<FONT color="green">027</FONT>     * is inspected looking for a registered HelpTopicFactory. Finally, if no<a name="line.27"></a>
+<FONT color="green">028</FONT>     * factory is found, a generic help topic is created for the command.<a name="line.28"></a>
+<FONT color="green">029</FONT>     *<a name="line.29"></a>
+<FONT color="green">030</FONT>     * @param &lt;TCommand&gt; The base class for your custom commands.<a name="line.30"></a>
+<FONT color="green">031</FONT>     */<a name="line.31"></a>
+<FONT color="green">032</FONT>    public interface HelpTopicFactory&lt;TCommand extends Command&gt; {<a name="line.32"></a>
+<FONT color="green">033</FONT>        /**<a name="line.33"></a>
+<FONT color="green">034</FONT>         * This method accepts a command deriving from a custom command base class<a name="line.34"></a>
+<FONT color="green">035</FONT>         * and constructs a custom HelpTopic for it.<a name="line.35"></a>
+<FONT color="green">036</FONT>         *<a name="line.36"></a>
+<FONT color="green">037</FONT>         * @param command The custom command to build a help topic for.<a name="line.37"></a>
+<FONT color="green">038</FONT>         * @return A new custom help topic or {@code null} to intentionally NOT<a name="line.38"></a>
+<FONT color="green">039</FONT>         *     create a topic.<a name="line.39"></a>
+<FONT color="green">040</FONT>         */<a name="line.40"></a>
+<FONT color="green">041</FONT>        public HelpTopic createTopic(TCommand command);<a name="line.41"></a>
+<FONT color="green">042</FONT>    }<a name="line.42"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

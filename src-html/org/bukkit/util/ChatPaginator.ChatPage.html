@@ -1,0 +1,235 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.util;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.ChatColor;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.util.LinkedList;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import java.util.List;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    /**<a name="line.8"></a>
+<FONT color="green">009</FONT>     * The ChatPaginator takes a raw string of arbitrary length and breaks it down<a name="line.9"></a>
+<FONT color="green">010</FONT>     * into an array of strings appropriate for displaying on the Minecraft player<a name="line.10"></a>
+<FONT color="green">011</FONT>     * console.<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    public class ChatPaginator {<a name="line.13"></a>
+<FONT color="green">014</FONT>        public static final int GUARANTEED_NO_WRAP_CHAT_PAGE_WIDTH = 55; // Will never wrap, even with the largest characters<a name="line.14"></a>
+<FONT color="green">015</FONT>        public static final int AVERAGE_CHAT_PAGE_WIDTH = 65; // Will typically not wrap using an average character distribution<a name="line.15"></a>
+<FONT color="green">016</FONT>        public static final int UNBOUNDED_PAGE_WIDTH = Integer.MAX_VALUE;<a name="line.16"></a>
+<FONT color="green">017</FONT>        public static final int OPEN_CHAT_PAGE_HEIGHT = 20; // The height of an expanded chat window<a name="line.17"></a>
+<FONT color="green">018</FONT>        public static final int CLOSED_CHAT_PAGE_HEIGHT = 10; // The height of the default chat window<a name="line.18"></a>
+<FONT color="green">019</FONT>        public static final int UNBOUNDED_PAGE_HEIGHT = Integer.MAX_VALUE;<a name="line.19"></a>
+<FONT color="green">020</FONT>    <a name="line.20"></a>
+<FONT color="green">021</FONT>        /**<a name="line.21"></a>
+<FONT color="green">022</FONT>         * Breaks a raw string up into pages using the default width and height.<a name="line.22"></a>
+<FONT color="green">023</FONT>         *<a name="line.23"></a>
+<FONT color="green">024</FONT>         * @param unpaginatedString The raw string to break.<a name="line.24"></a>
+<FONT color="green">025</FONT>         * @param pageNumber The page number to fetch.<a name="line.25"></a>
+<FONT color="green">026</FONT>         * @return A single chat page.<a name="line.26"></a>
+<FONT color="green">027</FONT>         */<a name="line.27"></a>
+<FONT color="green">028</FONT>        public static ChatPage paginate(String unpaginatedString, int pageNumber) {<a name="line.28"></a>
+<FONT color="green">029</FONT>            return  paginate(unpaginatedString, pageNumber, GUARANTEED_NO_WRAP_CHAT_PAGE_WIDTH, CLOSED_CHAT_PAGE_HEIGHT);<a name="line.29"></a>
+<FONT color="green">030</FONT>        }<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>        /**<a name="line.32"></a>
+<FONT color="green">033</FONT>         * Breaks a raw string up into pages using a provided width and height.<a name="line.33"></a>
+<FONT color="green">034</FONT>         *<a name="line.34"></a>
+<FONT color="green">035</FONT>         * @param unpaginatedString The raw string to break.<a name="line.35"></a>
+<FONT color="green">036</FONT>         * @param pageNumber The page number to fetch.<a name="line.36"></a>
+<FONT color="green">037</FONT>         * @param lineLength The desired width of a chat line.<a name="line.37"></a>
+<FONT color="green">038</FONT>         * @param pageHeight The desired number of lines in a page.<a name="line.38"></a>
+<FONT color="green">039</FONT>         * @return A single chat page.<a name="line.39"></a>
+<FONT color="green">040</FONT>         */<a name="line.40"></a>
+<FONT color="green">041</FONT>        public static ChatPage paginate(String unpaginatedString, int pageNumber, int lineLength, int pageHeight) {<a name="line.41"></a>
+<FONT color="green">042</FONT>            String[] lines = wordWrap(unpaginatedString, lineLength);<a name="line.42"></a>
+<FONT color="green">043</FONT>    <a name="line.43"></a>
+<FONT color="green">044</FONT>            int totalPages = lines.length / pageHeight + (lines.length % pageHeight == 0 ? 0 : 1);<a name="line.44"></a>
+<FONT color="green">045</FONT>            int actualPageNumber = pageNumber &lt;= totalPages ? pageNumber : totalPages;<a name="line.45"></a>
+<FONT color="green">046</FONT>    <a name="line.46"></a>
+<FONT color="green">047</FONT>            int from = (actualPageNumber - 1) * pageHeight;<a name="line.47"></a>
+<FONT color="green">048</FONT>            int to = from + pageHeight &lt;= lines.length  ? from + pageHeight : lines.length;<a name="line.48"></a>
+<FONT color="green">049</FONT>            String[] selectedLines = Java15Compat.Arrays_copyOfRange(lines, from, to);<a name="line.49"></a>
+<FONT color="green">050</FONT>    <a name="line.50"></a>
+<FONT color="green">051</FONT>            return new ChatPage(selectedLines, actualPageNumber, totalPages);<a name="line.51"></a>
+<FONT color="green">052</FONT>        }<a name="line.52"></a>
+<FONT color="green">053</FONT>    <a name="line.53"></a>
+<FONT color="green">054</FONT>        /**<a name="line.54"></a>
+<FONT color="green">055</FONT>         * Breaks a raw string up into a series of lines. Words are wrapped using<a name="line.55"></a>
+<FONT color="green">056</FONT>         * spaces as decimeters and the newline character is respected.<a name="line.56"></a>
+<FONT color="green">057</FONT>         *<a name="line.57"></a>
+<FONT color="green">058</FONT>         * @param rawString The raw string to break.<a name="line.58"></a>
+<FONT color="green">059</FONT>         * @param lineLength The length of a line of text.<a name="line.59"></a>
+<FONT color="green">060</FONT>         * @return An array of word-wrapped lines.<a name="line.60"></a>
+<FONT color="green">061</FONT>         */<a name="line.61"></a>
+<FONT color="green">062</FONT>        public static String[] wordWrap(String rawString, int lineLength) {<a name="line.62"></a>
+<FONT color="green">063</FONT>            // A null string is a single line<a name="line.63"></a>
+<FONT color="green">064</FONT>            if (rawString == null) {<a name="line.64"></a>
+<FONT color="green">065</FONT>                return new String[] {""};<a name="line.65"></a>
+<FONT color="green">066</FONT>            }<a name="line.66"></a>
+<FONT color="green">067</FONT>    <a name="line.67"></a>
+<FONT color="green">068</FONT>            // A string shorter than the lineWidth is a single line<a name="line.68"></a>
+<FONT color="green">069</FONT>            if (rawString.length() &lt;= lineLength &amp;&amp; !rawString.contains("\n")) {<a name="line.69"></a>
+<FONT color="green">070</FONT>                return new String[] {rawString};<a name="line.70"></a>
+<FONT color="green">071</FONT>            }<a name="line.71"></a>
+<FONT color="green">072</FONT>    <a name="line.72"></a>
+<FONT color="green">073</FONT>            char[] rawChars = (rawString + ' ').toCharArray(); // add a trailing space to trigger pagination<a name="line.73"></a>
+<FONT color="green">074</FONT>            StringBuilder word = new StringBuilder();<a name="line.74"></a>
+<FONT color="green">075</FONT>            StringBuilder line = new StringBuilder();<a name="line.75"></a>
+<FONT color="green">076</FONT>            List&lt;String&gt; lines = new LinkedList&lt;String&gt;();<a name="line.76"></a>
+<FONT color="green">077</FONT>            int lineColorChars = 0;<a name="line.77"></a>
+<FONT color="green">078</FONT>    <a name="line.78"></a>
+<FONT color="green">079</FONT>            for (int i = 0; i &lt; rawChars.length; i++) {<a name="line.79"></a>
+<FONT color="green">080</FONT>                char c = rawChars[i];<a name="line.80"></a>
+<FONT color="green">081</FONT>    <a name="line.81"></a>
+<FONT color="green">082</FONT>                // skip chat color modifiers<a name="line.82"></a>
+<FONT color="green">083</FONT>                if (c == ChatColor.COLOR_CHAR) {<a name="line.83"></a>
+<FONT color="green">084</FONT>                    word.append(ChatColor.getByChar(rawChars[i + 1]));<a name="line.84"></a>
+<FONT color="green">085</FONT>                    lineColorChars += 2;<a name="line.85"></a>
+<FONT color="green">086</FONT>                    i++; // Eat the next character as we have already processed it<a name="line.86"></a>
+<FONT color="green">087</FONT>                    continue;<a name="line.87"></a>
+<FONT color="green">088</FONT>                }<a name="line.88"></a>
+<FONT color="green">089</FONT>    <a name="line.89"></a>
+<FONT color="green">090</FONT>                if (c == ' ' || c == '\n') {<a name="line.90"></a>
+<FONT color="green">091</FONT>                    if (line.length() == 0 &amp;&amp; word.length() &gt; lineLength) { // special case: extremely long word begins a line<a name="line.91"></a>
+<FONT color="green">092</FONT>                        for (String partialWord : word.toString().split("(?&lt;=\\G.{" + lineLength + "})")) {<a name="line.92"></a>
+<FONT color="green">093</FONT>                            lines.add(partialWord);<a name="line.93"></a>
+<FONT color="green">094</FONT>                        }<a name="line.94"></a>
+<FONT color="green">095</FONT>                    } else if (line.length() + word.length() - lineColorChars == lineLength) { // Line exactly the correct length...newline<a name="line.95"></a>
+<FONT color="green">096</FONT>                        line.append(word);<a name="line.96"></a>
+<FONT color="green">097</FONT>                        lines.add(line.toString());<a name="line.97"></a>
+<FONT color="green">098</FONT>                        line = new StringBuilder();<a name="line.98"></a>
+<FONT color="green">099</FONT>                        lineColorChars = 0;<a name="line.99"></a>
+<FONT color="green">100</FONT>                    } else if (line.length() + 1 + word.length() - lineColorChars &gt; lineLength) { // Line too long...break the line<a name="line.100"></a>
+<FONT color="green">101</FONT>                        for (String partialWord : word.toString().split("(?&lt;=\\G.{" + lineLength + "})")) {<a name="line.101"></a>
+<FONT color="green">102</FONT>                            lines.add(line.toString());<a name="line.102"></a>
+<FONT color="green">103</FONT>                            line = new StringBuilder(partialWord);<a name="line.103"></a>
+<FONT color="green">104</FONT>                        }<a name="line.104"></a>
+<FONT color="green">105</FONT>                        lineColorChars = 0;<a name="line.105"></a>
+<FONT color="green">106</FONT>                    } else {<a name="line.106"></a>
+<FONT color="green">107</FONT>                        if (line.length() &gt; 0) {<a name="line.107"></a>
+<FONT color="green">108</FONT>                            line.append(' ');<a name="line.108"></a>
+<FONT color="green">109</FONT>                        }<a name="line.109"></a>
+<FONT color="green">110</FONT>                        line.append(word);<a name="line.110"></a>
+<FONT color="green">111</FONT>                    }<a name="line.111"></a>
+<FONT color="green">112</FONT>                    word = new StringBuilder();<a name="line.112"></a>
+<FONT color="green">113</FONT>    <a name="line.113"></a>
+<FONT color="green">114</FONT>                    if (c == '\n') { // Newline forces the line to flush<a name="line.114"></a>
+<FONT color="green">115</FONT>                        lines.add(line.toString());<a name="line.115"></a>
+<FONT color="green">116</FONT>                        line = new StringBuilder();<a name="line.116"></a>
+<FONT color="green">117</FONT>                    }<a name="line.117"></a>
+<FONT color="green">118</FONT>                } else {<a name="line.118"></a>
+<FONT color="green">119</FONT>                    word.append(c);<a name="line.119"></a>
+<FONT color="green">120</FONT>                }<a name="line.120"></a>
+<FONT color="green">121</FONT>            }<a name="line.121"></a>
+<FONT color="green">122</FONT>    <a name="line.122"></a>
+<FONT color="green">123</FONT>            if(line.length() &gt; 0) { // Only add the last line if there is anything to add<a name="line.123"></a>
+<FONT color="green">124</FONT>                lines.add(line.toString());<a name="line.124"></a>
+<FONT color="green">125</FONT>            }<a name="line.125"></a>
+<FONT color="green">126</FONT>    <a name="line.126"></a>
+<FONT color="green">127</FONT>            // Iterate over the wrapped lines, applying the last color from one line to the beginning of the next<a name="line.127"></a>
+<FONT color="green">128</FONT>            if (lines.get(0).length() == 0 || lines.get(0).charAt(0) != ChatColor.COLOR_CHAR) {<a name="line.128"></a>
+<FONT color="green">129</FONT>                lines.set(0, ChatColor.WHITE + lines.get(0));<a name="line.129"></a>
+<FONT color="green">130</FONT>            }<a name="line.130"></a>
+<FONT color="green">131</FONT>            for (int i = 1; i &lt; lines.size(); i++) {<a name="line.131"></a>
+<FONT color="green">132</FONT>                final String pLine = lines.get(i-1);<a name="line.132"></a>
+<FONT color="green">133</FONT>                final String subLine = lines.get(i);<a name="line.133"></a>
+<FONT color="green">134</FONT>    <a name="line.134"></a>
+<FONT color="green">135</FONT>                char color = pLine.charAt(pLine.lastIndexOf(ChatColor.COLOR_CHAR) + 1);<a name="line.135"></a>
+<FONT color="green">136</FONT>                if (subLine.length() == 0 || subLine.charAt(0) != ChatColor.COLOR_CHAR) {<a name="line.136"></a>
+<FONT color="green">137</FONT>                    lines.set(i, ChatColor.getByChar(color) + subLine);<a name="line.137"></a>
+<FONT color="green">138</FONT>                }<a name="line.138"></a>
+<FONT color="green">139</FONT>            }<a name="line.139"></a>
+<FONT color="green">140</FONT>    <a name="line.140"></a>
+<FONT color="green">141</FONT>            return lines.toArray(new String[lines.size()]);<a name="line.141"></a>
+<FONT color="green">142</FONT>        }<a name="line.142"></a>
+<FONT color="green">143</FONT>    <a name="line.143"></a>
+<FONT color="green">144</FONT>        public static class ChatPage {<a name="line.144"></a>
+<FONT color="green">145</FONT>    <a name="line.145"></a>
+<FONT color="green">146</FONT>            private String[] lines;<a name="line.146"></a>
+<FONT color="green">147</FONT>            private int pageNumber;<a name="line.147"></a>
+<FONT color="green">148</FONT>            private int totalPages;<a name="line.148"></a>
+<FONT color="green">149</FONT>    <a name="line.149"></a>
+<FONT color="green">150</FONT>            public ChatPage(String[] lines, int pageNumber, int totalPages) {<a name="line.150"></a>
+<FONT color="green">151</FONT>                this.lines = lines;<a name="line.151"></a>
+<FONT color="green">152</FONT>                this.pageNumber = pageNumber;<a name="line.152"></a>
+<FONT color="green">153</FONT>                this.totalPages = totalPages;<a name="line.153"></a>
+<FONT color="green">154</FONT>            }<a name="line.154"></a>
+<FONT color="green">155</FONT>    <a name="line.155"></a>
+<FONT color="green">156</FONT>            public int getPageNumber() {<a name="line.156"></a>
+<FONT color="green">157</FONT>                return pageNumber;<a name="line.157"></a>
+<FONT color="green">158</FONT>            }<a name="line.158"></a>
+<FONT color="green">159</FONT>    <a name="line.159"></a>
+<FONT color="green">160</FONT>            public int getTotalPages() {<a name="line.160"></a>
+<FONT color="green">161</FONT>                return totalPages;<a name="line.161"></a>
+<FONT color="green">162</FONT>            }<a name="line.162"></a>
+<FONT color="green">163</FONT>    <a name="line.163"></a>
+<FONT color="green">164</FONT>            public String[] getLines() {<a name="line.164"></a>
+<FONT color="green">165</FONT>    <a name="line.165"></a>
+<FONT color="green">166</FONT>                return lines;<a name="line.166"></a>
+<FONT color="green">167</FONT>            }<a name="line.167"></a>
+<FONT color="green">168</FONT>        }<a name="line.168"></a>
+<FONT color="green">169</FONT>    }<a name="line.169"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

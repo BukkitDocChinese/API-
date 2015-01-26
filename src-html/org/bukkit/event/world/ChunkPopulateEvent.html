@@ -1,0 +1,94 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.event.world;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.Chunk;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import org.bukkit.event.HandlerList;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import org.bukkit.generator.BlockPopulator;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    /**<a name="line.7"></a>
+<FONT color="green">008</FONT>     * Thrown when a new chunk has finished being populated.<a name="line.8"></a>
+<FONT color="green">009</FONT>     * &lt;p&gt;<a name="line.9"></a>
+<FONT color="green">010</FONT>     * If your intent is to populate the chunk using this event, please see {@link<a name="line.10"></a>
+<FONT color="green">011</FONT>     * BlockPopulator}<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    public class ChunkPopulateEvent extends ChunkEvent {<a name="line.13"></a>
+<FONT color="green">014</FONT>        private static final HandlerList handlers = new HandlerList();<a name="line.14"></a>
+<FONT color="green">015</FONT>    <a name="line.15"></a>
+<FONT color="green">016</FONT>        public ChunkPopulateEvent(final Chunk chunk) {<a name="line.16"></a>
+<FONT color="green">017</FONT>            super(chunk);<a name="line.17"></a>
+<FONT color="green">018</FONT>        }<a name="line.18"></a>
+<FONT color="green">019</FONT>    <a name="line.19"></a>
+<FONT color="green">020</FONT>        @Override<a name="line.20"></a>
+<FONT color="green">021</FONT>        public HandlerList getHandlers() {<a name="line.21"></a>
+<FONT color="green">022</FONT>            return handlers;<a name="line.22"></a>
+<FONT color="green">023</FONT>        }<a name="line.23"></a>
+<FONT color="green">024</FONT>    <a name="line.24"></a>
+<FONT color="green">025</FONT>        public static HandlerList getHandlerList() {<a name="line.25"></a>
+<FONT color="green">026</FONT>            return handlers;<a name="line.26"></a>
+<FONT color="green">027</FONT>        }<a name="line.27"></a>
+<FONT color="green">028</FONT>    }<a name="line.28"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

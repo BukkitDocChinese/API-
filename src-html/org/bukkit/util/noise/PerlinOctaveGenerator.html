@@ -1,0 +1,116 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.util.noise;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.util.Random;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import org.bukkit.World;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    /**<a name="line.6"></a>
+<FONT color="green">007</FONT>     * Creates perlin noise through unbiased octaves<a name="line.7"></a>
+<FONT color="green">008</FONT>     */<a name="line.8"></a>
+<FONT color="green">009</FONT>    public class PerlinOctaveGenerator extends OctaveGenerator {<a name="line.9"></a>
+<FONT color="green">010</FONT>    <a name="line.10"></a>
+<FONT color="green">011</FONT>        /**<a name="line.11"></a>
+<FONT color="green">012</FONT>         * Creates a perlin octave generator for the given world<a name="line.12"></a>
+<FONT color="green">013</FONT>         *<a name="line.13"></a>
+<FONT color="green">014</FONT>         * @param world World to construct this generator for<a name="line.14"></a>
+<FONT color="green">015</FONT>         * @param octaves Amount of octaves to create<a name="line.15"></a>
+<FONT color="green">016</FONT>         */<a name="line.16"></a>
+<FONT color="green">017</FONT>        public PerlinOctaveGenerator(World world, int octaves) {<a name="line.17"></a>
+<FONT color="green">018</FONT>            this(new Random(world.getSeed()), octaves);<a name="line.18"></a>
+<FONT color="green">019</FONT>        }<a name="line.19"></a>
+<FONT color="green">020</FONT>    <a name="line.20"></a>
+<FONT color="green">021</FONT>        /**<a name="line.21"></a>
+<FONT color="green">022</FONT>         * Creates a perlin octave generator for the given world<a name="line.22"></a>
+<FONT color="green">023</FONT>         *<a name="line.23"></a>
+<FONT color="green">024</FONT>         * @param seed Seed to construct this generator for<a name="line.24"></a>
+<FONT color="green">025</FONT>         * @param octaves Amount of octaves to create<a name="line.25"></a>
+<FONT color="green">026</FONT>         */<a name="line.26"></a>
+<FONT color="green">027</FONT>        public PerlinOctaveGenerator(long seed, int octaves) {<a name="line.27"></a>
+<FONT color="green">028</FONT>            this(new Random(seed), octaves);<a name="line.28"></a>
+<FONT color="green">029</FONT>        }<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>        /**<a name="line.31"></a>
+<FONT color="green">032</FONT>         * Creates a perlin octave generator for the given {@link Random}<a name="line.32"></a>
+<FONT color="green">033</FONT>         *<a name="line.33"></a>
+<FONT color="green">034</FONT>         * @param rand Random object to construct this generator for<a name="line.34"></a>
+<FONT color="green">035</FONT>         * @param octaves Amount of octaves to create<a name="line.35"></a>
+<FONT color="green">036</FONT>         */<a name="line.36"></a>
+<FONT color="green">037</FONT>        public PerlinOctaveGenerator(Random rand, int octaves) {<a name="line.37"></a>
+<FONT color="green">038</FONT>            super(createOctaves(rand, octaves));<a name="line.38"></a>
+<FONT color="green">039</FONT>        }<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>        private static NoiseGenerator[] createOctaves(Random rand, int octaves) {<a name="line.41"></a>
+<FONT color="green">042</FONT>            NoiseGenerator[] result = new NoiseGenerator[octaves];<a name="line.42"></a>
+<FONT color="green">043</FONT>    <a name="line.43"></a>
+<FONT color="green">044</FONT>            for (int i = 0; i &lt; octaves; i++) {<a name="line.44"></a>
+<FONT color="green">045</FONT>                result[i] = new PerlinNoiseGenerator(rand);<a name="line.45"></a>
+<FONT color="green">046</FONT>            }<a name="line.46"></a>
+<FONT color="green">047</FONT>    <a name="line.47"></a>
+<FONT color="green">048</FONT>            return result;<a name="line.48"></a>
+<FONT color="green">049</FONT>        }<a name="line.49"></a>
+<FONT color="green">050</FONT>    }<a name="line.50"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

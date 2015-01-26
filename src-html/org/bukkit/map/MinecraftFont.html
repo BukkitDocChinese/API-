@@ -1,0 +1,394 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.map;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    /**<a name="line.3"></a>
+<FONT color="green">004</FONT>     * Represents the built-in Minecraft font.<a name="line.4"></a>
+<FONT color="green">005</FONT>     */<a name="line.5"></a>
+<FONT color="green">006</FONT>    public class MinecraftFont extends MapFont {<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>        private static final int spaceSize = 2;<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>        private static final String fontChars =<a name="line.10"></a>
+<FONT color="green">011</FONT>            " !\"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?" +<a name="line.11"></a>
+<FONT color="green">012</FONT>            "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" +<a name="line.12"></a>
+<FONT color="green">013</FONT>            "'abcdefghijklmnopqrstuvwxyz{|}~\u007F" +<a name="line.13"></a>
+<FONT color="green">014</FONT>            "\u00C7\u00FC\u00E9\u00E2\u00E4\u00E0\u00E5\u00E7" + // Çüéâäàåç<a name="line.14"></a>
+<FONT color="green">015</FONT>            "\u00EA\u00EB\u00E8\u00EF\u00EE\u00EC\u00C4\u00C5" + // êëèïîìÄÅ<a name="line.15"></a>
+<FONT color="green">016</FONT>            "\u00C9\u00E6\u00C6\u00F4\u00F6\u00F2\u00FB\u00F9" + // ÉæÆôöòûù<a name="line.16"></a>
+<FONT color="green">017</FONT>            "\u00FF\u00D6\u00DC\u00F8\u00A3\u00D8\u00D7\u0191" + // ÿÖÜø£Ø×?<a name="line.17"></a>
+<FONT color="green">018</FONT>            "\u00E1\u00ED\u00F3\u00FA\u00F1\u00D1\u00AA\u00BA" + // áíóúñÑªº<a name="line.18"></a>
+<FONT color="green">019</FONT>            "\u00BF\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB";  // ¿®¬½¼¡«»<a name="line.19"></a>
+<FONT color="green">020</FONT>    <a name="line.20"></a>
+<FONT color="green">021</FONT>        private static final int[][] fontData = new int[][] {<a name="line.21"></a>
+<FONT color="green">022</FONT>            /* null */  {0,0,0,0,0,0,0,0},<a name="line.22"></a>
+<FONT color="green">023</FONT>            /* 1 */  {126,129,165,129,189,153,129,126},<a name="line.23"></a>
+<FONT color="green">024</FONT>            /* 2 */  {126,255,219,255,195,231,255,126},<a name="line.24"></a>
+<FONT color="green">025</FONT>            /* 3 */  {54,127,127,127,62,28,8,0},<a name="line.25"></a>
+<FONT color="green">026</FONT>            /* 4 */  {8,28,62,127,62,28,8,0},<a name="line.26"></a>
+<FONT color="green">027</FONT>            /* 5 */  {28,62,28,127,127,62,28,62},<a name="line.27"></a>
+<FONT color="green">028</FONT>            /* 6 */  {8,8,28,62,127,62,28,62},<a name="line.28"></a>
+<FONT color="green">029</FONT>            /* 7 */  {0,0,24,60,60,24,0,0},<a name="line.29"></a>
+<FONT color="green">030</FONT>            /* 8 */  {255,255,231,195,195,231,255,255},<a name="line.30"></a>
+<FONT color="green">031</FONT>            /* 9 */  {0,60,102,66,66,102,60,0},<a name="line.31"></a>
+<FONT color="green">032</FONT>            /* 10 */  {255,195,153,189,189,153,195,255},<a name="line.32"></a>
+<FONT color="green">033</FONT>            /* 11 */  {240,224,240,190,51,51,51,30},<a name="line.33"></a>
+<FONT color="green">034</FONT>            /* 12 */  {60,102,102,102,60,24,126,24},<a name="line.34"></a>
+<FONT color="green">035</FONT>            /* 13 */  {252,204,252,12,12,14,15,7},<a name="line.35"></a>
+<FONT color="green">036</FONT>            /* 14 */  {254,198,254,198,198,230,103,3},<a name="line.36"></a>
+<FONT color="green">037</FONT>            /* 15 */  {153,90,60,231,231,60,90,153},<a name="line.37"></a>
+<FONT color="green">038</FONT>            /* 16 */  {1,7,31,127,31,7,1,0},<a name="line.38"></a>
+<FONT color="green">039</FONT>            /* 17 */  {64,112,124,127,124,112,64,0},<a name="line.39"></a>
+<FONT color="green">040</FONT>            /* 18 */  {24,60,126,24,24,126,60,24},<a name="line.40"></a>
+<FONT color="green">041</FONT>            /* 19 */  {102,102,102,102,102,0,102,0},<a name="line.41"></a>
+<FONT color="green">042</FONT>            /* 20 */  {254,219,219,222,216,216,216,0},<a name="line.42"></a>
+<FONT color="green">043</FONT>            /* 21 */  {124,198,28,54,54,28,51,30},<a name="line.43"></a>
+<FONT color="green">044</FONT>            /* 22 */  {0,0,0,0,126,126,126,0},<a name="line.44"></a>
+<FONT color="green">045</FONT>            /* 23 */  {24,60,126,24,126,60,24,255},<a name="line.45"></a>
+<FONT color="green">046</FONT>            /* 24 */  {24,60,126,24,24,24,24,0},<a name="line.46"></a>
+<FONT color="green">047</FONT>            /* 25 */  {24,24,24,24,126,60,24,0},<a name="line.47"></a>
+<FONT color="green">048</FONT>            /* 26 */  {0,24,48,127,48,24,0,0},<a name="line.48"></a>
+<FONT color="green">049</FONT>            /* 27 */  {0,12,6,127,6,12,0,0},<a name="line.49"></a>
+<FONT color="green">050</FONT>            /* 28 */  {0,0,3,3,3,127,0,0},<a name="line.50"></a>
+<FONT color="green">051</FONT>            /* 29 */  {0,36,102,255,102,36,0,0},<a name="line.51"></a>
+<FONT color="green">052</FONT>            /* 30 */  {0,24,60,126,255,255,0,0},<a name="line.52"></a>
+<FONT color="green">053</FONT>            /* 31 */  {0,255,255,126,60,24,0,0},<a name="line.53"></a>
+<FONT color="green">054</FONT>            /*   */  {0,0,0,0,0,0,0,0},<a name="line.54"></a>
+<FONT color="green">055</FONT>            /* ! */  {1,1,1,1,1,0,1,0},<a name="line.55"></a>
+<FONT color="green">056</FONT>            /* " */  {10,10,5,0,0,0,0,0},<a name="line.56"></a>
+<FONT color="green">057</FONT>            /* # */  {10,10,31,10,31,10,10,0},<a name="line.57"></a>
+<FONT color="green">058</FONT>            /* $ */  {4,30,1,14,16,15,4,0},<a name="line.58"></a>
+<FONT color="green">059</FONT>            /* % */  {17,9,8,4,2,18,17,0},<a name="line.59"></a>
+<FONT color="green">060</FONT>            /* &amp; */  {4,10,4,22,13,9,22,0},<a name="line.60"></a>
+<FONT color="green">061</FONT>            /* ' */  {2,2,1,0,0,0,0,0},<a name="line.61"></a>
+<FONT color="green">062</FONT>            /* ( */  {12,2,1,1,1,2,12,0},<a name="line.62"></a>
+<FONT color="green">063</FONT>            /* ) */  {3,4,8,8,8,4,3,0},<a name="line.63"></a>
+<FONT color="green">064</FONT>            /* * */  {0,0,9,6,9,0,0,0},<a name="line.64"></a>
+<FONT color="green">065</FONT>            /* + */  {0,4,4,31,4,4,0,0},<a name="line.65"></a>
+<FONT color="green">066</FONT>            /* , */  {0,0,0,0,0,1,1,1},<a name="line.66"></a>
+<FONT color="green">067</FONT>            /* - */  {0,0,0,31,0,0,0,0},<a name="line.67"></a>
+<FONT color="green">068</FONT>            /* . */  {0,0,0,0,0,1,1,0},<a name="line.68"></a>
+<FONT color="green">069</FONT>            /* / */  {16,8,8,4,2,2,1,0},<a name="line.69"></a>
+<FONT color="green">070</FONT>            /* 0 */  {14,17,25,21,19,17,14,0},<a name="line.70"></a>
+<FONT color="green">071</FONT>            /* 1 */  {4,6,4,4,4,4,31,0},<a name="line.71"></a>
+<FONT color="green">072</FONT>            /* 2 */  {14,17,16,12,2,17,31,0},<a name="line.72"></a>
+<FONT color="green">073</FONT>            /* 3 */  {14,17,16,12,16,17,14,0},<a name="line.73"></a>
+<FONT color="green">074</FONT>            /* 4 */  {24,20,18,17,31,16,16,0},<a name="line.74"></a>
+<FONT color="green">075</FONT>            /* 5 */  {31,1,15,16,16,17,14,0},<a name="line.75"></a>
+<FONT color="green">076</FONT>            /* 6 */  {12,2,1,15,17,17,14,0},<a name="line.76"></a>
+<FONT color="green">077</FONT>            /* 7 */  {31,17,16,8,4,4,4,0},<a name="line.77"></a>
+<FONT color="green">078</FONT>            /* 8 */  {14,17,17,14,17,17,14,0},<a name="line.78"></a>
+<FONT color="green">079</FONT>            /* 9 */  {14,17,17,30,16,8,6,0},<a name="line.79"></a>
+<FONT color="green">080</FONT>            /* : */  {0,1,1,0,0,1,1,0},<a name="line.80"></a>
+<FONT color="green">081</FONT>            /* ; */  {0,1,1,0,0,1,1,1},<a name="line.81"></a>
+<FONT color="green">082</FONT>            /* &lt; */  {8,4,2,1,2,4,8,0},<a name="line.82"></a>
+<FONT color="green">083</FONT>            /* = */  {0,0,31,0,0,31,0,0},<a name="line.83"></a>
+<FONT color="green">084</FONT>            /* &gt; */  {1,2,4,8,4,2,1,0},<a name="line.84"></a>
+<FONT color="green">085</FONT>            /* ? */  {14,17,16,8,4,0,4,0},<a name="line.85"></a>
+<FONT color="green">086</FONT>            /* @ */  {30,33,45,45,61,1,30,0},<a name="line.86"></a>
+<FONT color="green">087</FONT>            /* A */  {14,17,31,17,17,17,17,0},<a name="line.87"></a>
+<FONT color="green">088</FONT>            /* B */  {15,17,15,17,17,17,15,0},<a name="line.88"></a>
+<FONT color="green">089</FONT>            /* C */  {14,17,1,1,1,17,14,0},<a name="line.89"></a>
+<FONT color="green">090</FONT>            /* D */  {15,17,17,17,17,17,15,0},<a name="line.90"></a>
+<FONT color="green">091</FONT>            /* E */  {31,1,7,1,1,1,31,0},<a name="line.91"></a>
+<FONT color="green">092</FONT>            /* F */  {31,1,7,1,1,1,1,0},<a name="line.92"></a>
+<FONT color="green">093</FONT>            /* G */  {30,1,25,17,17,17,14,0},<a name="line.93"></a>
+<FONT color="green">094</FONT>            /* H */  {17,17,31,17,17,17,17,0},<a name="line.94"></a>
+<FONT color="green">095</FONT>            /* I */  {7,2,2,2,2,2,7,0},<a name="line.95"></a>
+<FONT color="green">096</FONT>            /* J */  {16,16,16,16,16,17,14,0},<a name="line.96"></a>
+<FONT color="green">097</FONT>            /* K */  {17,9,7,9,17,17,17,0},<a name="line.97"></a>
+<FONT color="green">098</FONT>            /* L */  {1,1,1,1,1,1,31,0},<a name="line.98"></a>
+<FONT color="green">099</FONT>            /* M */  {17,27,21,17,17,17,17,0},<a name="line.99"></a>
+<FONT color="green">100</FONT>            /* N */  {17,19,21,25,17,17,17,0},<a name="line.100"></a>
+<FONT color="green">101</FONT>            /* O */  {14,17,17,17,17,17,14,0},<a name="line.101"></a>
+<FONT color="green">102</FONT>            /* P */  {15,17,15,1,1,1,1,0},<a name="line.102"></a>
+<FONT color="green">103</FONT>            /* Q */  {14,17,17,17,17,9,22,0},<a name="line.103"></a>
+<FONT color="green">104</FONT>            /* R */  {15,17,15,17,17,17,17,0},<a name="line.104"></a>
+<FONT color="green">105</FONT>            /* S */  {30,1,14,16,16,17,14,0},<a name="line.105"></a>
+<FONT color="green">106</FONT>            /* T */  {31,4,4,4,4,4,4,0},<a name="line.106"></a>
+<FONT color="green">107</FONT>            /* U */  {17,17,17,17,17,17,14,0},<a name="line.107"></a>
+<FONT color="green">108</FONT>            /* V */  {17,17,17,17,10,10,4,0},<a name="line.108"></a>
+<FONT color="green">109</FONT>            /* W */  {17,17,17,17,21,27,17,0},<a name="line.109"></a>
+<FONT color="green">110</FONT>            /* X */  {17,10,4,10,17,17,17,0},<a name="line.110"></a>
+<FONT color="green">111</FONT>            /* Y */  {17,10,4,4,4,4,4,0},<a name="line.111"></a>
+<FONT color="green">112</FONT>            /* Z */  {31,16,8,4,2,1,31,0},<a name="line.112"></a>
+<FONT color="green">113</FONT>            /* [ */  {7,1,1,1,1,1,7,0},<a name="line.113"></a>
+<FONT color="green">114</FONT>            /* \ */  {1,2,2,4,8,8,16,0},<a name="line.114"></a>
+<FONT color="green">115</FONT>            /* ] */  {7,4,4,4,4,4,7,0},<a name="line.115"></a>
+<FONT color="green">116</FONT>            /* ^ */  {4,10,17,0,0,0,0,0},<a name="line.116"></a>
+<FONT color="green">117</FONT>            /* _ */  {0,0,0,0,0,0,0,31},<a name="line.117"></a>
+<FONT color="green">118</FONT>            /* ` */  {1,1,2,0,0,0,0,0},<a name="line.118"></a>
+<FONT color="green">119</FONT>            /* a */  {0,0,14,16,30,17,30,0},<a name="line.119"></a>
+<FONT color="green">120</FONT>            /* b */  {1,1,13,19,17,17,15,0},<a name="line.120"></a>
+<FONT color="green">121</FONT>            /* c */  {0,0,14,17,1,17,14,0},<a name="line.121"></a>
+<FONT color="green">122</FONT>            /* d */  {16,16,22,25,17,17,30,0},<a name="line.122"></a>
+<FONT color="green">123</FONT>            /* e */  {0,0,14,17,31,1,30,0},<a name="line.123"></a>
+<FONT color="green">124</FONT>            /* f */  {12,2,15,2,2,2,2,0},<a name="line.124"></a>
+<FONT color="green">125</FONT>            /* g */  {0,0,30,17,17,30,16,15},<a name="line.125"></a>
+<FONT color="green">126</FONT>            /* h */  {1,1,13,19,17,17,17,0},<a name="line.126"></a>
+<FONT color="green">127</FONT>            /* i */  {1,0,1,1,1,1,1,0},<a name="line.127"></a>
+<FONT color="green">128</FONT>            /* j */  {16,0,16,16,16,17,17,14},<a name="line.128"></a>
+<FONT color="green">129</FONT>            /* k */  {1,1,9,5,3,5,9,0},<a name="line.129"></a>
+<FONT color="green">130</FONT>            /* l */  {1,1,1,1,1,1,2,0},<a name="line.130"></a>
+<FONT color="green">131</FONT>            /* m */  {0,0,11,21,21,17,17,0},<a name="line.131"></a>
+<FONT color="green">132</FONT>            /* n */  {0,0,15,17,17,17,17,0},<a name="line.132"></a>
+<FONT color="green">133</FONT>            /* o */  {0,0,14,17,17,17,14,0},<a name="line.133"></a>
+<FONT color="green">134</FONT>            /* p */  {0,0,13,19,17,15,1,1},<a name="line.134"></a>
+<FONT color="green">135</FONT>            /* q */  {0,0,22,25,17,30,16,16},<a name="line.135"></a>
+<FONT color="green">136</FONT>            /* r */  {0,0,13,19,1,1,1,0},<a name="line.136"></a>
+<FONT color="green">137</FONT>            /* s */  {0,0,30,1,14,16,15,0},<a name="line.137"></a>
+<FONT color="green">138</FONT>            /* t */  {2,2,7,2,2,2,4,0},<a name="line.138"></a>
+<FONT color="green">139</FONT>            /* u */  {0,0,17,17,17,17,30,0},<a name="line.139"></a>
+<FONT color="green">140</FONT>            /* v */  {0,0,17,17,17,10,4,0},<a name="line.140"></a>
+<FONT color="green">141</FONT>            /* w */  {0,0,17,17,21,21,30,0},<a name="line.141"></a>
+<FONT color="green">142</FONT>            /* x */  {0,0,17,10,4,10,17,0},<a name="line.142"></a>
+<FONT color="green">143</FONT>            /* y */  {0,0,17,17,17,30,16,15},<a name="line.143"></a>
+<FONT color="green">144</FONT>            /* z */  {0,0,31,8,4,2,31,0},<a name="line.144"></a>
+<FONT color="green">145</FONT>            /* { */  {12,2,2,1,2,2,12,0},<a name="line.145"></a>
+<FONT color="green">146</FONT>            /* | */  {1,1,1,0,1,1,1,0},<a name="line.146"></a>
+<FONT color="green">147</FONT>            /* } */  {3,4,4,8,4,4,3,0},<a name="line.147"></a>
+<FONT color="green">148</FONT>            /* ~ */  {38,25,0,0,0,0,0,0},<a name="line.148"></a>
+<FONT color="green">149</FONT>            /* ? */  {0,0,4,10,17,17,31,0},<a name="line.149"></a>
+<FONT color="green">150</FONT>            /* Ç */  {14,17,1,1,17,14,16,12},<a name="line.150"></a>
+<FONT color="green">151</FONT>            /* ü */  {10,0,17,17,17,17,30,0},<a name="line.151"></a>
+<FONT color="green">152</FONT>            /* é */  {24,0,14,17,31,1,30,0},<a name="line.152"></a>
+<FONT color="green">153</FONT>            /* â */  {14,17,14,16,30,17,30,0},<a name="line.153"></a>
+<FONT color="green">154</FONT>            /* ä */  {10,0,14,16,30,17,30,0},<a name="line.154"></a>
+<FONT color="green">155</FONT>            /* à */  {3,0,14,16,30,17,30,0},<a name="line.155"></a>
+<FONT color="green">156</FONT>            /* å */  {4,0,14,16,30,17,30,0},<a name="line.156"></a>
+<FONT color="green">157</FONT>            /* ç */  {0,14,17,1,17,14,16,12},<a name="line.157"></a>
+<FONT color="green">158</FONT>            /* ê */  {14,17,14,17,31,1,30,0},<a name="line.158"></a>
+<FONT color="green">159</FONT>            /* ë */  {10,0,14,17,31,1,30,0},<a name="line.159"></a>
+<FONT color="green">160</FONT>            /* è */  {3,0,14,17,31,1,30,0},<a name="line.160"></a>
+<FONT color="green">161</FONT>            /* ï */  {5,0,2,2,2,2,2,0},<a name="line.161"></a>
+<FONT color="green">162</FONT>            /* î */  {14,17,4,4,4,4,4,0},<a name="line.162"></a>
+<FONT color="green">163</FONT>            /* ì */  {3,0,2,2,2,2,2,0},<a name="line.163"></a>
+<FONT color="green">164</FONT>            /* Ä */  {17,14,17,31,17,17,17,0},<a name="line.164"></a>
+<FONT color="green">165</FONT>            /* Å */  {4,0,14,17,31,17,17,0},<a name="line.165"></a>
+<FONT color="green">166</FONT>            /* É */  {24,0,31,1,7,1,31,0},<a name="line.166"></a>
+<FONT color="green">167</FONT>            /* æ */  {0,0,10,20,30,5,30,0},<a name="line.167"></a>
+<FONT color="green">168</FONT>            /* Æ */  {30,5,15,5,5,5,29,0},<a name="line.168"></a>
+<FONT color="green">169</FONT>            /* ô */  {14,17,14,17,17,17,14,0},<a name="line.169"></a>
+<FONT color="green">170</FONT>            /* ö */  {10,0,14,17,17,17,14,0},<a name="line.170"></a>
+<FONT color="green">171</FONT>            /* ò */  {3,0,14,17,17,17,14,0},<a name="line.171"></a>
+<FONT color="green">172</FONT>            /* û */  {14,17,0,17,17,17,30,0},<a name="line.172"></a>
+<FONT color="green">173</FONT>            /* ù */  {3,0,17,17,17,17,30,0},<a name="line.173"></a>
+<FONT color="green">174</FONT>            /* ÿ */  {10,0,17,17,17,30,16,15},<a name="line.174"></a>
+<FONT color="green">175</FONT>            /* Ö */  {17,14,17,17,17,17,14,0},<a name="line.175"></a>
+<FONT color="green">176</FONT>            /* Ü */  {17,0,17,17,17,17,14,0},<a name="line.176"></a>
+<FONT color="green">177</FONT>            /* ø */  {0,0,14,25,21,19,14,4},<a name="line.177"></a>
+<FONT color="green">178</FONT>            /* £ */  {12,18,2,15,2,2,31,0},<a name="line.178"></a>
+<FONT color="green">179</FONT>            /* Ø */  {14,17,25,21,19,17,14,0},<a name="line.179"></a>
+<FONT color="green">180</FONT>            /* × */  {0,0,5,2,5,0,0,0},<a name="line.180"></a>
+<FONT color="green">181</FONT>            /* ? */  {8,20,4,14,4,4,5,2},<a name="line.181"></a>
+<FONT color="green">182</FONT>            /* á */  {24,0,14,16,30,17,30,0},<a name="line.182"></a>
+<FONT color="green">183</FONT>            /* í */  {3,0,1,1,1,1,1,0},<a name="line.183"></a>
+<FONT color="green">184</FONT>            /* ó */  {24,0,14,17,17,17,14,0},<a name="line.184"></a>
+<FONT color="green">185</FONT>            /* ú */  {24,0,17,17,17,17,30,0},<a name="line.185"></a>
+<FONT color="green">186</FONT>            /* ñ */  {31,0,15,17,17,17,17,0},<a name="line.186"></a>
+<FONT color="green">187</FONT>            /* Ñ */  {31,0,17,19,21,25,17,0},<a name="line.187"></a>
+<FONT color="green">188</FONT>            /* ª */  {14,16,31,30,0,31,0,0},<a name="line.188"></a>
+<FONT color="green">189</FONT>            /* º */  {14,17,17,14,0,31,0,0},<a name="line.189"></a>
+<FONT color="green">190</FONT>            /* ¿ */  {4,0,4,2,1,17,14,0},<a name="line.190"></a>
+<FONT color="green">191</FONT>            /* ® */  {0,30,45,37,43,30,0,0},<a name="line.191"></a>
+<FONT color="green">192</FONT>            /* ¬ */  {0,0,0,31,16,16,0,0},<a name="line.192"></a>
+<FONT color="green">193</FONT>            /* ½ */  {17,9,8,4,18,10,25,0},<a name="line.193"></a>
+<FONT color="green">194</FONT>            /* ¼ */  {17,9,8,4,26,26,17,0},<a name="line.194"></a>
+<FONT color="green">195</FONT>            /* ¡ */  {0,1,0,1,1,1,1,0},<a name="line.195"></a>
+<FONT color="green">196</FONT>            /* « */  {0,20,10,5,10,20,0,0},<a name="line.196"></a>
+<FONT color="green">197</FONT>            /* » */  {0,5,10,20,10,5,0,0},<a name="line.197"></a>
+<FONT color="green">198</FONT>            /* 176 */  {68,17,68,17,68,17,68,17},<a name="line.198"></a>
+<FONT color="green">199</FONT>            /* 177 */  {170,85,170,85,170,85,170,85},<a name="line.199"></a>
+<FONT color="green">200</FONT>            /* 178 */  {219,238,219,119,219,238,219,119},<a name="line.200"></a>
+<FONT color="green">201</FONT>            /* 179 */  {24,24,24,24,24,24,24,24},<a name="line.201"></a>
+<FONT color="green">202</FONT>            /* 180 */  {24,24,24,24,31,24,24,24},<a name="line.202"></a>
+<FONT color="green">203</FONT>            /* 181 */  {24,24,31,24,31,24,24,24},<a name="line.203"></a>
+<FONT color="green">204</FONT>            /* 182 */  {108,108,108,108,111,108,108,108},<a name="line.204"></a>
+<FONT color="green">205</FONT>            /* 183 */  {0,0,0,0,127,108,108,108},<a name="line.205"></a>
+<FONT color="green">206</FONT>            /* 184 */  {0,0,31,24,31,24,24,24},<a name="line.206"></a>
+<FONT color="green">207</FONT>            /* 185 */  {108,108,111,96,111,108,108,108},<a name="line.207"></a>
+<FONT color="green">208</FONT>            /* 186 */  {108,108,108,108,108,108,108,108},<a name="line.208"></a>
+<FONT color="green">209</FONT>            /* 187 */  {0,0,127,96,111,108,108,108},<a name="line.209"></a>
+<FONT color="green">210</FONT>            /* 188 */  {108,108,111,96,127,0,0,0},<a name="line.210"></a>
+<FONT color="green">211</FONT>            /* 189 */  {108,108,108,108,127,0,0,0},<a name="line.211"></a>
+<FONT color="green">212</FONT>            /* 190 */  {24,24,31,24,31,0,0,0},<a name="line.212"></a>
+<FONT color="green">213</FONT>            /* 191 */  {0,0,0,0,31,24,24,24},<a name="line.213"></a>
+<FONT color="green">214</FONT>            /* 192 */  {24,24,24,24,248,0,0,0},<a name="line.214"></a>
+<FONT color="green">215</FONT>            /* 193 */  {24,24,24,24,255,0,0,0},<a name="line.215"></a>
+<FONT color="green">216</FONT>            /* 194 */  {0,0,0,0,255,24,24,24},<a name="line.216"></a>
+<FONT color="green">217</FONT>            /* 195 */  {24,24,24,24,248,24,24,24},<a name="line.217"></a>
+<FONT color="green">218</FONT>            /* 196 */  {0,0,0,0,255,0,0,0},<a name="line.218"></a>
+<FONT color="green">219</FONT>            /* 197 */  {24,24,24,24,255,24,24,24},<a name="line.219"></a>
+<FONT color="green">220</FONT>            /* 198 */  {24,24,248,24,248,24,24,24},<a name="line.220"></a>
+<FONT color="green">221</FONT>            /* 199 */  {108,108,108,108,236,108,108,108},<a name="line.221"></a>
+<FONT color="green">222</FONT>            /* 200 */  {108,108,236,12,252,0,0,0},<a name="line.222"></a>
+<FONT color="green">223</FONT>            /* 201 */  {0,0,252,12,236,108,108,108},<a name="line.223"></a>
+<FONT color="green">224</FONT>            /* 202 */  {108,108,239,0,255,0,0,0},<a name="line.224"></a>
+<FONT color="green">225</FONT>            /* 203 */  {0,0,255,0,239,108,108,108},<a name="line.225"></a>
+<FONT color="green">226</FONT>            /* 204 */  {108,108,236,12,236,108,108,108},<a name="line.226"></a>
+<FONT color="green">227</FONT>            /* 205 */  {0,0,255,0,255,0,0,0},<a name="line.227"></a>
+<FONT color="green">228</FONT>            /* 206 */  {108,108,239,0,239,108,108,108},<a name="line.228"></a>
+<FONT color="green">229</FONT>            /* 207 */  {24,24,255,0,255,0,0,0},<a name="line.229"></a>
+<FONT color="green">230</FONT>            /* 208 */  {108,108,108,108,255,0,0,0},<a name="line.230"></a>
+<FONT color="green">231</FONT>            /* 209 */  {0,0,255,0,255,24,24,24},<a name="line.231"></a>
+<FONT color="green">232</FONT>            /* 210 */  {0,0,0,0,255,108,108,108},<a name="line.232"></a>
+<FONT color="green">233</FONT>            /* 211 */  {108,108,108,108,252,0,0,0},<a name="line.233"></a>
+<FONT color="green">234</FONT>            /* 212 */  {24,24,248,24,248,0,0,0},<a name="line.234"></a>
+<FONT color="green">235</FONT>            /* 213 */  {0,0,248,24,248,24,24,24},<a name="line.235"></a>
+<FONT color="green">236</FONT>            /* 214 */  {0,0,0,0,252,108,108,108},<a name="line.236"></a>
+<FONT color="green">237</FONT>            /* 215 */  {108,108,108,108,255,108,108,108},<a name="line.237"></a>
+<FONT color="green">238</FONT>            /* 216 */  {24,24,255,24,255,24,24,24},<a name="line.238"></a>
+<FONT color="green">239</FONT>            /* 217 */  {24,24,24,24,31,0,0,0},<a name="line.239"></a>
+<FONT color="green">240</FONT>            /* 218 */  {0,0,0,0,248,24,24,24},<a name="line.240"></a>
+<FONT color="green">241</FONT>            /* 219 */  {255,255,255,255,255,255,255,255},<a name="line.241"></a>
+<FONT color="green">242</FONT>            /* 220 */  {0,0,0,0,255,255,255,255},<a name="line.242"></a>
+<FONT color="green">243</FONT>            /* 221 */  {15,15,15,15,15,15,15,15},<a name="line.243"></a>
+<FONT color="green">244</FONT>            /* 222 */  {240,240,240,240,240,240,240,240},<a name="line.244"></a>
+<FONT color="green">245</FONT>            /* 223 */  {255,255,255,255,0,0,0,0},<a name="line.245"></a>
+<FONT color="green">246</FONT>            /* 224 */  {0,0,110,59,19,59,110,0},<a name="line.246"></a>
+<FONT color="green">247</FONT>            /* 225 */  {0,30,51,31,51,31,3,3},<a name="line.247"></a>
+<FONT color="green">248</FONT>            /* 226 */  {0,63,51,3,3,3,3,0},<a name="line.248"></a>
+<FONT color="green">249</FONT>            /* 227 */  {0,127,54,54,54,54,54,0},<a name="line.249"></a>
+<FONT color="green">250</FONT>            /* 228 */  {63,51,6,12,6,51,63,0},<a name="line.250"></a>
+<FONT color="green">251</FONT>            /* 229 */  {0,0,126,27,27,27,14,0},<a name="line.251"></a>
+<FONT color="green">252</FONT>            /* 230 */  {0,102,102,102,102,62,6,3},<a name="line.252"></a>
+<FONT color="green">253</FONT>            /* 231 */  {0,110,59,24,24,24,24,0},<a name="line.253"></a>
+<FONT color="green">254</FONT>            /* 232 */  {63,12,30,51,51,30,12,63},<a name="line.254"></a>
+<FONT color="green">255</FONT>            /* 233 */  {28,54,99,127,99,54,28,0},<a name="line.255"></a>
+<FONT color="green">256</FONT>            /* 234 */  {28,54,99,99,54,54,119,0},<a name="line.256"></a>
+<FONT color="green">257</FONT>            /* 235 */  {56,12,24,62,51,51,30,0},<a name="line.257"></a>
+<FONT color="green">258</FONT>            /* 236 */  {0,0,126,219,219,126,0,0},<a name="line.258"></a>
+<FONT color="green">259</FONT>            /* 237 */  {96,48,126,219,219,126,6,3},<a name="line.259"></a>
+<FONT color="green">260</FONT>            /* 238 */  {28,6,3,31,3,6,28,0},<a name="line.260"></a>
+<FONT color="green">261</FONT>            /* 239 */  {30,51,51,51,51,51,51,0},<a name="line.261"></a>
+<FONT color="green">262</FONT>            /* 240 */  {0,63,0,63,0,63,0,0},<a name="line.262"></a>
+<FONT color="green">263</FONT>            /* 241 */  {12,12,63,12,12,0,63,0},<a name="line.263"></a>
+<FONT color="green">264</FONT>            /* 242 */  {6,12,24,12,6,0,63,0},<a name="line.264"></a>
+<FONT color="green">265</FONT>            /* 243 */  {24,12,6,12,24,0,63,0},<a name="line.265"></a>
+<FONT color="green">266</FONT>            /* 244 */  {112,216,216,24,24,24,24,24},<a name="line.266"></a>
+<FONT color="green">267</FONT>            /* 245 */  {24,24,24,24,24,27,27,14},<a name="line.267"></a>
+<FONT color="green">268</FONT>            /* 246 */  {12,12,0,63,0,12,12,0},<a name="line.268"></a>
+<FONT color="green">269</FONT>            /* 247 */  {0,110,59,0,110,59,0,0},<a name="line.269"></a>
+<FONT color="green">270</FONT>            /* 248 */  {28,54,54,28,0,0,0,0},<a name="line.270"></a>
+<FONT color="green">271</FONT>            /* 249 */  {0,0,0,24,24,0,0,0},<a name="line.271"></a>
+<FONT color="green">272</FONT>            /* 250 */  {0,0,0,0,24,0,0,0},<a name="line.272"></a>
+<FONT color="green">273</FONT>            /* 251 */  {240,48,48,48,55,54,60,56},<a name="line.273"></a>
+<FONT color="green">274</FONT>            /* 252 */  {30,54,54,54,54,0,0,0},<a name="line.274"></a>
+<FONT color="green">275</FONT>            /* 253 */  {14,24,12,6,30,0,0,0},<a name="line.275"></a>
+<FONT color="green">276</FONT>            /* 254 */  {0,0,60,60,60,60,0,0},<a name="line.276"></a>
+<FONT color="green">277</FONT>            /* 255 */  {0,0,0,0,0,0,0,0},<a name="line.277"></a>
+<FONT color="green">278</FONT>        };<a name="line.278"></a>
+<FONT color="green">279</FONT>    <a name="line.279"></a>
+<FONT color="green">280</FONT>        /**<a name="line.280"></a>
+<FONT color="green">281</FONT>         * A static non-malleable MinecraftFont.<a name="line.281"></a>
+<FONT color="green">282</FONT>         */<a name="line.282"></a>
+<FONT color="green">283</FONT>        public static final MinecraftFont Font = new MinecraftFont(false);<a name="line.283"></a>
+<FONT color="green">284</FONT>    <a name="line.284"></a>
+<FONT color="green">285</FONT>        /**<a name="line.285"></a>
+<FONT color="green">286</FONT>         * Initialize a new MinecraftFont.<a name="line.286"></a>
+<FONT color="green">287</FONT>         */<a name="line.287"></a>
+<FONT color="green">288</FONT>        public MinecraftFont() {<a name="line.288"></a>
+<FONT color="green">289</FONT>            this(true);<a name="line.289"></a>
+<FONT color="green">290</FONT>        }<a name="line.290"></a>
+<FONT color="green">291</FONT>    <a name="line.291"></a>
+<FONT color="green">292</FONT>        private MinecraftFont(boolean malleable) {<a name="line.292"></a>
+<FONT color="green">293</FONT>            for (int i = 1; i &lt; fontData.length; ++i) {<a name="line.293"></a>
+<FONT color="green">294</FONT>                char ch = (char) i;<a name="line.294"></a>
+<FONT color="green">295</FONT>                if (i &gt;= 32 &amp;&amp; i &lt; 32 + fontChars.length()) {<a name="line.295"></a>
+<FONT color="green">296</FONT>                    ch = fontChars.charAt(i - 32);<a name="line.296"></a>
+<FONT color="green">297</FONT>                }<a name="line.297"></a>
+<FONT color="green">298</FONT>    <a name="line.298"></a>
+<FONT color="green">299</FONT>                if (ch == ' ') {<a name="line.299"></a>
+<FONT color="green">300</FONT>                    setChar(ch, new CharacterSprite(spaceSize, 8, new boolean[spaceSize * 8]));<a name="line.300"></a>
+<FONT color="green">301</FONT>                    continue;<a name="line.301"></a>
+<FONT color="green">302</FONT>                }<a name="line.302"></a>
+<FONT color="green">303</FONT>    <a name="line.303"></a>
+<FONT color="green">304</FONT>                int[] rows = fontData[i];<a name="line.304"></a>
+<FONT color="green">305</FONT>                int width = 0;<a name="line.305"></a>
+<FONT color="green">306</FONT>                for (int r = 0; r &lt; 8; ++r) {<a name="line.306"></a>
+<FONT color="green">307</FONT>                    for (int c = 0; c &lt; 8; ++c) {<a name="line.307"></a>
+<FONT color="green">308</FONT>                        if ((rows[r] &amp; (1 &lt;&lt; c)) != 0 &amp;&amp; c &gt; width) {<a name="line.308"></a>
+<FONT color="green">309</FONT>                            width = c;<a name="line.309"></a>
+<FONT color="green">310</FONT>                        }<a name="line.310"></a>
+<FONT color="green">311</FONT>                    }<a name="line.311"></a>
+<FONT color="green">312</FONT>                }<a name="line.312"></a>
+<FONT color="green">313</FONT>                ++width;<a name="line.313"></a>
+<FONT color="green">314</FONT>    <a name="line.314"></a>
+<FONT color="green">315</FONT>                boolean[] data = new boolean[width * 8];<a name="line.315"></a>
+<FONT color="green">316</FONT>                for (int r = 0; r &lt; 8; ++r) {<a name="line.316"></a>
+<FONT color="green">317</FONT>                    for (int c = 0; c &lt; width; ++c) {<a name="line.317"></a>
+<FONT color="green">318</FONT>                        data[r * width + c] = (rows[r] &amp; (1 &lt;&lt; c)) != 0;<a name="line.318"></a>
+<FONT color="green">319</FONT>                    }<a name="line.319"></a>
+<FONT color="green">320</FONT>                }<a name="line.320"></a>
+<FONT color="green">321</FONT>    <a name="line.321"></a>
+<FONT color="green">322</FONT>                setChar(ch, new CharacterSprite(width, 8, data));<a name="line.322"></a>
+<FONT color="green">323</FONT>            }<a name="line.323"></a>
+<FONT color="green">324</FONT>    <a name="line.324"></a>
+<FONT color="green">325</FONT>            this.malleable = malleable;<a name="line.325"></a>
+<FONT color="green">326</FONT>        }<a name="line.326"></a>
+<FONT color="green">327</FONT>    <a name="line.327"></a>
+<FONT color="green">328</FONT>    }<a name="line.328"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

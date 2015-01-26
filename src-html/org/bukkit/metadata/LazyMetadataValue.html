@@ -1,0 +1,186 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.metadata;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.lang.ref.SoftReference;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.concurrent.Callable;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import org.apache.commons.lang.Validate;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import org.bukkit.plugin.Plugin;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * The LazyMetadataValue class implements a type of metadata that is not<a name="line.10"></a>
+<FONT color="green">011</FONT>     * computed until another plugin asks for it.<a name="line.11"></a>
+<FONT color="green">012</FONT>     * &lt;p&gt;<a name="line.12"></a>
+<FONT color="green">013</FONT>     * By making metadata values lazy, no computation is done by the providing<a name="line.13"></a>
+<FONT color="green">014</FONT>     * plugin until absolutely necessary (if ever). Additionally,<a name="line.14"></a>
+<FONT color="green">015</FONT>     * LazyMetadataValue objects cache their values internally unless overridden<a name="line.15"></a>
+<FONT color="green">016</FONT>     * by a {@link CacheStrategy} or invalidated at the individual or plugin<a name="line.16"></a>
+<FONT color="green">017</FONT>     * level. Once invalidated, the LazyMetadataValue will recompute its value<a name="line.17"></a>
+<FONT color="green">018</FONT>     * when asked.<a name="line.18"></a>
+<FONT color="green">019</FONT>     */<a name="line.19"></a>
+<FONT color="green">020</FONT>    public class LazyMetadataValue extends MetadataValueAdapter implements MetadataValue {<a name="line.20"></a>
+<FONT color="green">021</FONT>        private Callable&lt;Object&gt; lazyValue;<a name="line.21"></a>
+<FONT color="green">022</FONT>        private CacheStrategy cacheStrategy;<a name="line.22"></a>
+<FONT color="green">023</FONT>        private SoftReference&lt;Object&gt; internalValue;<a name="line.23"></a>
+<FONT color="green">024</FONT>        private static final Object ACTUALLY_NULL = new Object();<a name="line.24"></a>
+<FONT color="green">025</FONT>    <a name="line.25"></a>
+<FONT color="green">026</FONT>        /**<a name="line.26"></a>
+<FONT color="green">027</FONT>         * Initialized a LazyMetadataValue object with the default<a name="line.27"></a>
+<FONT color="green">028</FONT>         * CACHE_AFTER_FIRST_EVAL cache strategy.<a name="line.28"></a>
+<FONT color="green">029</FONT>         *<a name="line.29"></a>
+<FONT color="green">030</FONT>         * @param owningPlugin the {@link Plugin} that created this metadata<a name="line.30"></a>
+<FONT color="green">031</FONT>         *     value.<a name="line.31"></a>
+<FONT color="green">032</FONT>         * @param lazyValue the lazy value assigned to this metadata value.<a name="line.32"></a>
+<FONT color="green">033</FONT>         */<a name="line.33"></a>
+<FONT color="green">034</FONT>        public LazyMetadataValue(Plugin owningPlugin, Callable&lt;Object&gt; lazyValue) {<a name="line.34"></a>
+<FONT color="green">035</FONT>            this(owningPlugin, CacheStrategy.CACHE_AFTER_FIRST_EVAL, lazyValue);<a name="line.35"></a>
+<FONT color="green">036</FONT>        }<a name="line.36"></a>
+<FONT color="green">037</FONT>    <a name="line.37"></a>
+<FONT color="green">038</FONT>        /**<a name="line.38"></a>
+<FONT color="green">039</FONT>         * Initializes a LazyMetadataValue object with a specific cache strategy.<a name="line.39"></a>
+<FONT color="green">040</FONT>         *<a name="line.40"></a>
+<FONT color="green">041</FONT>         * @param owningPlugin the {@link Plugin} that created this metadata<a name="line.41"></a>
+<FONT color="green">042</FONT>         *     value.<a name="line.42"></a>
+<FONT color="green">043</FONT>         * @param cacheStrategy determines the rules for caching this metadata<a name="line.43"></a>
+<FONT color="green">044</FONT>         *     value.<a name="line.44"></a>
+<FONT color="green">045</FONT>         * @param lazyValue the lazy value assigned to this metadata value.<a name="line.45"></a>
+<FONT color="green">046</FONT>         */<a name="line.46"></a>
+<FONT color="green">047</FONT>        public LazyMetadataValue(Plugin owningPlugin, CacheStrategy cacheStrategy, Callable&lt;Object&gt; lazyValue) {<a name="line.47"></a>
+<FONT color="green">048</FONT>            super(owningPlugin);<a name="line.48"></a>
+<FONT color="green">049</FONT>            Validate.notNull(cacheStrategy, "cacheStrategy cannot be null");<a name="line.49"></a>
+<FONT color="green">050</FONT>            Validate.notNull(lazyValue, "lazyValue cannot be null");<a name="line.50"></a>
+<FONT color="green">051</FONT>            this.internalValue = new SoftReference&lt;Object&gt;(null);<a name="line.51"></a>
+<FONT color="green">052</FONT>            this.lazyValue = lazyValue;<a name="line.52"></a>
+<FONT color="green">053</FONT>            this.cacheStrategy = cacheStrategy;<a name="line.53"></a>
+<FONT color="green">054</FONT>        }<a name="line.54"></a>
+<FONT color="green">055</FONT>    <a name="line.55"></a>
+<FONT color="green">056</FONT>        /**<a name="line.56"></a>
+<FONT color="green">057</FONT>         * Protected special constructor used by FixedMetadataValue to bypass<a name="line.57"></a>
+<FONT color="green">058</FONT>         * standard setup.<a name="line.58"></a>
+<FONT color="green">059</FONT>         */<a name="line.59"></a>
+<FONT color="green">060</FONT>        protected LazyMetadataValue(Plugin owningPlugin) {<a name="line.60"></a>
+<FONT color="green">061</FONT>            super(owningPlugin);<a name="line.61"></a>
+<FONT color="green">062</FONT>        }<a name="line.62"></a>
+<FONT color="green">063</FONT>    <a name="line.63"></a>
+<FONT color="green">064</FONT>        public Object value() {<a name="line.64"></a>
+<FONT color="green">065</FONT>            eval();<a name="line.65"></a>
+<FONT color="green">066</FONT>            Object value = internalValue.get();<a name="line.66"></a>
+<FONT color="green">067</FONT>            if (value == ACTUALLY_NULL) {<a name="line.67"></a>
+<FONT color="green">068</FONT>                return null;<a name="line.68"></a>
+<FONT color="green">069</FONT>            }<a name="line.69"></a>
+<FONT color="green">070</FONT>            return value;<a name="line.70"></a>
+<FONT color="green">071</FONT>        }<a name="line.71"></a>
+<FONT color="green">072</FONT>    <a name="line.72"></a>
+<FONT color="green">073</FONT>        /**<a name="line.73"></a>
+<FONT color="green">074</FONT>         * Lazily evaluates the value of this metadata item.<a name="line.74"></a>
+<FONT color="green">075</FONT>         *<a name="line.75"></a>
+<FONT color="green">076</FONT>         * @throws MetadataEvaluationException if computing the metadata value<a name="line.76"></a>
+<FONT color="green">077</FONT>         *     fails.<a name="line.77"></a>
+<FONT color="green">078</FONT>         */<a name="line.78"></a>
+<FONT color="green">079</FONT>        private synchronized void eval() throws MetadataEvaluationException {<a name="line.79"></a>
+<FONT color="green">080</FONT>            if (cacheStrategy == CacheStrategy.NEVER_CACHE || internalValue.get() == null) {<a name="line.80"></a>
+<FONT color="green">081</FONT>                try {<a name="line.81"></a>
+<FONT color="green">082</FONT>                    Object value = lazyValue.call();<a name="line.82"></a>
+<FONT color="green">083</FONT>                    if (value == null) {<a name="line.83"></a>
+<FONT color="green">084</FONT>                        value = ACTUALLY_NULL;<a name="line.84"></a>
+<FONT color="green">085</FONT>                    }<a name="line.85"></a>
+<FONT color="green">086</FONT>                    internalValue = new SoftReference&lt;Object&gt;(value);<a name="line.86"></a>
+<FONT color="green">087</FONT>                } catch (Exception e) {<a name="line.87"></a>
+<FONT color="green">088</FONT>                    throw new MetadataEvaluationException(e);<a name="line.88"></a>
+<FONT color="green">089</FONT>                }<a name="line.89"></a>
+<FONT color="green">090</FONT>            }<a name="line.90"></a>
+<FONT color="green">091</FONT>        }<a name="line.91"></a>
+<FONT color="green">092</FONT>    <a name="line.92"></a>
+<FONT color="green">093</FONT>        public synchronized void invalidate() {<a name="line.93"></a>
+<FONT color="green">094</FONT>            if (cacheStrategy != CacheStrategy.CACHE_ETERNALLY) {<a name="line.94"></a>
+<FONT color="green">095</FONT>                internalValue.clear();<a name="line.95"></a>
+<FONT color="green">096</FONT>            }<a name="line.96"></a>
+<FONT color="green">097</FONT>        }<a name="line.97"></a>
+<FONT color="green">098</FONT>    <a name="line.98"></a>
+<FONT color="green">099</FONT>        /**<a name="line.99"></a>
+<FONT color="green">100</FONT>         * Describes possible caching strategies for metadata.<a name="line.100"></a>
+<FONT color="green">101</FONT>         */<a name="line.101"></a>
+<FONT color="green">102</FONT>        public enum CacheStrategy {<a name="line.102"></a>
+<FONT color="green">103</FONT>            /**<a name="line.103"></a>
+<FONT color="green">104</FONT>             * Once the metadata value has been evaluated, do not re-evaluate the<a name="line.104"></a>
+<FONT color="green">105</FONT>             * value until it is manually invalidated.<a name="line.105"></a>
+<FONT color="green">106</FONT>             */<a name="line.106"></a>
+<FONT color="green">107</FONT>            CACHE_AFTER_FIRST_EVAL,<a name="line.107"></a>
+<FONT color="green">108</FONT>    <a name="line.108"></a>
+<FONT color="green">109</FONT>            /**<a name="line.109"></a>
+<FONT color="green">110</FONT>             * Re-evaluate the metadata item every time it is requested<a name="line.110"></a>
+<FONT color="green">111</FONT>             */<a name="line.111"></a>
+<FONT color="green">112</FONT>            NEVER_CACHE,<a name="line.112"></a>
+<FONT color="green">113</FONT>    <a name="line.113"></a>
+<FONT color="green">114</FONT>            /**<a name="line.114"></a>
+<FONT color="green">115</FONT>             * Once the metadata value has been evaluated, do not re-evaluate the<a name="line.115"></a>
+<FONT color="green">116</FONT>             * value in spite of manual invalidation.<a name="line.116"></a>
+<FONT color="green">117</FONT>             */<a name="line.117"></a>
+<FONT color="green">118</FONT>            CACHE_ETERNALLY<a name="line.118"></a>
+<FONT color="green">119</FONT>        }<a name="line.119"></a>
+<FONT color="green">120</FONT>    }<a name="line.120"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

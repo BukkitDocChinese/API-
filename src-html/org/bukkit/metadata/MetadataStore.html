@@ -1,0 +1,126 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.metadata;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.plugin.Plugin;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.util.List;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    public interface MetadataStore&lt;T&gt; {<a name="line.7"></a>
+<FONT color="green">008</FONT>        /**<a name="line.8"></a>
+<FONT color="green">009</FONT>         * Adds a metadata value to an object.<a name="line.9"></a>
+<FONT color="green">010</FONT>         *<a name="line.10"></a>
+<FONT color="green">011</FONT>         * @param subject The object receiving the metadata.<a name="line.11"></a>
+<FONT color="green">012</FONT>         * @param metadataKey A unique key to identify this metadata.<a name="line.12"></a>
+<FONT color="green">013</FONT>         * @param newMetadataValue The metadata value to apply.<a name="line.13"></a>
+<FONT color="green">014</FONT>         * @throws IllegalArgumentException If value is null, or the owning plugin<a name="line.14"></a>
+<FONT color="green">015</FONT>         *     is null<a name="line.15"></a>
+<FONT color="green">016</FONT>         */<a name="line.16"></a>
+<FONT color="green">017</FONT>        public void setMetadata(T subject, String metadataKey, MetadataValue newMetadataValue);<a name="line.17"></a>
+<FONT color="green">018</FONT>    <a name="line.18"></a>
+<FONT color="green">019</FONT>        /**<a name="line.19"></a>
+<FONT color="green">020</FONT>         * Returns all metadata values attached to an object. If multiple plugins<a name="line.20"></a>
+<FONT color="green">021</FONT>         * have attached metadata, each will value will be included.<a name="line.21"></a>
+<FONT color="green">022</FONT>         *<a name="line.22"></a>
+<FONT color="green">023</FONT>         * @param subject the object being interrogated.<a name="line.23"></a>
+<FONT color="green">024</FONT>         * @param metadataKey the unique metadata key being sought.<a name="line.24"></a>
+<FONT color="green">025</FONT>         * @return A list of values, one for each plugin that has set the<a name="line.25"></a>
+<FONT color="green">026</FONT>         *     requested value.<a name="line.26"></a>
+<FONT color="green">027</FONT>         */<a name="line.27"></a>
+<FONT color="green">028</FONT>        public List&lt;MetadataValue&gt; getMetadata(T subject, String metadataKey);<a name="line.28"></a>
+<FONT color="green">029</FONT>    <a name="line.29"></a>
+<FONT color="green">030</FONT>        /**<a name="line.30"></a>
+<FONT color="green">031</FONT>         * Tests to see if a metadata attribute has been set on an object.<a name="line.31"></a>
+<FONT color="green">032</FONT>         *<a name="line.32"></a>
+<FONT color="green">033</FONT>         * @param subject the object upon which the has-metadata test is<a name="line.33"></a>
+<FONT color="green">034</FONT>         *     performed.<a name="line.34"></a>
+<FONT color="green">035</FONT>         * @param metadataKey the unique metadata key being queried.<a name="line.35"></a>
+<FONT color="green">036</FONT>         * @return the existence of the metadataKey within subject.<a name="line.36"></a>
+<FONT color="green">037</FONT>         */<a name="line.37"></a>
+<FONT color="green">038</FONT>        public boolean hasMetadata(T subject, String metadataKey);<a name="line.38"></a>
+<FONT color="green">039</FONT>    <a name="line.39"></a>
+<FONT color="green">040</FONT>        /**<a name="line.40"></a>
+<FONT color="green">041</FONT>         * Removes a metadata item owned by a plugin from a subject.<a name="line.41"></a>
+<FONT color="green">042</FONT>         *<a name="line.42"></a>
+<FONT color="green">043</FONT>         * @param subject the object to remove the metadata from.<a name="line.43"></a>
+<FONT color="green">044</FONT>         * @param metadataKey the unique metadata key identifying the metadata to<a name="line.44"></a>
+<FONT color="green">045</FONT>         *     remove.<a name="line.45"></a>
+<FONT color="green">046</FONT>         * @param owningPlugin the plugin attempting to remove a metadata item.<a name="line.46"></a>
+<FONT color="green">047</FONT>         * @throws IllegalArgumentException If plugin is null<a name="line.47"></a>
+<FONT color="green">048</FONT>         */<a name="line.48"></a>
+<FONT color="green">049</FONT>        public void removeMetadata(T subject, String metadataKey, Plugin owningPlugin);<a name="line.49"></a>
+<FONT color="green">050</FONT>    <a name="line.50"></a>
+<FONT color="green">051</FONT>        /**<a name="line.51"></a>
+<FONT color="green">052</FONT>         * Invalidates all metadata in the metadata store that originates from the<a name="line.52"></a>
+<FONT color="green">053</FONT>         * given plugin. Doing this will force each invalidated metadata item to<a name="line.53"></a>
+<FONT color="green">054</FONT>         * be recalculated the next time it is accessed.<a name="line.54"></a>
+<FONT color="green">055</FONT>         *<a name="line.55"></a>
+<FONT color="green">056</FONT>         * @param owningPlugin the plugin requesting the invalidation.<a name="line.56"></a>
+<FONT color="green">057</FONT>         * @throws IllegalArgumentException If plugin is null<a name="line.57"></a>
+<FONT color="green">058</FONT>         */<a name="line.58"></a>
+<FONT color="green">059</FONT>        public void invalidateAll(Plugin owningPlugin);<a name="line.59"></a>
+<FONT color="green">060</FONT>    }<a name="line.60"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

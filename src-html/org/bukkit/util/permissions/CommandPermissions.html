@@ -1,0 +1,183 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package org.bukkit.util.permissions;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import org.bukkit.permissions.Permission;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import org.bukkit.permissions.PermissionDefault;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    public final class CommandPermissions {<a name="line.6"></a>
+<FONT color="green">007</FONT>        private static final String ROOT = "bukkit.command";<a name="line.7"></a>
+<FONT color="green">008</FONT>        private static final String PREFIX = ROOT + ".";<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>        private CommandPermissions() {}<a name="line.10"></a>
+<FONT color="green">011</FONT>    <a name="line.11"></a>
+<FONT color="green">012</FONT>        private static Permission registerWhitelist(Permission parent) {<a name="line.12"></a>
+<FONT color="green">013</FONT>            Permission whitelist = DefaultPermissions.registerPermission(PREFIX + "whitelist", "Allows the user to modify the server whitelist", PermissionDefault.OP, parent);<a name="line.13"></a>
+<FONT color="green">014</FONT>    <a name="line.14"></a>
+<FONT color="green">015</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.add", "Allows the user to add a player to the server whitelist", whitelist);<a name="line.15"></a>
+<FONT color="green">016</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.remove", "Allows the user to remove a player from the server whitelist", whitelist);<a name="line.16"></a>
+<FONT color="green">017</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.reload", "Allows the user to reload the server whitelist", whitelist);<a name="line.17"></a>
+<FONT color="green">018</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.enable", "Allows the user to enable the server whitelist", whitelist);<a name="line.18"></a>
+<FONT color="green">019</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.disable", "Allows the user to disable the server whitelist", whitelist);<a name="line.19"></a>
+<FONT color="green">020</FONT>            DefaultPermissions.registerPermission(PREFIX + "whitelist.list", "Allows the user to list all the users on the server whitelist", whitelist);<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>            whitelist.recalculatePermissibles();<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>            return whitelist;<a name="line.24"></a>
+<FONT color="green">025</FONT>        }<a name="line.25"></a>
+<FONT color="green">026</FONT>    <a name="line.26"></a>
+<FONT color="green">027</FONT>        private static Permission registerBan(Permission parent) {<a name="line.27"></a>
+<FONT color="green">028</FONT>            Permission ban = DefaultPermissions.registerPermission(PREFIX + "ban", "Allows the user to ban people", PermissionDefault.OP, parent);<a name="line.28"></a>
+<FONT color="green">029</FONT>    <a name="line.29"></a>
+<FONT color="green">030</FONT>            DefaultPermissions.registerPermission(PREFIX + "ban.player", "Allows the user to ban players", ban);<a name="line.30"></a>
+<FONT color="green">031</FONT>            DefaultPermissions.registerPermission(PREFIX + "ban.ip", "Allows the user to ban IP addresses", ban);<a name="line.31"></a>
+<FONT color="green">032</FONT>    <a name="line.32"></a>
+<FONT color="green">033</FONT>            ban.recalculatePermissibles();<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>            return ban;<a name="line.35"></a>
+<FONT color="green">036</FONT>        }<a name="line.36"></a>
+<FONT color="green">037</FONT>    <a name="line.37"></a>
+<FONT color="green">038</FONT>        private static Permission registerUnban(Permission parent) {<a name="line.38"></a>
+<FONT color="green">039</FONT>            Permission unban = DefaultPermissions.registerPermission(PREFIX + "unban", "Allows the user to unban people", PermissionDefault.OP, parent);<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>            DefaultPermissions.registerPermission(PREFIX + "unban.player", "Allows the user to unban players", unban);<a name="line.41"></a>
+<FONT color="green">042</FONT>            DefaultPermissions.registerPermission(PREFIX + "unban.ip", "Allows the user to unban IP addresses", unban);<a name="line.42"></a>
+<FONT color="green">043</FONT>    <a name="line.43"></a>
+<FONT color="green">044</FONT>            unban.recalculatePermissibles();<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>            return unban;<a name="line.46"></a>
+<FONT color="green">047</FONT>        }<a name="line.47"></a>
+<FONT color="green">048</FONT>    <a name="line.48"></a>
+<FONT color="green">049</FONT>        private static Permission registerOp(Permission parent) {<a name="line.49"></a>
+<FONT color="green">050</FONT>            Permission op = DefaultPermissions.registerPermission(PREFIX + "op", "Allows the user to change operators", PermissionDefault.OP, parent);<a name="line.50"></a>
+<FONT color="green">051</FONT>    <a name="line.51"></a>
+<FONT color="green">052</FONT>            DefaultPermissions.registerPermission(PREFIX + "op.give", "Allows the user to give a player operator status", op);<a name="line.52"></a>
+<FONT color="green">053</FONT>            DefaultPermissions.registerPermission(PREFIX + "op.take", "Allows the user to take a players operator status", op);<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>            op.recalculatePermissibles();<a name="line.55"></a>
+<FONT color="green">056</FONT>    <a name="line.56"></a>
+<FONT color="green">057</FONT>            return op;<a name="line.57"></a>
+<FONT color="green">058</FONT>        }<a name="line.58"></a>
+<FONT color="green">059</FONT>    <a name="line.59"></a>
+<FONT color="green">060</FONT>        private static Permission registerSave(Permission parent) {<a name="line.60"></a>
+<FONT color="green">061</FONT>            Permission save = DefaultPermissions.registerPermission(PREFIX + "save", "Allows the user to save the worlds", PermissionDefault.OP, parent);<a name="line.61"></a>
+<FONT color="green">062</FONT>    <a name="line.62"></a>
+<FONT color="green">063</FONT>            DefaultPermissions.registerPermission(PREFIX + "save.enable", "Allows the user to enable automatic saving", save);<a name="line.63"></a>
+<FONT color="green">064</FONT>            DefaultPermissions.registerPermission(PREFIX + "save.disable", "Allows the user to disable automatic saving", save);<a name="line.64"></a>
+<FONT color="green">065</FONT>            DefaultPermissions.registerPermission(PREFIX + "save.perform", "Allows the user to perform a manual save", save);<a name="line.65"></a>
+<FONT color="green">066</FONT>    <a name="line.66"></a>
+<FONT color="green">067</FONT>            save.recalculatePermissibles();<a name="line.67"></a>
+<FONT color="green">068</FONT>    <a name="line.68"></a>
+<FONT color="green">069</FONT>            return save;<a name="line.69"></a>
+<FONT color="green">070</FONT>        }<a name="line.70"></a>
+<FONT color="green">071</FONT>    <a name="line.71"></a>
+<FONT color="green">072</FONT>        private static Permission registerTime(Permission parent) {<a name="line.72"></a>
+<FONT color="green">073</FONT>            Permission time = DefaultPermissions.registerPermission(PREFIX + "time", "Allows the user to alter the time", PermissionDefault.OP, parent);<a name="line.73"></a>
+<FONT color="green">074</FONT>    <a name="line.74"></a>
+<FONT color="green">075</FONT>            DefaultPermissions.registerPermission(PREFIX + "time.add", "Allows the user to fast-forward time", time);<a name="line.75"></a>
+<FONT color="green">076</FONT>            DefaultPermissions.registerPermission(PREFIX + "time.set", "Allows the user to change the time", time);<a name="line.76"></a>
+<FONT color="green">077</FONT>    <a name="line.77"></a>
+<FONT color="green">078</FONT>            time.recalculatePermissibles();<a name="line.78"></a>
+<FONT color="green">079</FONT>    <a name="line.79"></a>
+<FONT color="green">080</FONT>            return time;<a name="line.80"></a>
+<FONT color="green">081</FONT>        }<a name="line.81"></a>
+<FONT color="green">082</FONT>    <a name="line.82"></a>
+<FONT color="green">083</FONT>        public static Permission registerPermissions(Permission parent) {<a name="line.83"></a>
+<FONT color="green">084</FONT>            Permission commands = DefaultPermissions.registerPermission(ROOT, "Gives the user the ability to use all CraftBukkit commands", parent);<a name="line.84"></a>
+<FONT color="green">085</FONT>    <a name="line.85"></a>
+<FONT color="green">086</FONT>            registerWhitelist(commands);<a name="line.86"></a>
+<FONT color="green">087</FONT>            registerBan(commands);<a name="line.87"></a>
+<FONT color="green">088</FONT>            registerUnban(commands);<a name="line.88"></a>
+<FONT color="green">089</FONT>            registerOp(commands);<a name="line.89"></a>
+<FONT color="green">090</FONT>            registerSave(commands);<a name="line.90"></a>
+<FONT color="green">091</FONT>            registerTime(commands);<a name="line.91"></a>
+<FONT color="green">092</FONT>    <a name="line.92"></a>
+<FONT color="green">093</FONT>            DefaultPermissions.registerPermission(PREFIX + "kill", "Allows the user to commit suicide", PermissionDefault.TRUE, commands);<a name="line.93"></a>
+<FONT color="green">094</FONT>            DefaultPermissions.registerPermission(PREFIX + "me", "Allows the user to perform a chat action", PermissionDefault.TRUE, commands);<a name="line.94"></a>
+<FONT color="green">095</FONT>            DefaultPermissions.registerPermission(PREFIX + "tell", "Allows the user to privately message another player", PermissionDefault.TRUE, commands);<a name="line.95"></a>
+<FONT color="green">096</FONT>            DefaultPermissions.registerPermission(PREFIX + "say", "Allows the user to talk as the console", PermissionDefault.OP, commands);<a name="line.96"></a>
+<FONT color="green">097</FONT>            DefaultPermissions.registerPermission(PREFIX + "give", "Allows the user to give items to players", PermissionDefault.OP, commands);<a name="line.97"></a>
+<FONT color="green">098</FONT>            DefaultPermissions.registerPermission(PREFIX + "teleport", "Allows the user to teleport players", PermissionDefault.OP, commands);<a name="line.98"></a>
+<FONT color="green">099</FONT>            DefaultPermissions.registerPermission(PREFIX + "kick", "Allows the user to kick players", PermissionDefault.OP, commands);<a name="line.99"></a>
+<FONT color="green">100</FONT>            DefaultPermissions.registerPermission(PREFIX + "stop", "Allows the user to stop the server", PermissionDefault.OP, commands);<a name="line.100"></a>
+<FONT color="green">101</FONT>            DefaultPermissions.registerPermission(PREFIX + "list", "Allows the user to list all online players", PermissionDefault.OP, commands);<a name="line.101"></a>
+<FONT color="green">102</FONT>            DefaultPermissions.registerPermission(PREFIX + "help", "Allows the user to view the vanilla help menu", PermissionDefault.TRUE, commands);<a name="line.102"></a>
+<FONT color="green">103</FONT>            DefaultPermissions.registerPermission(PREFIX + "plugins", "Allows the user to view the list of plugins running on this server", PermissionDefault.TRUE, commands);<a name="line.103"></a>
+<FONT color="green">104</FONT>            DefaultPermissions.registerPermission(PREFIX + "reload", "Allows the user to reload the server settings", PermissionDefault.OP, commands);<a name="line.104"></a>
+<FONT color="green">105</FONT>            DefaultPermissions.registerPermission(PREFIX + "version", "Allows the user to view the version of the server", PermissionDefault.TRUE, commands);<a name="line.105"></a>
+<FONT color="green">106</FONT>            DefaultPermissions.registerPermission(PREFIX + "gamemode", "Allows the user to change the gamemode of another player", PermissionDefault.OP, commands);<a name="line.106"></a>
+<FONT color="green">107</FONT>            DefaultPermissions.registerPermission(PREFIX + "xp", "Allows the user to give themselves or others arbitrary values of experience", PermissionDefault.OP, commands);<a name="line.107"></a>
+<FONT color="green">108</FONT>            DefaultPermissions.registerPermission(PREFIX + "toggledownfall", "Allows the user to toggle rain on/off for a given world", PermissionDefault.OP, commands);<a name="line.108"></a>
+<FONT color="green">109</FONT>            DefaultPermissions.registerPermission(PREFIX + "defaultgamemode", "Allows the user to change the default gamemode of the server", PermissionDefault.OP, commands);<a name="line.109"></a>
+<FONT color="green">110</FONT>            DefaultPermissions.registerPermission(PREFIX + "seed", "Allows the user to view the seed of the world", PermissionDefault.OP, commands);<a name="line.110"></a>
+<FONT color="green">111</FONT>            DefaultPermissions.registerPermission(PREFIX + "effect", "Allows the user to add/remove effects on players", PermissionDefault.OP, commands);<a name="line.111"></a>
+<FONT color="green">112</FONT>    <a name="line.112"></a>
+<FONT color="green">113</FONT>            commands.recalculatePermissibles();<a name="line.113"></a>
+<FONT color="green">114</FONT>    <a name="line.114"></a>
+<FONT color="green">115</FONT>            return commands;<a name="line.115"></a>
+<FONT color="green">116</FONT>        }<a name="line.116"></a>
+<FONT color="green">117</FONT>    }<a name="line.117"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
